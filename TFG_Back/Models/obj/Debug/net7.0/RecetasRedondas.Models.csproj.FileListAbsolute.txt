@@ -1,0 +1,11 @@
+C:\Users\mario\OneDrive\Escritorio\TFG\TFG_Back\Models\bin\Debug\net7.0\RecetasRedondas.Models.deps.json
+C:\Users\mario\OneDrive\Escritorio\TFG\TFG_Back\Models\bin\Debug\net7.0\RecetasRedondas.Models.dll
+C:\Users\mario\OneDrive\Escritorio\TFG\TFG_Back\Models\bin\Debug\net7.0\RecetasRedondas.Models.pdb
+C:\Users\mario\OneDrive\Escritorio\TFG\TFG_Back\Models\obj\Debug\net7.0\RecetasRedondas.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mario\OneDrive\Escritorio\TFG\TFG_Back\Models\obj\Debug\net7.0\RecetasRedondas.Models.AssemblyInfoInputs.cache
+C:\Users\mario\OneDrive\Escritorio\TFG\TFG_Back\Models\obj\Debug\net7.0\RecetasRedondas.Models.AssemblyInfo.cs
+C:\Users\mario\OneDrive\Escritorio\TFG\TFG_Back\Models\obj\Debug\net7.0\RecetasRedondas.Models.csproj.CoreCompileInputs.cache
+C:\Users\mario\OneDrive\Escritorio\TFG\TFG_Back\Models\obj\Debug\net7.0\RecetasRedondas.Models.dll
+C:\Users\mario\OneDrive\Escritorio\TFG\TFG_Back\Models\obj\Debug\net7.0\refint\RecetasRedondas.Models.dll
+C:\Users\mario\OneDrive\Escritorio\TFG\TFG_Back\Models\obj\Debug\net7.0\RecetasRedondas.Models.pdb
+C:\Users\mario\OneDrive\Escritorio\TFG\TFG_Back\Models\obj\Debug\net7.0\ref\RecetasRedondas.Models.dll
