@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RecetasRedondas.Business")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e0ceb9b0abb87ab9e3901c585b72ede217b8b498")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("RecetasRedondas.Business")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RecetasRedondas.Business")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

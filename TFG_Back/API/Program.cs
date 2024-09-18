@@ -1,6 +1,7 @@
 using RecetasRedondas.Business;
 using RecetasRedondas.Models;
 using RecetasRedondas.Data;
+using Serilog;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -70,5 +71,19 @@ app.UseCors("MyCorsPolicy");
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<RecetasRedondasAppContext>();
+        context.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        Log.Fatal(ex, "Error durante la migración de la base de datos.");
+    }
+}
 
 app.Run();
