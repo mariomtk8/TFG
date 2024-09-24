@@ -15,9 +15,9 @@ namespace RecetasRedondas.Data
             _context = context;
         }
 
-        public List<Receta> GetAll() => _context.Recetas.ToList();
+        public List<Receta> GetAll() => _context.Recetas.Include(p => p.Pasos).ToList();
 
-        public Receta Get(int id) => _context.Recetas.Find(id);
+        public Receta Get(int id) => _context.Recetas.Include(p => p.Pasos).FirstOrDefault(r=> r.IdReceta == id);
 
         public List<Receta> GetByCategoria(int idCategoria)
         {

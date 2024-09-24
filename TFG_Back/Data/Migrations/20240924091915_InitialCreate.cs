@@ -86,7 +86,7 @@ namespace RecetasRedondas.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Instrucciones = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Imagen = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EsVegano = table.Column<bool>(type: "bit", nullable: false),
                     FechaCreacion = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NivelDificultad = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -113,6 +113,28 @@ namespace RecetasRedondas.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Usuarios", x => x.IdUsuario);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pasos",
+                columns: table => new
+                {
+                    IdPaso = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdReceta = table.Column<int>(type: "int", nullable: false),
+                    Numero = table.Column<int>(type: "int", nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImagenUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pasos", x => x.IdPaso);
+                    table.ForeignKey(
+                        name: "FK_Pasos_Recetas_IdReceta",
+                        column: x => x.IdReceta,
+                        principalTable: "Recetas",
+                        principalColumn: "IdReceta",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -148,21 +170,21 @@ namespace RecetasRedondas.Data.Migrations
                 columns: new[] { "IdCategoria", "Descripcion", "FechaCreacion", "Icono", "NombreCategoria", "PuntuacionPromedio", "Visible" },
                 values: new object[,]
                 {
-                    { 1, "Platos deliciosos de carne", new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(4941), "https://ik.imagekit.io/Mariocanizares/carne.webp?updatedAt=1726218723472", "Carnes", 4.5m, true },
-                    { 2, "Platos variados con arroz", new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5003), "https://ik.imagekit.io/Mariocanizares/arroz.png?updatedAt=1726218452623", "Arroces", 4.8m, true },
-                    { 3, "Guisos tradicionales y caseros", new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5007), "https://ik.imagekit.io/Mariocanizares/guisos.png?updatedAt=1726218800757", "Guisos", 4.7m, true },
-                    { 4, "Platos exquisitos de mariscos", new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5011), "https://ik.imagekit.io/Mariocanizares/marisco.webp?updatedAt=1726218800789", "Mariscos", 4.6m, true },
-                    { 5, "Platos frescos de pescados", new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5014), "https://ik.imagekit.io/Mariocanizares/pescado.png?updatedAt=1726218801946", "Pescados", 4.7m, true },
-                    { 6, "Platos deliciosos de pasta", new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5017), "https://ik.imagekit.io/Mariocanizares/pasta.png?updatedAt=1726218800772", "Pastas", 4.5m, true },
-                    { 7, "Frescas y saludables ensaladas", new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5020), "https://ik.imagekit.io/Mariocanizares/carne.webp?updatedAt=1726218723472", "Ensaladas", 4.6m, true },
-                    { 8, "Reconfortantes sopas y cremas", new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5022), "https://ik.imagekit.io/Mariocanizares/sopa.png?updatedAt=1726218800718f", "Sopas", 4.7m, true },
-                    { 9, "Variedad de pizzas caseras", new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5025), "https://ik.imagekit.io/Mariocanizares/pizza.png?updatedAt=1726218802077", "Pizzas", 4.8m, true },
-                    { 10, "Creativos y deliciosos sandwiches", new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5027), "https://ik.imagekit.io/Mariocanizares/sandwitches.png?updatedAt=1726218800723", "Sandwiches", 4.5m, true },
-                    { 11, "Platos saludables de verduras", new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5030), "https://ik.imagekit.io/Mariocanizares/verduras.png?updatedAt=1726218800742", "Verduras", 4.6m, true },
-                    { 12, "Salsas para acompañar tus platos", new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5032), "https://ik.imagekit.io/Mariocanizares/salsas.png?updatedAt=1726218800564", "Salsas", 4.7m, true },
-                    { 13, "Dulces y sabrosos postres", new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5034), "https://ik.imagekit.io/Mariocanizares/postres.png?updatedAt=1726218800753", "Postres", 4.8m, true },
-                    { 14, "Bebidas refrescantes y cócteles", new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5037), "https://ik.imagekit.io/Mariocanizares/bebidas.png?updatedAt=1726218678224", "Bebidas", 4.7m, true },
-                    { 15, "Platos tradicionales de legumbres", new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5039), "https://ik.imagekit.io/Mariocanizares/legumbres.png?updatedAt=1726218800787", "Legumbres", 4.6m, true }
+                    { 1, "Platos deliciosos de carne", new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6186), "https://ik.imagekit.io/Mariocanizares/carne.webp?updatedAt=1726218723472", "Carnes", 4.5m, true },
+                    { 2, "Platos variados con arroz", new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6251), "https://ik.imagekit.io/Mariocanizares/arroz.png?updatedAt=1726218452623", "Arroces", 4.8m, true },
+                    { 3, "Guisos tradicionales y caseros", new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6255), "https://ik.imagekit.io/Mariocanizares/guisos.png?updatedAt=1726218800757", "Guisos", 4.7m, true },
+                    { 4, "Platos exquisitos de mariscos", new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6259), "https://ik.imagekit.io/Mariocanizares/marisco.webp?updatedAt=1726218800789", "Mariscos", 4.6m, true },
+                    { 5, "Platos frescos de pescados", new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6262), "https://ik.imagekit.io/Mariocanizares/pescado.png?updatedAt=1726218801946", "Pescados", 4.7m, true },
+                    { 6, "Platos deliciosos de pasta", new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6266), "https://ik.imagekit.io/Mariocanizares/pasta.png?updatedAt=1726218800772", "Pastas", 4.5m, true },
+                    { 7, "Frescas y saludables ensaladas", new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6269), "https://ik.imagekit.io/Mariocanizares/carne.webp?updatedAt=1726218723472", "Ensaladas", 4.6m, true },
+                    { 8, "Reconfortantes sopas y cremas", new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6273), "https://ik.imagekit.io/Mariocanizares/sopa.png?updatedAt=1726218800718f", "Sopas", 4.7m, true },
+                    { 9, "Variedad de pizzas caseras", new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6277), "https://ik.imagekit.io/Mariocanizares/pizza.png?updatedAt=1726218802077", "Pizzas", 4.8m, true },
+                    { 10, "Creativos y deliciosos sandwiches", new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6280), "https://ik.imagekit.io/Mariocanizares/sandwitches.png?updatedAt=1726218800723", "Sandwiches", 4.5m, true },
+                    { 11, "Platos saludables de verduras", new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6283), "https://ik.imagekit.io/Mariocanizares/verduras.png?updatedAt=1726218800742", "Verduras", 4.6m, true },
+                    { 12, "Salsas para acompañar tus platos", new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6288), "https://ik.imagekit.io/Mariocanizares/salsas.png?updatedAt=1726218800564", "Salsas", 4.7m, true },
+                    { 13, "Dulces y sabrosos postres", new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6292), "https://ik.imagekit.io/Mariocanizares/postres.png?updatedAt=1726218800753", "Postres", 4.8m, true },
+                    { 14, "Bebidas refrescantes y cócteles", new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6296), "https://ik.imagekit.io/Mariocanizares/bebidas.png?updatedAt=1726218678224", "Bebidas", 4.7m, true },
+                    { 15, "Platos tradicionales de legumbres", new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6299), "https://ik.imagekit.io/Mariocanizares/legumbres.png?updatedAt=1726218800787", "Legumbres", 4.6m, true }
                 });
 
             migrationBuilder.InsertData(
@@ -170,9 +192,9 @@ namespace RecetasRedondas.Data.Migrations
                 columns: new[] { "IdIngrediente", "Calorias", "ContieneAlergenos", "FechaExpiracion", "NombreIngrediente", "TipoAlergeno", "UnidadMedida" },
                 values: new object[,]
                 {
-                    { 1, 15m, false, new DateTime(2024, 10, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5404), "Lechuga", "", "g" },
-                    { 2, 130m, false, new DateTime(2025, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5416), "Arroz", "", "g" },
-                    { 3, 2m, false, new DateTime(2025, 3, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5419), "Café", "", "ml" }
+                    { 1, 15m, false, new DateTime(2024, 10, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6881), "Lechuga", "", "g" },
+                    { 2, 130m, false, new DateTime(2025, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6892), "Arroz", "", "g" },
+                    { 3, 2m, false, new DateTime(2025, 3, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6897), "Café", "", "ml" }
                 });
 
             migrationBuilder.InsertData(
@@ -180,30 +202,46 @@ namespace RecetasRedondas.Data.Migrations
                 columns: new[] { "Fecha", "IdMenuSemanal", "IdReceta" },
                 values: new object[,]
                 {
-                    { new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5499), 1, 1 },
-                    { new DateTime(2024, 9, 14, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5502), 1, 2 },
-                    { new DateTime(2024, 9, 15, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5505), 1, 3 }
+                    { new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(7029), 1, 1 },
+                    { new DateTime(2024, 9, 25, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(7033), 1, 2 },
+                    { new DateTime(2024, 9, 26, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(7036), 1, 3 }
                 });
 
             migrationBuilder.InsertData(
                 table: "MenusSemanales",
                 columns: new[] { "IdMenuSemanal", "Descripcion", "FechaFin", "FechaInicio", "IdUsuario" },
-                values: new object[] { 1, "Menú semanal de prueba", new DateTime(2024, 9, 20, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5477), new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5474), 1 });
+                values: new object[] { 1, "Menú semanal de prueba", new DateTime(2024, 10, 1, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6999), new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6995), 1 });
 
             migrationBuilder.InsertData(
                 table: "Recetas",
-                columns: new[] { "IdReceta", "Descripcion", "EsVegano", "FechaCreacion", "IdCategoria", "Instrucciones", "NivelDificultad", "Nombre", "TiempoPreparacion" },
+                columns: new[] { "IdReceta", "Descripcion", "EsVegano", "FechaCreacion", "IdCategoria", "Imagen", "NivelDificultad", "Nombre", "TiempoPreparacion" },
                 values: new object[,]
                 {
-                    { 1, "Ensalada fresca con aderezo César", false, new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5331), 1, "Instrucciones para Ensalada César", 1m, "Ensalada César", 20 },
-                    { 2, "Arroz tradicional español con mariscos", false, new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5335), 2, "Instrucciones para Paella", 2m, "Paella", 60 },
-                    { 3, "Postre italiano con café y mascarpone", false, new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5340), 3, "Instrucciones para Tiramisú", 3m, "Tiramisú", 30 }
+                    { 1, "Ensalada fresca con aderezo César", false, new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6790), 1, "https://ik.imagekit.io/Mariocanizares/Recetas/ensalada.jpg?updatedAt=1727169325456", 1m, "Ensalada César", 20 },
+                    { 2, "Arroz tradicional español con mariscos", false, new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6801), 2, "https://ik.imagekit.io/Mariocanizares/Recetas/arroz-marisco.jpg?updatedAt=1727169389258", 2m, "Paella", 60 },
+                    { 3, "Postre italiano con café y mascarpone", false, new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6807), 3, "https://ik.imagekit.io/Mariocanizares/Recetas/tiramisu.jpg?updatedAt=1727169422091", 3m, "Tiramisú", 30 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Usuarios",
                 columns: new[] { "IdUsuario", "Contraseña", "Email", "EsAdmin", "FechaRegistro", "Nombre" },
-                values: new object[] { 1, "password", "john.doe@example.com", false, new DateTime(2024, 9, 13, 11, 20, 37, 817, DateTimeKind.Local).AddTicks(5457), "John Doe" });
+                values: new object[] { 1, "password", "john.doe@example.com", false, new DateTime(2024, 9, 24, 11, 19, 15, 103, DateTimeKind.Local).AddTicks(6960), "John Doe" });
+
+            migrationBuilder.InsertData(
+                table: "Pasos",
+                columns: new[] { "IdPaso", "Descripcion", "IdReceta", "ImagenUrl", "Numero" },
+                values: new object[,]
+                {
+                    { 1, "Lavar y trocear la lechuga.", 1, "https://ik.imagekit.io/Mariocanizares/Recetas/ensalada.jpg?updatedAt=1727169325456", 1 },
+                    { 2, "Agregar el aderezo César y mezclar bien.", 1, "https://example.com/imagen2.jpg", 2 },
+                    { 3, "Servir y disfrutar.", 1, "https://example.com/imagen3.jpg", 3 },
+                    { 4, "Cocinar el arroz en caldo de pescado.", 2, "https://ik.imagekit.io/Mariocanizares/Recetas/arroz-marisco.jpg?updatedAt=1727169389258", 1 },
+                    { 5, "Agregar los mariscos y verduras.", 2, "https://example.com/imagen5.jpg", 2 },
+                    { 6, "Cocinar a fuego lento hasta que el arroz esté listo.", 2, "https://example.com/imagen6.jpg", 3 },
+                    { 7, "Preparar el café y dejar enfriar.", 3, "https://ik.imagekit.io/Mariocanizares/Recetas/tiramisu.jpg?updatedAt=1727169422091", 1 },
+                    { 8, "Mezclar el mascarpone con azúcar.", 3, "https://example.com/imagen8.jpg", 2 },
+                    { 9, "Montar los ingredientes en capas.", 3, "https://example.com/imagen9.jpg", 3 }
+                });
 
             migrationBuilder.InsertData(
                 table: "RecetaIngredientes",
@@ -214,6 +252,11 @@ namespace RecetasRedondas.Data.Migrations
                     { 2, 2, 200m, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "" },
                     { 3, 3, 50m, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pasos_IdReceta",
+                table: "Pasos",
+                column: "IdReceta");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RecetaIngredientes_IdIngrediente",
@@ -232,6 +275,9 @@ namespace RecetasRedondas.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "MenusSemanales");
+
+            migrationBuilder.DropTable(
+                name: "Pasos");
 
             migrationBuilder.DropTable(
                 name: "RecetaIngredientes");

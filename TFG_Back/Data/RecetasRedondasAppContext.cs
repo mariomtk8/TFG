@@ -15,6 +15,7 @@ namespace RecetasRedondas.Models
         public DbSet<MenuSemanal> MenusSemanales { get; set; }
         public DbSet<MenuSemanalReceta> MenuSemanalRecetas { get; set; }
         public DbSet<Receta> Recetas { get; set; }
+        public DbSet<Paso> Pasos { get; set; }
         public DbSet<RecetaIngrediente> RecetaIngredientes { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
 
@@ -52,6 +53,16 @@ namespace RecetasRedondas.Models
                 .HasOne<Ingrediente>()
                 .WithMany()
                 .HasForeignKey(ri => ri.IdIngrediente);
+            
+             modelBuilder.Entity<Paso>()
+        .HasKey(p => p.IdPaso); // Clave primaria para Paso
+
+    // Configuración de relaciones
+    modelBuilder.Entity<Receta>()
+        .HasMany(r => r.Pasos)
+        .WithOne(p => p.Receta) // Relación uno a muchos
+        .HasForeignKey(p => p.IdReceta) // Establecer clave foránea
+        .OnDelete(DeleteBehavior.Cascade);
 
             // Datos de ejemplo (se pueden ajustar según sea necesario)
             modelBuilder.Entity<Categoria>().HasData(
@@ -72,11 +83,27 @@ namespace RecetasRedondas.Models
     new Categoria { IdCategoria = 15, NombreCategoria = "Legumbres", Descripcion = "Platos tradicionales de legumbres", Visible = true, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/legumbres.png?updatedAt=1726218800787", PuntuacionPromedio = 4.6m }
 );
 
-            modelBuilder.Entity<Receta>().HasData(
-                new Receta { IdReceta = 1, Nombre = "Ensalada César", IdCategoria = 1, Descripcion = "Ensalada fresca con aderezo César", Instrucciones = "Instrucciones para Ensalada César", FechaCreacion = DateTime.Now, NivelDificultad = 1, EsVegano = false, TiempoPreparacion = 20 },
-                new Receta { IdReceta = 2, Nombre = "Paella", IdCategoria = 2, Descripcion = "Arroz tradicional español con mariscos", Instrucciones = "Instrucciones para Paella", FechaCreacion = DateTime.Now, NivelDificultad = 2, EsVegano = false, TiempoPreparacion = 60 },
-                new Receta { IdReceta = 3, Nombre = "Tiramisú", IdCategoria = 3, Descripcion = "Postre italiano con café y mascarpone", Instrucciones = "Instrucciones para Tiramisú", FechaCreacion = DateTime.Now, NivelDificultad = 3, EsVegano = false, TiempoPreparacion = 30 }
+              modelBuilder.Entity<Receta>().HasData(
+                new Receta { IdReceta = 1, Nombre = "Ensalada César", IdCategoria = 1, Descripcion = "Ensalada fresca con aderezo César", Imagen ="https://ik.imagekit.io/Mariocanizares/Recetas/ensalada.jpg?updatedAt=1727169325456", FechaCreacion = DateTime.Now, NivelDificultad = 1, EsVegano = false, TiempoPreparacion = 20 },
+                new Receta { IdReceta = 2, Nombre = "Paella", IdCategoria = 2, Descripcion = "Arroz tradicional español con mariscos", Imagen ="https://ik.imagekit.io/Mariocanizares/Recetas/arroz-marisco.jpg?updatedAt=1727169389258", FechaCreacion = DateTime.Now, NivelDificultad = 2, EsVegano = false, TiempoPreparacion = 60 },
+                new Receta { IdReceta = 3, Nombre = "Tiramisú", IdCategoria = 3, Descripcion = "Postre italiano con café y mascarpone", Imagen ="https://ik.imagekit.io/Mariocanizares/Recetas/tiramisu.jpg?updatedAt=1727169422091", FechaCreacion = DateTime.Now, NivelDificultad = 3, EsVegano = false, TiempoPreparacion = 30 }
             );
+
+            // Datos de ejemplo para pasos
+            modelBuilder.Entity<Paso>().HasData(
+                new Paso { IdPaso = 1, IdReceta = 1, Numero = 1, Descripcion = "Lavar y trocear la lechuga.", ImagenUrl = "https://ik.imagekit.io/Mariocanizares/Recetas/ensalada.jpg?updatedAt=1727169325456" },
+                new Paso { IdPaso = 2, IdReceta = 1, Numero = 2, Descripcion = "Agregar el aderezo César y mezclar bien.", ImagenUrl = "https://example.com/imagen2.jpg" },
+                new Paso { IdPaso = 3, IdReceta = 1, Numero = 3, Descripcion = "Servir y disfrutar.", ImagenUrl = "https://example.com/imagen3.jpg" },
+
+                new Paso { IdPaso = 4, IdReceta = 2, Numero = 1, Descripcion = "Cocinar el arroz en caldo de pescado.", ImagenUrl = "https://ik.imagekit.io/Mariocanizares/Recetas/arroz-marisco.jpg?updatedAt=1727169389258" },
+                new Paso { IdPaso = 5, IdReceta = 2, Numero = 2, Descripcion = "Agregar los mariscos y verduras.", ImagenUrl = "https://example.com/imagen5.jpg" },
+                new Paso { IdPaso = 6, IdReceta = 2, Numero = 3, Descripcion = "Cocinar a fuego lento hasta que el arroz esté listo.", ImagenUrl = "https://example.com/imagen6.jpg" },
+
+                new Paso { IdPaso = 7, IdReceta = 3, Numero = 1, Descripcion = "Preparar el café y dejar enfriar.", ImagenUrl = "https://ik.imagekit.io/Mariocanizares/Recetas/tiramisu.jpg?updatedAt=1727169422091" },
+                new Paso { IdPaso = 8, IdReceta = 3, Numero = 2, Descripcion = "Mezclar el mascarpone con azúcar.", ImagenUrl = "https://example.com/imagen8.jpg" },
+                new Paso { IdPaso = 9, IdReceta = 3, Numero = 3, Descripcion = "Montar los ingredientes en capas.", ImagenUrl = "https://example.com/imagen9.jpg" }
+            );
+
 
             modelBuilder.Entity<Ingrediente>().HasData(
                 new Ingrediente { IdIngrediente = 1, NombreIngrediente = "Lechuga", Calorias = 15, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddMonths(1) },

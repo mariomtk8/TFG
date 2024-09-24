@@ -19,7 +19,15 @@ namespace RecetasRedondas.Controllers
         [HttpGet]
         public ActionResult<List<Receta>> GetAll()
         {
-            return Ok(_recetaService.GetAll());
+            try
+            {
+                return Ok(_recetaService.GetAll());
+            }
+            catch (Exception er)
+            {
+                
+                return StatusCode(500, new {message = er});
+            }
         }
 
         [HttpGet("{id}")]
