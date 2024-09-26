@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\API\\RecetasRedondas.API.csproj": {}
+    "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\API\\RecetasRedondas.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\API\\RecetasRedondas.API.csproj": {
+    "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\API\\RecetasRedondas.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\API\\RecetasRedondas.API.csproj",
+        "projectUniqueName": "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\API\\RecetasRedondas.API.csproj",
         "projectName": "RecetasRedondas.API",
-        "projectPath": "C:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\API\\RecetasRedondas.API.csproj",
+        "projectPath": "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\API\\RecetasRedondas.API.csproj",
         "packagesPath": "C:\\Users\\Practicas25\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\API\\obj\\",
+        "outputPath": "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Practicas25\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -26,8 +26,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Business\\RecetasRedondas.Business.csproj": {
-                "projectPath": "C:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Business\\RecetasRedondas.Business.csproj"
+              "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Business\\RecetasRedondas.Business.csproj": {
+                "projectPath": "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Business\\RecetasRedondas.Business.csproj"
               },
               "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Models\\RecetasRedondas.Models.csproj": {
                 "projectPath": "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Models\\RecetasRedondas.Models.csproj"
@@ -91,14 +91,14 @@
         }
       }
     },
-    "C:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Business\\RecetasRedondas.Business.csproj": {
+    "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Business\\RecetasRedondas.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Business\\RecetasRedondas.Business.csproj",
+        "projectUniqueName": "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Business\\RecetasRedondas.Business.csproj",
         "projectName": "RecetasRedondas.Business",
-        "projectPath": "C:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Business\\RecetasRedondas.Business.csproj",
+        "projectPath": "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Business\\RecetasRedondas.Business.csproj",
         "packagesPath": "C:\\Users\\Practicas25\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Business\\obj\\",
+        "outputPath": "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Business\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Practicas25\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -113,8 +113,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Data\\RecetasRedondas.Data.csproj": {
-                "projectPath": "C:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Data\\RecetasRedondas.Data.csproj"
+              "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Data\\RecetasRedondas.Data.csproj": {
+                "projectPath": "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Data\\RecetasRedondas.Data.csproj"
               },
               "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Models\\RecetasRedondas.Models.csproj": {
                 "projectPath": "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Models\\RecetasRedondas.Models.csproj"
@@ -151,14 +151,14 @@
         }
       }
     },
-    "C:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Data\\RecetasRedondas.Data.csproj": {
+    "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Data\\RecetasRedondas.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Data\\RecetasRedondas.Data.csproj",
+        "projectUniqueName": "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Data\\RecetasRedondas.Data.csproj",
         "projectName": "RecetasRedondas.Data",
-        "projectPath": "C:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Data\\RecetasRedondas.Data.csproj",
+        "projectPath": "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Data\\RecetasRedondas.Data.csproj",
         "packagesPath": "C:\\Users\\Practicas25\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Data\\obj\\",
+        "outputPath": "c:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Practicas25\\AppData\\Roaming\\NuGet\\NuGet.Config"
