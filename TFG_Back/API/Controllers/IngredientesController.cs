@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using RecetasRedondas.Business;
 using RecetasRedondas.Models;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RecetasRedondas.Controllers
 {
@@ -16,12 +17,14 @@ namespace RecetasRedondas.Controllers
             _ingredienteService = ingredienteService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult<List<Ingrediente>> GetAll()
         {
             return Ok(_ingredienteService.GetAll());
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public ActionResult<Ingrediente> Get(int id)
         {
@@ -33,6 +36,7 @@ namespace RecetasRedondas.Controllers
             return Ok(ingrediente);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Add([FromBody] Ingrediente ingrediente)
         {
@@ -40,6 +44,7 @@ namespace RecetasRedondas.Controllers
             return CreatedAtAction(nameof(Get), new { id = ingrediente.IdIngrediente }, ingrediente);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public ActionResult Update(int id, [FromBody] Ingrediente ingrediente)
         {
@@ -52,6 +57,7 @@ namespace RecetasRedondas.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {

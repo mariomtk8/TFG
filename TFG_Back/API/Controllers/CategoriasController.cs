@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using RecetasRedondas.Business;
 using RecetasRedondas.Models;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RecetasRedondas.Controllers
-{
+{   
+    [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class CategoriaController : ControllerBase
@@ -15,13 +17,15 @@ namespace RecetasRedondas.Controllers
         {
             _categoriaService = categoriaService;
         }
-
+        
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult<List<Categoria>> GetAll()
         {
             return Ok(_categoriaService.GetAll());
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public ActionResult<Categoria> Get(int id)
         {
@@ -33,6 +37,7 @@ namespace RecetasRedondas.Controllers
             return Ok(categoria);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Add([FromBody] Categoria categoria)
         {
@@ -40,6 +45,7 @@ namespace RecetasRedondas.Controllers
             return CreatedAtAction(nameof(Get), new { id = categoria.IdCategoria }, categoria);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public ActionResult Update(int id, [FromBody] Categoria categoria)
         {
@@ -52,6 +58,7 @@ namespace RecetasRedondas.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {

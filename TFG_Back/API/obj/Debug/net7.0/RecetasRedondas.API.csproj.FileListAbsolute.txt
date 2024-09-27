@@ -183,3 +183,4 @@ c:\Users\Practicas25\Desktop\Tf\Back\TFG_Back\API\bin\Debug\net7.0\Microsoft.Ext
 c:\Users\Practicas25\Desktop\Tf\Back\TFG_Back\API\bin\Debug\net7.0\Serilog.dll
 c:\Users\Practicas25\Desktop\Tf\Back\TFG_Back\API\bin\Debug\net7.0\Serilog.Extensions.Logging.dll
 c:\Users\Practicas25\Desktop\Tf\Back\TFG_Back\API\bin\Debug\net7.0\Serilog.Sinks.File.dll
+C:\Users\Practicas25\Desktop\Tf\Back\TFG_Back\API\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

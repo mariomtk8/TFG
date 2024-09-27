@@ -3,6 +3,7 @@ using RecetasRedondas.Business;
 using RecetasRedondas.Models;
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RecetasRedondas.Controllers
 {
@@ -17,12 +18,14 @@ namespace RecetasRedondas.Controllers
             _menuSemanalRecetaService = menuSemanalRecetaService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult<List<MenuSemanalReceta>> GetAll()
         {
             return Ok(_menuSemanalRecetaService.GetAll());
         }
 
+        [AllowAnonymous]
         [HttpGet("{idMenuSemanal}/{idReceta}/{fecha}")]
         public ActionResult<MenuSemanalReceta> Get(int idMenuSemanal, int idReceta, DateTime fecha)
         {
@@ -34,6 +37,7 @@ namespace RecetasRedondas.Controllers
             return Ok(menuSemanalReceta);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Add([FromBody] MenuSemanalReceta menuSemanalReceta)
         {
@@ -41,6 +45,7 @@ namespace RecetasRedondas.Controllers
             return CreatedAtAction(nameof(Get), new { idMenuSemanal = menuSemanalReceta.IdMenuSemanal, idReceta = menuSemanalReceta.IdReceta, fecha = menuSemanalReceta.Fecha }, menuSemanalReceta);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("{idMenuSemanal}/{idReceta}/{fecha}")]
         public ActionResult Update(int idMenuSemanal, int idReceta, DateTime fecha, [FromBody] MenuSemanalReceta menuSemanalReceta)
         {
@@ -53,6 +58,7 @@ namespace RecetasRedondas.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{idMenuSemanal}/{idReceta}/{fecha}")]
         public ActionResult Delete(int idMenuSemanal, int idReceta, DateTime fecha)
         {

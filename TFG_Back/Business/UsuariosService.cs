@@ -13,14 +13,36 @@ namespace RecetasRedondas.Business
             _usuarioRepository = usuarioRepository;
         }
 
-        public List<Usuario> GetAll() => _usuarioRepository.GetAll();
 
-        public Usuario Get(int id) => _usuarioRepository.Get(id);
+        //Get
+        public List<UsuarioDTO> GetAll() => _usuarioRepository.GetAll();
+        public UsuarioDTO GetUsuarioId(int id)
+        {
+            return _usuarioRepository.GetUsuarioId(id);
+        }
 
-        public void Update(Usuario usuario) => _usuarioRepository.Update(usuario);
+        public Usuario LoginUsuario(LoginUsuarioDTO loginDTO)
+        {
+            return _usuarioRepository.LoginUsuario(loginDTO);
+        }
 
-        public void Add(Usuario usuario) => _usuarioRepository.Add(usuario);
+        //Create
+        public Usuario RegisterUsuario(RegisterUsuarioDTO user)
+        {
+            return _usuarioRepository.RegisterUsuario(user);
+        }
 
-        public void Delete(int id) => _usuarioRepository.Delete(id);
+        //Update
+        public void UpdateUsuario(UsuarioDTO usuario)
+        {
+            _usuarioRepository.UpdateUsuario(usuario);
+        }
+
+
+        //Delete
+        public void DeleteUsuario(int idUsuario)
+        {
+            _usuarioRepository.DeleteUsuario(idUsuario);
+        }
     }
 }

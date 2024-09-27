@@ -32,6 +32,8 @@ services:
       - db
     environment:
       - DOCKER_CONTAINER=true
+      - Environment=Docker 
+
    # web:
         #container_name: webContainer
    #     image: web:1.0

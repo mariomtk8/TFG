@@ -118,7 +118,7 @@ namespace RecetasRedondas.Models
             );
 
             modelBuilder.Entity<Usuario>().HasData(
-                new Usuario { IdUsuario = 1, Nombre = "John Doe", Email = "john.doe@example.com", Contraseña = "password", FechaRegistro = DateTime.Now, EsAdmin = false, }
+                new Usuario { IdUsuario = 1, Nombre = "Admin", Correo = "mario@gmail.com", Contrasena = "MarioX8", FechaRegistro = DateTime.Now, Rol = true }
             );
 
             modelBuilder.Entity<MenuSemanal>().HasData(

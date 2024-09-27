@@ -5,10 +5,15 @@ namespace RecetasRedondas.Business
 {
     public interface IUsuarioService
     {
-        List<Usuario> GetAll();
-        Usuario Get(int id);
-        void Add(Usuario usuario);
-        void Update(Usuario usuario);
-        void Delete(int id);
+        //Get
+        public List<UsuarioDTO> GetAll();
+        public UsuarioDTO GetUsuarioId(int id);
+        public Usuario LoginUsuario(LoginUsuarioDTO loginDTO);
+        //Register
+        public Usuario RegisterUsuario(RegisterUsuarioDTO user);
+        //Update
+        void UpdateUsuario(UsuarioDTO usuario);
+        //Delete
+        void DeleteUsuario(int idUsuario);
     }
 }

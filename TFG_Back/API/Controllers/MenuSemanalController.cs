@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using RecetasRedondas.Business;
 using RecetasRedondas.Models;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RecetasRedondas.Controllers
 {
@@ -16,12 +17,14 @@ namespace RecetasRedondas.Controllers
             _menuSemanalService = menuSemanalService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult<List<MenuSemanal>> GetAll()
         {
             return Ok(_menuSemanalService.GetAll());
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public ActionResult<MenuSemanal> Get(int id)
         {
@@ -33,6 +36,7 @@ namespace RecetasRedondas.Controllers
             return Ok(menuSemanal);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Add([FromBody] MenuSemanal menuSemanal)
         {
@@ -40,6 +44,7 @@ namespace RecetasRedondas.Controllers
             return CreatedAtAction(nameof(Get), new { id = menuSemanal.IdMenuSemanal }, menuSemanal);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public ActionResult Update(int id, [FromBody] MenuSemanal menuSemanal)
         {
@@ -52,6 +57,7 @@ namespace RecetasRedondas.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {

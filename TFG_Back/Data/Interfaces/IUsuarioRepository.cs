@@ -5,10 +5,11 @@ namespace RecetasRedondas.Data
 {
     public interface IUsuarioRepository
     {
-        List<Usuario> GetAll();
-        Usuario Get(int id);
-        void Add(Usuario usuario);
-        void Update(Usuario usuario);
-        void Delete(int id);
+        List<UsuarioDTO> GetAll();
+        public UsuarioDTO GetUsuarioId(int id);
+        public Usuario LoginUsuario(LoginUsuarioDTO loginDTO);
+        public Usuario RegisterUsuario(RegisterUsuarioDTO user);
+        void UpdateUsuario(UsuarioDTO usuario);
+        void DeleteUsuario(int idUsuario);
     }
 }
