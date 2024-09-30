@@ -8,4 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = RecetasRedondas.Models
-build_property.ProjectDir = C:\Users\Practicas25\Desktop\Tf\Back\TFG_Back\Models\
+build_property.ProjectDir = c:\Users\mario\OneDrive\Escritorio\TFG__Back\TFG_Back\Models\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RecetasRedondas.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1f0801976f3daf6fb62f7f6350e932454fc77321")]
 [assembly: System.Reflection.AssemblyProductAttribute("RecetasRedondas.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RecetasRedondas.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
