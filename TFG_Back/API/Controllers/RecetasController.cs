@@ -19,7 +19,7 @@ namespace RecetasRedondas.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public ActionResult<List<Receta>> GetAll()
+        public ActionResult<List<RecetaDTO>> GetAll()
         {
             try
             {
@@ -27,14 +27,13 @@ namespace RecetasRedondas.Controllers
             }
             catch (Exception er)
             {
-                
-                return StatusCode(500, new {message = er});
+                return StatusCode(500, new { message = er });
             }
         }
 
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public ActionResult<Receta> Get(int id)
+        public ActionResult<RecetaDTO> Get(int id)
         {
             var receta = _recetaService.Get(id);
             if (receta == null)
@@ -82,6 +81,37 @@ namespace RecetasRedondas.Controllers
         public ActionResult Delete(int id)
         {
             _recetaService.Delete(id);
+            return NoContent();
+        }
+
+        [HttpPost("{recetaId}/paso")]
+        public IActionResult AddPaso(int recetaId, [FromBody] Paso paso)
+        {
+            if (paso == null)
+            {
+                return BadRequest("Paso cannot be null.");
+            }
+
+            _recetaService.AddPaso(recetaId, paso);
+            return CreatedAtAction(nameof(Get), new { id = recetaId }, paso);
+        }
+
+        [HttpPut("{recetaId}/paso")]
+        public IActionResult UpdatePaso(int recetaId, [FromBody] DatosPasoDTO paso)
+        {
+            if (paso == null)
+            {
+                return BadRequest("Paso cannot be null.");
+            }
+
+            _recetaService.UpdatePaso(recetaId, paso);
+            return NoContent();
+        }
+
+        [HttpDelete("{recetaId}/paso/{pasoId}")]
+        public IActionResult DeletePaso(int recetaId, int pasoId)
+        {
+            _recetaService.DeletePaso(recetaId, pasoId);
             return NoContent();
         }
     }

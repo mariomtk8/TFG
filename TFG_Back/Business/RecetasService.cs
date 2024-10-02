@@ -1,7 +1,6 @@
 using RecetasRedondas.Data;
 using RecetasRedondas.Models;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace RecetasRedondas.Business
 {
@@ -14,9 +13,9 @@ namespace RecetasRedondas.Business
             _recetaRepository = recetaRepository;
         }
 
-        public List<Receta> GetAll() => _recetaRepository.GetAll();
+        public List<RecetaDTO> GetAll() => _recetaRepository.GetAll();
 
-        public Receta Get(int id) => _recetaRepository.Get(id);
+        public RecetaDTO Get(int id) => _recetaRepository.Get(id);
 
         public List<Receta> GetByCategoria(int idCategoria) => _recetaRepository.GetByCategoria(idCategoria);
 
@@ -25,5 +24,11 @@ namespace RecetasRedondas.Business
         public void Add(Receta receta) => _recetaRepository.Add(receta);
 
         public void Delete(int id) => _recetaRepository.Delete(id);
+
+        public void AddPaso(int recetaId, Paso paso) => _recetaRepository.AddPaso(recetaId, paso);
+
+        public void UpdatePaso(int recetaId, DatosPasoDTO paso) => _recetaRepository.UpdatePaso(recetaId, paso);
+
+        public void DeletePaso(int recetaId, int pasoId) => _recetaRepository.DeletePaso(recetaId, pasoId);
     }
 }

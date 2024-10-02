@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace RecetasRedondas.Models
 {
@@ -10,6 +11,7 @@ namespace RecetasRedondas.Models
     public string Nombre { get; set; }
     public string Descripcion { get; set; }
     public string Imagen { get; set; }
+     [JsonIgnore]
     public List<Paso> Pasos { get; set; } = new List<Paso>();
     public bool EsVegano { get; set; }
     public DateTime FechaCreacion { get; set; }

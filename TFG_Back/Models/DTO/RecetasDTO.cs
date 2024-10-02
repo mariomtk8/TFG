@@ -1,11 +1,19 @@
 using System.ComponentModel.DataAnnotations;
 
-public class RecetasDTO
+namespace RecetasRedondas.Models
 {
-    public int RecetaID { get; set; }
-    public string Titulo { get; set; }
+    public class RecetaDTO
+    {
+    public int IdReceta { get; set; }
+    public string Nombre { get; set; }
     public string Descripcion { get; set; }
-    public int TiempoPreparacion { get; set; }
+    public string Imagen { get; set; }
+    public List<DatosPasoDTO> Pasos { get; set; } = new List<DatosPasoDTO>();
+    public bool EsVegano { get; set; }
     public DateTime FechaCreacion { get; set; }
-    public string NombreCategoria { get; set; } // Simplificación para evitar enviar el objeto Categoría completo
+    public decimal NivelDificultad { get; set; }
+    public int TiempoPreparacion { get; set; }
+    public int IdCategoria { get; set; }
+    }
 }
+

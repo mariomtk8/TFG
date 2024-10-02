@@ -19,6 +19,8 @@ namespace RecetasRedondas.Models
         public DbSet<RecetaIngrediente> RecetaIngredientes { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
 
+        public DbSet<RecetasPaso> recetasPasos {get;set;}
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configuración de claves primarias
@@ -58,10 +60,30 @@ namespace RecetasRedondas.Models
         .HasKey(p => p.IdPaso); // Clave primaria para Paso
 
     // Configuración de relaciones
-    modelBuilder.Entity<Receta>()
-        .HasMany(r => r.Pasos)
-        .WithOne(p => p.Receta) // Relación uno a muchos
-        .HasForeignKey(p => p.IdReceta) // Establecer clave foránea
+     modelBuilder.Entity<Receta>()
+                .HasMany(r => r.Pasos)
+                .WithOne(p => p.Receta)
+                .HasForeignKey(p => p.IdReceta)
+                .OnDelete(DeleteBehavior.Cascade); // Cascade delete para pasos
+
+            // Otras configuraciones...
+
+            // Configuración para RecetasPaso si es necesario
+            modelBuilder.Entity<RecetasPaso>()
+        .HasKey(rp => new { rp.IdReceta, rp.IdPaso });
+
+    // Relación entre RecetasPaso y Receta
+    modelBuilder.Entity<RecetasPaso>()
+        .HasOne(rp => rp.Receta)
+        .WithMany() // No necesitas especificar la colección aquí si no hay propiedad de navegación
+        .HasForeignKey(rp => rp.IdReceta)
+        .OnDelete(DeleteBehavior.Restrict);  // Cambiado a "Restrict" para evitar el ciclo
+
+    // Relación entre RecetasPaso y Paso
+    modelBuilder.Entity<RecetasPaso>()
+        .HasOne(rp => rp.Paso)
+        .WithMany() // No necesitas especificar la colección aquí si no hay propiedad de navegación
+        .HasForeignKey(rp => rp.IdPaso)
         .OnDelete(DeleteBehavior.Cascade);
 
             // Datos de ejemplo (se pueden ajustar según sea necesario)

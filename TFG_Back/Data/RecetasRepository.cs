@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RecetasRedondas.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace RecetasRedondas.Data
 {
@@ -15,9 +15,66 @@ namespace RecetasRedondas.Data
             _context = context;
         }
 
-        public List<Receta> GetAll() => _context.Recetas.Include(p => p.Pasos).ToList();
+        public List<RecetaDTO> GetAll()
+        {
+            var recetas = _context.Recetas.Include(p => p.Pasos).ToList();
 
-        public Receta Get(int id) => _context.Recetas.Include(p => p.Pasos).FirstOrDefault(r=> r.IdReceta == id);
+            var newRecetas = recetas.Select(receta => new RecetaDTO
+            {
+                IdReceta = receta.IdReceta,
+                Nombre = receta.Nombre,
+                Descripcion = receta.Descripcion,
+                Imagen = receta.Imagen,
+                Pasos = receta.Pasos.Select(paso => new DatosPasoDTO
+                {
+                    IdPaso = paso.IdPaso,
+                    IdReceta = paso.IdReceta,
+                    Numero = paso.Numero,
+                    Descripcion = paso.Descripcion,
+                    ImagenUrl = paso.ImagenUrl
+                }).ToList(),
+                EsVegano = receta.EsVegano,
+                FechaCreacion = receta.FechaCreacion,
+                NivelDificultad = receta.NivelDificultad,
+                TiempoPreparacion = receta.TiempoPreparacion,
+                IdCategoria = receta.IdCategoria,
+            }).ToList();
+
+            return newRecetas;
+        }
+
+        public RecetaDTO Get(int id)
+        {
+            var recetas = _context.Recetas.Include(p => p.Pasos).FirstOrDefault(r => r.IdReceta == id);
+
+            if (recetas is null)
+            {
+                throw new Exception($"No hay ninguna receta con el ID: {id}");
+            }
+
+            var newRecetas = new RecetaDTO
+            {
+                IdReceta = recetas.IdReceta,
+                Nombre = recetas.Nombre,
+                Descripcion = recetas.Descripcion,
+                Imagen = recetas.Imagen,
+                Pasos = recetas.Pasos.Select(paso => new DatosPasoDTO
+                {
+                    IdPaso = paso.IdPaso,
+                    IdReceta = paso.IdReceta,
+                    Numero = paso.Numero,
+                    Descripcion = paso.Descripcion,
+                    ImagenUrl = paso.ImagenUrl
+                }).ToList(),
+                EsVegano = recetas.EsVegano,
+                FechaCreacion = recetas.FechaCreacion,
+                NivelDificultad = recetas.NivelDificultad,
+                TiempoPreparacion = recetas.TiempoPreparacion,
+                IdCategoria = recetas.IdCategoria,
+            };
+
+            return newRecetas;
+        }
 
         public List<Receta> GetByCategoria(int idCategoria)
         {
@@ -28,13 +85,51 @@ namespace RecetasRedondas.Data
 
         public void Update(Receta receta)
         {
-            var existingEntity = _context.Recetas.Find(receta.IdReceta);
-            if (existingEntity != null)
+            var existingEntity = _context.Recetas.Include(r => r.Pasos).FirstOrDefault(r => r.IdReceta == receta.IdReceta);
+            if (existingEntity is null)
             {
-                _context.Entry(existingEntity).State = EntityState.Detached;
+                throw new Exception("No se encontró la receta a actualizar");
             }
 
-            _context.Entry(receta).State = EntityState.Modified;
+            existingEntity.Nombre = receta.Nombre;
+            existingEntity.Descripcion = receta.Descripcion;
+            existingEntity.Imagen = receta.Imagen;
+            existingEntity.EsVegano = receta.EsVegano;
+            existingEntity.FechaCreacion = receta.FechaCreacion;
+            existingEntity.NivelDificultad = receta.NivelDificultad;
+            existingEntity.TiempoPreparacion = receta.TiempoPreparacion;
+            existingEntity.IdCategoria = receta.IdCategoria;
+
+            // Actualizar o agregar pasos
+            foreach (var paso in receta.Pasos)
+            {
+                var existingPaso = existingEntity.Pasos.FirstOrDefault(p => p.IdPaso == paso.IdPaso);
+
+                if (existingPaso != null)
+                {
+                    // Actualizar paso existente
+                    existingPaso.Numero = paso.Numero;
+                    existingPaso.Descripcion = paso.Descripcion;
+                    existingPaso.ImagenUrl = paso.ImagenUrl;
+                }
+                else
+                {
+                    // Si el paso no existe, agregarlo
+                    paso.IdReceta = receta.IdReceta; // Asegúrate de que se asigna correctamente
+                    existingEntity.Pasos.Add(paso);
+                }
+            }
+
+            // Eliminar pasos que no están en la nueva lista
+            var pasosToRemove = existingEntity.Pasos
+                .Where(ep => !receta.Pasos.Any(np => np.IdPaso == ep.IdPaso))
+                .ToList();
+
+            foreach (var pasoToRemove in pasosToRemove)
+            {
+                _context.Pasos.Remove(pasoToRemove);
+            }
+
             _context.SaveChanges();
         }
 
@@ -46,10 +141,46 @@ namespace RecetasRedondas.Data
 
         public void Delete(int id)
         {
-            var receta = _context.Recetas.Find(id);
+            var receta = _context.Recetas.Include(r => r.Pasos).FirstOrDefault(r => r.IdReceta == id);
             if (receta != null)
             {
+                _context.Pasos.RemoveRange(receta.Pasos); // Eliminar pasos relacionados
                 _context.Recetas.Remove(receta);
+                _context.SaveChanges();
+            }
+        }
+
+        // Implementación de métodos para gestionar pasos
+        public void AddPaso(int recetaId, Paso paso)
+        {
+            var receta = _context.Recetas.Include(r => r.Pasos).FirstOrDefault(r => r.IdReceta == recetaId);
+            if (receta != null)
+            {
+                receta.Pasos.Add(paso);
+                _context.SaveChanges();
+            }
+        }
+
+        public void UpdatePaso(int recetaId, DatosPasoDTO paso)
+        {
+            var existingPaso = _context.Pasos.FirstOrDefault(p => p.IdPaso == paso.IdPaso && p.IdReceta == recetaId);
+            if (existingPaso != null)
+            {
+                existingPaso.Numero = paso.Numero;
+                existingPaso.Descripcion = paso.Descripcion;
+                existingPaso.ImagenUrl = paso.ImagenUrl;
+
+                _context.Pasos.Update(existingPaso);
+                _context.SaveChanges();
+            }
+        }
+
+        public void DeletePaso(int recetaId, int pasoId)
+        {
+            var paso = _context.Pasos.FirstOrDefault(p => p.IdPaso == pasoId && p.IdReceta == recetaId);
+            if (paso != null)
+            {
+                _context.Pasos.Remove(paso);
                 _context.SaveChanges();
             }
         }
