@@ -11,8 +11,9 @@ namespace RecetasRedondas.Data
         void Add(Receta receta);
         void Update(Receta receta);
         void Delete(int id);
-        void AddPaso(int recetaId, Paso paso);
+        IEnumerable<DatosPasoDTO> GetPasosByRecetaId(int recetaId);
+        void AddPaso(int recetaId, DatosPasoDTO paso);
         void UpdatePaso(int recetaId, DatosPasoDTO paso);
-        void DeletePaso(int recetaId, int pasoId);
+        void DeletePaso( int pasoId);
     }
 }

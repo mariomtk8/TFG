@@ -150,13 +150,39 @@ namespace RecetasRedondas.Data
             }
         }
 
-        // Implementación de métodos para gestionar pasos
-        public void AddPaso(int recetaId, Paso paso)
-        {
+        //métodos para gestionar pasos
+
+            public IEnumerable<DatosPasoDTO> GetPasosByRecetaId(int recetaId)
+                {
+                    var receta = _context.Recetas.Include(r => r.Pasos).FirstOrDefault(r => r.IdReceta == recetaId);
+                    
+                    if (receta != null)
+                    {
+                        return receta.Pasos.Select(p => new DatosPasoDTO
+                        {
+                            IdPaso = p.IdPaso,
+                            IdReceta = p.IdReceta,
+                            Numero = p.Numero,
+                            Descripcion = p.Descripcion,
+                            ImagenUrl = p.ImagenUrl
+                        }).ToList();
+                    }
+
+                    return new List<DatosPasoDTO>(); 
+                }
+
+        public void AddPaso(int recetaId, DatosPasoDTO paso)
+        {   
             var receta = _context.Recetas.Include(r => r.Pasos).FirstOrDefault(r => r.IdReceta == recetaId);
             if (receta != null)
             {
-                receta.Pasos.Add(paso);
+                var DatosPaso = new Paso{
+                    IdReceta = paso.IdReceta,
+                    Numero = paso.Numero,
+                    Descripcion = paso.Descripcion,
+                    ImagenUrl = paso.ImagenUrl
+                };
+                receta.Pasos.Add(DatosPaso);
                 _context.SaveChanges();
             }
         }
@@ -175,9 +201,9 @@ namespace RecetasRedondas.Data
             }
         }
 
-        public void DeletePaso(int recetaId, int pasoId)
+        public void DeletePaso( int pasoId)
         {
-            var paso = _context.Pasos.FirstOrDefault(p => p.IdPaso == pasoId && p.IdReceta == recetaId);
+            var paso = _context.Pasos.FirstOrDefault(p => p.IdPaso == pasoId );
             if (paso != null)
             {
                 _context.Pasos.Remove(paso);

@@ -84,8 +84,17 @@ namespace RecetasRedondas.Controllers
             return NoContent();
         }
 
+        [HttpGet("Receta/{recetaId}/Pasos")]
+            public IActionResult GetPasosByRecetaId(int recetaId)
+            {
+                var pasos = _recetaService.GetPasosByRecetaId(recetaId);
+                return Ok(pasos);
+            }
+
+            // Obtener un paso específico por ID
+
         [HttpPost("{recetaId}/paso")]
-        public IActionResult AddPaso(int recetaId, [FromBody] Paso paso)
+        public IActionResult AddPaso(int recetaId, [FromBody] DatosPasoDTO paso)
         {
             if (paso == null)
             {
@@ -93,7 +102,7 @@ namespace RecetasRedondas.Controllers
             }
 
             _recetaService.AddPaso(recetaId, paso);
-            return CreatedAtAction(nameof(Get), new { id = recetaId }, paso);
+            return Ok(paso);
         }
 
         [HttpPut("{recetaId}/paso")]
@@ -108,10 +117,10 @@ namespace RecetasRedondas.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{recetaId}/paso/{pasoId}")]
-        public IActionResult DeletePaso(int recetaId, int pasoId)
+        [HttpDelete("/Paso/{pasoId}")]
+        public IActionResult DeletePaso(int pasoId)
         {
-            _recetaService.DeletePaso(recetaId, pasoId);
+            _recetaService.DeletePaso( pasoId);
             return NoContent();
         }
     }

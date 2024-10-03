@@ -24,11 +24,12 @@ namespace RecetasRedondas.Business
         public void Add(Receta receta) => _recetaRepository.Add(receta);
 
         public void Delete(int id) => _recetaRepository.Delete(id);
+        public IEnumerable<DatosPasoDTO> GetPasosByRecetaId(int recetaId) => _recetaRepository.GetPasosByRecetaId(recetaId);
 
-        public void AddPaso(int recetaId, Paso paso) => _recetaRepository.AddPaso(recetaId, paso);
+        public void AddPaso(int recetaId, DatosPasoDTO paso) => _recetaRepository.AddPaso(recetaId, paso);
 
         public void UpdatePaso(int recetaId, DatosPasoDTO paso) => _recetaRepository.UpdatePaso(recetaId, paso);
 
-        public void DeletePaso(int recetaId, int pasoId) => _recetaRepository.DeletePaso(recetaId, pasoId);
+        public void DeletePaso( int pasoId) => _recetaRepository.DeletePaso(pasoId);
     }
 }
