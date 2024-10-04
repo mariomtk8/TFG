@@ -44,7 +44,7 @@ namespace RecetasRedondas.Models
                 .HasKey(msr => new { msr.IdMenuSemanal, msr.IdReceta, msr.Fecha });
 
             modelBuilder.Entity<RecetaIngrediente>()
-                .HasKey(ri => new { ri.IdReceta, ri.IdIngrediente });
+                .HasKey(ri => ri.IdRecetaIngrediente);
 
             modelBuilder.Entity<RecetaIngrediente>()
                 .HasOne<Receta>()
@@ -55,6 +55,7 @@ namespace RecetasRedondas.Models
                 .HasOne<Ingrediente>()
                 .WithMany()
                 .HasForeignKey(ri => ri.IdIngrediente);
+
             
              modelBuilder.Entity<Paso>()
         .HasKey(p => p.IdPaso); // Clave primaria para Paso
@@ -134,9 +135,9 @@ namespace RecetasRedondas.Models
             );
 
             modelBuilder.Entity<RecetaIngrediente>().HasData(
-                new RecetaIngrediente { IdReceta = 1, IdIngrediente = 1, Cantidad = 100, EsOpcional = false, Notas = "" },
-                new RecetaIngrediente { IdReceta = 2, IdIngrediente = 2, Cantidad = 200, EsOpcional = false, Notas = "" },
-                new RecetaIngrediente { IdReceta = 3, IdIngrediente = 3, Cantidad = 50, EsOpcional = false, Notas = "" }
+                new RecetaIngrediente { IdRecetaIngrediente=1, IdReceta = 1, IdIngrediente = 1, Cantidad = 100, EsOpcional = false, Notas = "" },
+                new RecetaIngrediente { IdRecetaIngrediente=2, IdReceta = 2, IdIngrediente = 2, Cantidad = 200, EsOpcional = false, Notas = "" },
+                new RecetaIngrediente { IdRecetaIngrediente=3, IdReceta = 3, IdIngrediente = 3, Cantidad = 50, EsOpcional = false, Notas = "" }
             );
 
             modelBuilder.Entity<Usuario>().HasData(

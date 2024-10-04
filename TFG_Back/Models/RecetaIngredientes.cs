@@ -1,11 +1,14 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace RecetasRedondas.Models
 {
     public class RecetaIngrediente
     {
+        [Key]
+        public int IdRecetaIngrediente {get;set;}
         public int IdReceta { get; set; }
         public int IdIngrediente { get; set; }
         public decimal Cantidad { get; set; }

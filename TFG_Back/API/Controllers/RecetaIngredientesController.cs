@@ -25,10 +25,10 @@ namespace RecetasRedondas.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("{idReceta}/{idIngrediente}")]
-        public ActionResult<RecetaIngrediente> Get(int idReceta, int idIngrediente)
+        [HttpGet("{idRecetaIngrediente}")]
+        public ActionResult<RecetaIngrediente> Get(int idRecetaIngrediente)
         {
-            return _recetaIngredienteService.Get(idReceta, idIngrediente);
+            return _recetaIngredienteService.GetById(idRecetaIngrediente);
         }
 
         [AllowAnonymous]
@@ -50,14 +50,14 @@ namespace RecetasRedondas.Controllers
         public IActionResult Post([FromBody] RecetaIngrediente recetaIngrediente)
         {
             _recetaIngredienteService.Add(recetaIngrediente);
-            return CreatedAtAction(nameof(Get), new { idReceta = recetaIngrediente.IdReceta, idIngrediente = recetaIngrediente.IdIngrediente }, recetaIngrediente);
+            return CreatedAtAction(nameof(Get), new { idRecetaIngrediente = recetaIngrediente.IdRecetaIngrediente }, recetaIngrediente);
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPut("{idReceta}/{idIngrediente}")]
-        public IActionResult Put(int idReceta, int idIngrediente, [FromBody] RecetaIngrediente recetaIngrediente)
+        [HttpPut("{idRecetaIngrediente}")]
+        public IActionResult Put(int idRecetaIngrediente, [FromBody] RecetaIngrediente recetaIngrediente)
         {
-            if (idReceta != recetaIngrediente.IdReceta || idIngrediente != recetaIngrediente.IdIngrediente)
+            if (idRecetaIngrediente != recetaIngrediente.IdRecetaIngrediente)
             {
                 return BadRequest();
             }
@@ -67,10 +67,10 @@ namespace RecetasRedondas.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpDelete("{idReceta}/{idIngrediente}")]
-        public IActionResult Delete(int idReceta, int idIngrediente)
+        [HttpDelete("{idRecetaIngrediente}")]
+        public IActionResult Delete(int idRecetaIngrediente)
         {
-            _recetaIngredienteService.Delete(idReceta, idIngrediente);
+            _recetaIngredienteService.Delete(idRecetaIngrediente);
             return NoContent();
         }
     }

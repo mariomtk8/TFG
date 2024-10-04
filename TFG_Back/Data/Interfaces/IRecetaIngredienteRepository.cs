@@ -6,10 +6,10 @@ namespace RecetasRedondas.Data
     public interface IRecetaIngredienteRepository
     {
         List<RecetaIngrediente> GetAll();
-        RecetaIngrediente Get(int idReceta, int idIngrediente);
+        RecetaIngrediente GetById(int idRecetaIngrediente); // Cambiado
         void Add(RecetaIngrediente recetaIngrediente);
         void Update(RecetaIngrediente recetaIngrediente);
-        void Delete(int idReceta, int idIngrediente);
+        void Delete(int idRecetaIngrediente); // Cambiado
         List<RecetaIngrediente> GetByReceta(int recetaId);
         List<RecetaIngrediente> GetByIngrediente(int ingredienteId);
     }

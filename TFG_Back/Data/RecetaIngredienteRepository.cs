@@ -16,12 +16,12 @@ namespace RecetasRedondas.Data
 
         public List<RecetaIngrediente> GetAll() => _context.RecetaIngredientes.ToList();
 
-        public RecetaIngrediente Get(int idReceta, int idIngrediente) 
-            => _context.RecetaIngredientes.Find(idReceta, idIngrediente);
+        public RecetaIngrediente GetById(int idRecetaIngrediente)
+            => _context.RecetaIngredientes.Find(idRecetaIngrediente);
 
         public void Update(RecetaIngrediente recetaIngrediente)
         {
-            var existingEntity = _context.RecetaIngredientes.Find(recetaIngrediente.IdReceta, recetaIngrediente.IdIngrediente);
+            var existingEntity = _context.RecetaIngredientes.Find(recetaIngrediente.IdRecetaIngrediente);
             if (existingEntity != null)
             {
                 _context.Entry(existingEntity).State = EntityState.Detached;
@@ -37,9 +37,9 @@ namespace RecetasRedondas.Data
             _context.SaveChanges();
         }
 
-        public void Delete(int idReceta, int idIngrediente)
+        public void Delete(int idRecetaIngrediente)
         {
-            var recetaIngrediente = _context.RecetaIngredientes.Find(idReceta, idIngrediente);
+            var recetaIngrediente = _context.RecetaIngredientes.Find(idRecetaIngrediente);
             if (recetaIngrediente != null)
             {
                 _context.RecetaIngredientes.Remove(recetaIngrediente);

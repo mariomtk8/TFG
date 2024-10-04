@@ -15,13 +15,13 @@ namespace RecetasRedondas.Business
 
         public List<RecetaIngrediente> GetAll() => _recetaIngredienteRepository.GetAll();
 
-        public RecetaIngrediente Get(int idReceta, int idIngrediente) => _recetaIngredienteRepository.Get(idReceta, idIngrediente);
+        public RecetaIngrediente GetById(int idRecetaIngrediente) => _recetaIngredienteRepository.GetById(idRecetaIngrediente);
 
         public void Add(RecetaIngrediente recetaIngrediente) => _recetaIngredienteRepository.Add(recetaIngrediente);
 
         public void Update(RecetaIngrediente recetaIngrediente) => _recetaIngredienteRepository.Update(recetaIngrediente);
 
-        public void Delete(int idReceta, int idIngrediente) => _recetaIngredienteRepository.Delete(idReceta, idIngrediente);
+        public void Delete(int idRecetaIngrediente) => _recetaIngredienteRepository.Delete(idRecetaIngrediente);
 
         public List<RecetaIngrediente> GetByReceta(int recetaId) => _recetaIngredienteRepository.GetByReceta(recetaId);
 
