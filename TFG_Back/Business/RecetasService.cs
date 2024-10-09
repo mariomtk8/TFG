@@ -19,7 +19,7 @@ namespace RecetasRedondas.Business
 
         public List<Receta> GetByCategoria(int idCategoria) => _recetaRepository.GetByCategoria(idCategoria);
 
-        public void Update(Receta receta) => _recetaRepository.Update(receta);
+        public void Update(RecetaUpdateDTO receta) => _recetaRepository.Update(receta);
 
         public void Add(Receta receta) => _recetaRepository.Add(receta);
 

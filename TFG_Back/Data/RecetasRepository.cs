@@ -83,7 +83,7 @@ namespace RecetasRedondas.Data
                 .ToList();
         }
 
-        public void Update(Receta receta)
+        public void Update(RecetaUpdateDTO receta)
         {
             var existingEntity = _context.Recetas.Include(r => r.Pasos).FirstOrDefault(r => r.IdReceta == receta.IdReceta);
             if (existingEntity is null)
@@ -100,35 +100,7 @@ namespace RecetasRedondas.Data
             existingEntity.TiempoPreparacion = receta.TiempoPreparacion;
             existingEntity.IdCategoria = receta.IdCategoria;
 
-            // Actualizar o agregar pasos
-            foreach (var paso in receta.Pasos)
-            {
-                var existingPaso = existingEntity.Pasos.FirstOrDefault(p => p.IdPaso == paso.IdPaso);
-
-                if (existingPaso != null)
-                {
-                    // Actualizar paso existente
-                    existingPaso.Numero = paso.Numero;
-                    existingPaso.Descripcion = paso.Descripcion;
-                    existingPaso.ImagenUrl = paso.ImagenUrl;
-                }
-                else
-                {
-                    // Si el paso no existe, agregarlo
-                    paso.IdReceta = receta.IdReceta; // Asegúrate de que se asigna correctamente
-                    existingEntity.Pasos.Add(paso);
-                }
-            }
-
-            // Eliminar pasos que no están en la nueva lista
-            var pasosToRemove = existingEntity.Pasos
-                .Where(ep => !receta.Pasos.Any(np => np.IdPaso == ep.IdPaso))
-                .ToList();
-
-            foreach (var pasoToRemove in pasosToRemove)
-            {
-                _context.Pasos.Remove(pasoToRemove);
-            }
+            
 
             _context.SaveChanges();
         }

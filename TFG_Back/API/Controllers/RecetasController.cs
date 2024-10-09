@@ -65,7 +65,7 @@ namespace RecetasRedondas.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
-        public ActionResult Update(int id, [FromBody] Receta receta)
+        public ActionResult Update(int id, [FromBody] RecetaUpdateDTO receta)
         {
             if (id != receta.IdReceta)
             {
