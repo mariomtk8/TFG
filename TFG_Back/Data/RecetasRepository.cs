@@ -42,6 +42,13 @@ namespace RecetasRedondas.Data
 
             return newRecetas;
         }
+            public List<Receta> GetBySearch(string searchTerm)
+        {
+            return _context.Recetas
+                .Where(r => r.Nombre.Contains(searchTerm))
+                .ToList();
+        }
+
 
         public RecetaDTO Get(int id)
         {

@@ -30,6 +30,19 @@ namespace RecetasRedondas.Controllers
                 return StatusCode(500, new { message = er });
             }
         }
+        [AllowAnonymous]
+        [HttpGet("search")]
+        public ActionResult<List<Receta>> SearchRecetas(string searchTerm)
+        {
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                return BadRequest("El término de búsqueda no puede estar vacío.");
+            }
+
+            var recetas = _recetaService.SearchRecetas(searchTerm);
+            return Ok(recetas);
+        }
+
 
         [AllowAnonymous]
         [HttpGet("{id}")]

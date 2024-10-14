@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Wl+5EqCh6tgiJfuwq+Ohugw7T/UrPZF5+revh1gVrzrr0inOfWURgNmxNSgIHrfUsMgxfxEn1laDvjGgLgKTiQ==",
+  "dgSpecHash": "i2xtA7aweqoe3QTZCtwM2MG6RfGIWihT7JqVfzqTcngm1/98+ZVCgHZMv3YSAx+UFlUFPbjaj7h0C+U9DY6yAQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\API\\RecetasRedondas.API.csproj",
+  "projectFilePath": "C:\\Users\\Practicas25\\Desktop\\Tf\\Back\\TFG_Back\\api\\RecetasRedondas.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Practicas25\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Practicas25\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

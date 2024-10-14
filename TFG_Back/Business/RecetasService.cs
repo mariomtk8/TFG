@@ -14,6 +14,11 @@ namespace RecetasRedondas.Business
         }
 
         public List<RecetaDTO> GetAll() => _recetaRepository.GetAll();
+        
+        public List<Receta> SearchRecetas(string searchTerm)
+        {
+            return _recetaRepository.GetBySearch(searchTerm);
+        }
 
         public RecetaDTO Get(int id) => _recetaRepository.Get(id);
 

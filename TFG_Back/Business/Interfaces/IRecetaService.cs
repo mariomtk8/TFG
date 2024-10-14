@@ -6,6 +6,7 @@ namespace RecetasRedondas.Business
     public interface IRecetaService
     {
         List<RecetaDTO> GetAll();
+        List<Receta> SearchRecetas(string searchTerm);
         RecetaDTO Get(int id);
         List<Receta> GetByCategoria(int idCategoria);
         void Add(Receta receta);
