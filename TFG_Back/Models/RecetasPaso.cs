@@ -7,9 +7,9 @@ namespace RecetasRedondas.Models
     {
 
         public int IdRecetasPaso { get; set; }   
-        public int IdPaso { get; set; }          // ID del paso (clave primaria)
+        public int IdPaso { get; set; }          
         public int IdReceta { get; set; }  
-         public Paso Paso { get; set; }      // ID de la receta (clave foránea)
+         public Paso Paso { get; set; }      
         public Receta Receta { get; set; }
     }
 }

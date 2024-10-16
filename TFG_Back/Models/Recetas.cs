@@ -18,5 +18,8 @@ namespace RecetasRedondas.Models
     public decimal NivelDificultad { get; set; }
     public int TiempoPreparacion { get; set; }
     public int IdCategoria { get; set; }
+    
+
+
     }
 }

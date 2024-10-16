@@ -98,6 +98,7 @@ builder.Services.AddScoped<IRecetaIngredienteRepository, RecetaIngredienteReposi
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IMenuSemanalRepository, MenuSemanalRepository>();
 builder.Services.AddScoped<IMenuSemanalRecetaRepository, MenuSemanalRecetaRepository>();
+builder.Services.AddScoped<IFavoritoRepository, FavoritoRepository>();
 
 // Registrar servicios
 builder.Services.AddScoped<IRecetaService, RecetaService>();
@@ -107,6 +108,7 @@ builder.Services.AddScoped<IRecetaIngredienteService, RecetaIngredienteService>(
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IMenuSemanalService, MenuSemanalService>();
 builder.Services.AddScoped<IMenuSemanalRecetaService, MenuSemanalRecetaService>();
+builder.Services.AddScoped<IFavoritoService, FavoritoService>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 

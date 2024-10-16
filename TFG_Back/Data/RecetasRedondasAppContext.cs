@@ -18,79 +18,74 @@ namespace RecetasRedondas.Models
         public DbSet<Paso> Pasos { get; set; }
         public DbSet<RecetaIngrediente> RecetaIngredientes { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
-
+        public DbSet<Favorito> Favoritos { get; set; }
         public DbSet<RecetasPaso> recetasPasos {get;set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            // Configuración de claves primarias
-            modelBuilder.Entity<Categoria>()
-                .HasKey(c => c.IdCategoria);
+    {
+        // Configuración de claves primarias
+        modelBuilder.Entity<Categoria>().HasKey(c => c.IdCategoria);
+        modelBuilder.Entity<Ingrediente>().HasKey(i => i.IdIngrediente);
+        modelBuilder.Entity<MenuSemanal>().HasKey(ms => ms.IdMenuSemanal);
+        modelBuilder.Entity<Usuario>().HasKey(u => u.IdUsuario);
+        modelBuilder.Entity<Receta>().HasKey(r => r.IdReceta);
+        modelBuilder.Entity<Paso>().HasKey(p => p.IdPaso);
+        modelBuilder.Entity<RecetaIngrediente>().HasKey(ri => ri.IdRecetaIngrediente);
+        modelBuilder.Entity<Favorito>().HasKey(f => f.IdFavorito);
 
-            modelBuilder.Entity<Ingrediente>()
-                .HasKey(i => i.IdIngrediente);
+        // Configuración de relaciones muchos a muchos
+        modelBuilder.Entity<MenuSemanalReceta>()
+            .HasKey(msr => new { msr.IdMenuSemanal, msr.IdReceta, msr.Fecha });
 
-            modelBuilder.Entity<MenuSemanal>()
-                .HasKey(ms => ms.IdMenuSemanal);
+        modelBuilder.Entity<RecetaIngrediente>()
+            .HasOne<Receta>()
+            .WithMany()
+            .HasForeignKey(ri => ri.IdReceta);
 
-            modelBuilder.Entity<Usuario>()
-                .HasKey(u => u.IdUsuario);
+        modelBuilder.Entity<RecetaIngrediente>()
+            .HasOne<Ingrediente>()
+            .WithMany()
+            .HasForeignKey(ri => ri.IdIngrediente);
 
-            modelBuilder.Entity<Receta>()
-                .HasKey(r => r.IdReceta);
+        // Configuración de relaciones
+        modelBuilder.Entity<Receta>()
+            .HasMany(r => r.Pasos)
+            .WithOne(p => p.Receta)
+            .HasForeignKey(p => p.IdReceta); // Se mantiene el comportamiento por defecto para la eliminación en cascada.
 
-            // Configuración de relaciones muchos a muchos
-            modelBuilder.Entity<MenuSemanalReceta>()
-                .HasKey(msr => new { msr.IdMenuSemanal, msr.IdReceta, msr.Fecha });
+        // Configuración para RecetasPaso
+        modelBuilder.Entity<RecetasPaso>()
+            .HasKey(rp => new { rp.IdReceta, rp.IdPaso });
 
-            modelBuilder.Entity<RecetaIngrediente>()
-                .HasKey(ri => ri.IdRecetaIngrediente);
+        // Relación entre RecetasPaso y Receta
+        modelBuilder.Entity<RecetasPaso>()
+            .HasOne(rp => rp.Receta)
+            .WithMany() // No necesitas especificar la colección aquí si no hay propiedad de navegación
+            .HasForeignKey(rp => rp.IdReceta)
+            .OnDelete(DeleteBehavior.Restrict);  // Cambiado a "Restrict" para evitar el ciclo
 
-            modelBuilder.Entity<RecetaIngrediente>()
-                .HasOne<Receta>()
-                .WithMany()
-                .HasForeignKey(ri => ri.IdReceta);
+        // Relación entre RecetasPaso y Paso
+        modelBuilder.Entity<RecetasPaso>()
+            .HasOne(rp => rp.Paso)
+            .WithMany() // No necesitas especificar la colección aquí si no hay propiedad de navegación
+            .HasForeignKey(rp => rp.IdPaso)
+            .OnDelete(DeleteBehavior.Restrict); // Cambiado a "Restrict" para evitar el ciclo
 
-            modelBuilder.Entity<RecetaIngrediente>()
-                .HasOne<Ingrediente>()
-                .WithMany()
-                .HasForeignKey(ri => ri.IdIngrediente);
+        // Relación Favorito
+        modelBuilder.Entity<Favorito>()
+            .HasOne(f => f.Usuario)
+            .WithMany(u => u.Favoritos)
+            .HasForeignKey(f => f.IdUsuario);
 
-            
-             modelBuilder.Entity<Paso>()
-        .HasKey(p => p.IdPaso); // Clave primaria para Paso
-
-    // Configuración de relaciones
-     modelBuilder.Entity<Receta>()
-                .HasMany(r => r.Pasos)
-                .WithOne(p => p.Receta)
-                .HasForeignKey(p => p.IdReceta)
-                .OnDelete(DeleteBehavior.Cascade); // Cascade delete para pasos
-
-            // Otras configuraciones...
-
-            // Configuración para RecetasPaso si es necesario
-            modelBuilder.Entity<RecetasPaso>()
-        .HasKey(rp => new { rp.IdReceta, rp.IdPaso });
-
-    // Relación entre RecetasPaso y Receta
-    modelBuilder.Entity<RecetasPaso>()
-        .HasOne(rp => rp.Receta)
-        .WithMany() // No necesitas especificar la colección aquí si no hay propiedad de navegación
-        .HasForeignKey(rp => rp.IdReceta)
-        .OnDelete(DeleteBehavior.Restrict);  // Cambiado a "Restrict" para evitar el ciclo
-
-    // Relación entre RecetasPaso y Paso
-    modelBuilder.Entity<RecetasPaso>()
-        .HasOne(rp => rp.Paso)
-        .WithMany() // No necesitas especificar la colección aquí si no hay propiedad de navegación
-        .HasForeignKey(rp => rp.IdPaso)
-        .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<Favorito>()
+            .HasOne(f => f.Receta)
+            .WithMany()
+            .HasForeignKey(f => f.IdReceta);
 
             // Datos de ejemplo (se pueden ajustar según sea necesario)
             modelBuilder.Entity<Categoria>().HasData(
-    new Categoria { IdCategoria = 1, NombreCategoria = "Carnes", Descripcion = "Platos deliciosos de carne", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/carne.webp?updatedAt=1726218723472", PuntuacionPromedio = 4.5m },
-    new Categoria { IdCategoria = 2, NombreCategoria = "Arroces", Descripcion = "Platos variados con arroz", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/arroz.png?updatedAt=1726218452623", PuntuacionPromedio = 4.8m },
+     new Categoria { IdCategoria = 1, NombreCategoria = "Carnes", Descripcion = "Platos deliciosos de carne", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/carne.webp?updatedAt=1726218723472", PuntuacionPromedio = 4.5m },
+     new Categoria { IdCategoria = 2, NombreCategoria = "Arroces", Descripcion = "Platos variados con arroz", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/arroz.png?updatedAt=1726218452623", PuntuacionPromedio = 4.8m },
     new Categoria { IdCategoria = 3, NombreCategoria = "Guisos", Descripcion = "Guisos tradicionales y caseros", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/guisos.png?updatedAt=1726218800757", PuntuacionPromedio = 4.7m },
     new Categoria { IdCategoria = 4, NombreCategoria = "Mariscos", Descripcion = "Platos exquisitos de mariscos", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/marisco.webp?updatedAt=1726218800789", PuntuacionPromedio = 4.6m },
     new Categoria { IdCategoria = 5, NombreCategoria = "Pescados", Descripcion = "Platos frescos de pescados", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/pescado.png?updatedAt=1726218801946", PuntuacionPromedio = 4.7m },
@@ -140,7 +135,7 @@ namespace RecetasRedondas.Models
 );
 
 
-            // Datos de ejemplo para pasos
+           // Datos de ejemplo para pasos
             modelBuilder.Entity<Paso>().HasData(
                 new Paso { IdPaso = 1, IdReceta = 1, Numero = 1, Descripcion = "Lavar y trocear la lechuga.", ImagenUrl = "https://ik.imagekit.io/Mariocanizares/Recetas/ensalada.jpg?updatedAt=1727169325456" },
                 new Paso { IdPaso = 2, IdReceta = 1, Numero = 2, Descripcion = "Agregar el aderezo César y mezclar bien.", ImagenUrl = "https://example.com/imagen2.jpg" },

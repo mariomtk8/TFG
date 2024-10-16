@@ -12,5 +12,6 @@ namespace RecetasRedondas.Models
         public string Contrasena { get; set; }
         public DateTime FechaRegistro { get; set; }
         public bool Rol { get; set; }
+        public List<Favorito> Favoritos { get; set; }
     }
 }
