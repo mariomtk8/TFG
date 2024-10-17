@@ -28,6 +28,12 @@ public class FavoritoRepository : IFavoritoRepository
     }
 
     public void AddFavorito(FavoritoDTO favorito)
+{
+    // Verifica si el usuario ya tiene esta receta como favorita
+    var exists = _context.Favoritos
+        .Any(f => f.IdUsuario == favorito.IdUsuario && f.IdReceta == favorito.IdReceta);
+
+    if (!exists)
     {
         var newFav = new Favorito
         {
@@ -35,15 +41,26 @@ public class FavoritoRepository : IFavoritoRepository
             IdReceta = favorito.IdReceta
         };
 
-
         _context.Favoritos.Add(newFav);
         _context.SaveChanges();
     }
-
-    public void DeleteFavorito(Favorito favorito)
+    else
     {
-        _context.Favoritos.Remove(favorito);
-        _context.SaveChanges();
+        // Si el favorito ya existe, podrías lanzar una excepción o simplemente retornar sin hacer nada
+        // Esto dependerá de la lógica de negocio que desees implementar.
+        throw new Exception("Este favorito ya existe.");
+    }
+}
+
+
+    public void DeleteFavorito(int favoritoId)
+    {
+        var favorito = _context.Favoritos.Find(favoritoId);
+            if (favorito != null)
+            {
+                _context.Favoritos.Remove(favorito);
+                _context.SaveChanges();
+            }
     }
 
     public bool FavoritoExists(int IdFavorito)

@@ -23,12 +23,5 @@ public class FavoritoService : IFavoritoService
         }
     }
 
-    public void DeleteFavorito(int favoritoId)
-    {
-        var favorito = _favoritoRepository.GetFavorito(favoritoId);
-        if (favorito != null)
-        {
-            _favoritoRepository.DeleteFavorito(favorito);
-        }
-    }
+    public void DeleteFavorito(int favoritoId) => _favoritoRepository.DeleteFavorito(favoritoId);
 }

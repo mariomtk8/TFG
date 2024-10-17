@@ -5,5 +5,5 @@ public interface IFavoritoService
 {
     List<Favorito> GetFavoritosByUsuarioId(int usuarioId);
     void AddFavorito(FavoritoDTO favorito);
-    void DeleteFavorito(int favoritoId);
+    void DeleteFavorito(int IdFavorito);
 }
