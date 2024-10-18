@@ -13,5 +13,7 @@ namespace RecetasRedondas.Models
         public DateTime FechaRegistro { get; set; }
         public bool Rol { get; set; }
         public List<Favorito> Favoritos { get; set; }
+        public List<MenuSemanal> MenusSemanales { get; set; }
+        public List<Alergeno> Alergenos { get; set; } = new List<Alergeno>();
     }
 }

@@ -15,5 +15,8 @@ namespace RecetasRedondas.Models
         public string Notas { get; set; } 
         public DateTime FechaAñadido { get; set; } 
         public bool EsOpcional { get; set; }
+
+        public Receta Receta { get; set; }
+        public Ingrediente Ingrediente { get; set; }
     }
 }
