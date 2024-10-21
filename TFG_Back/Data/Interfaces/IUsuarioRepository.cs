@@ -11,5 +11,8 @@ namespace RecetasRedondas.Data
         public Usuario RegisterUsuario(RegisterUsuarioDTO user);
         void UpdateUsuario(UsuarioDTO usuario);
         void DeleteUsuario(int idUsuario);
+        void AddAlergenos(int idUsuario, List<AddAlergenoDTO> alergenosDTO);
+        void DeleteAlergeno(int idUsuario, int idAlergeno);
+        List<AlergenoDTO> GetAlergenos(int idUsuario);
     }
 }

@@ -15,5 +15,8 @@ namespace RecetasRedondas.Business
         void UpdateUsuario(UsuarioDTO usuario);
         //Delete
         void DeleteUsuario(int idUsuario);
+        void AddAlergenos(int idUsuario, List<AddAlergenoDTO> alergenosDTO);
+        void DeleteAlergeno(int idUsuario, int idAlergeno);
+        List<AlergenoDTO> GetAlergenos(int idUsuario);
     }
 }

@@ -13,5 +13,6 @@ namespace RecetasRedondas.Models
         public string TipoAlergeno { get; set; }
         public string UnidadMedida { get; set; }
         public DateTime FechaExpiracion { get; set; }
+        public List<RecetaIngrediente> recetaIngredientes  { get; set; } = new List<RecetaIngrediente>();
     }
 }

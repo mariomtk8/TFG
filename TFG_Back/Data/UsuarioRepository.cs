@@ -15,6 +15,79 @@ namespace RecetasRedondas.Data
         {
             _context = context;
         }
+        public void AddAlergenos(int idUsuario, List<AddAlergenoDTO> alergenosDTO)
+        {
+            var usuario = _context.Usuarios
+                .Include(u => u.Alergenos)
+                .FirstOrDefault(u => u.IdUsuario == idUsuario);
+
+            if (usuario == null)
+            {
+                throw new Exception($"Usuario con ID {idUsuario} no encontrado.");
+            }
+
+            // Asocia los alérgenos al usuario
+            foreach (var alergenoDto in alergenosDTO)
+            {
+                // Crea un nuevo objeto Alergeno para asociar
+                var alergeno = new Alergeno
+                {
+                    // El IdAlergeno se generará automáticamente en la base de datos
+                    IdIngrediente = alergenoDto.IdIngrediente,
+                };
+
+                usuario.Alergenos.Add(alergeno);
+            }
+
+            SaveChanges();
+        }
+
+
+// Elimina un alérgeno específico de un usuario
+public void DeleteAlergeno(int idUsuario, int idAlergeno)
+{
+    var usuario = _context.Usuarios
+        .Include(u => u.Alergenos)
+        .FirstOrDefault(u => u.IdUsuario == idUsuario);
+
+    if (usuario == null)
+    {
+        throw new Exception($"Usuario con ID {idUsuario} no encontrado.");
+    }
+
+    var alergeno = usuario.Alergenos.FirstOrDefault(a => a.IdAlergeno == idAlergeno);
+    if (alergeno != null)
+    {
+        usuario.Alergenos.Remove(alergeno);
+        SaveChanges();
+    }
+    else
+    {
+        throw new Exception($"Alérgeno con ID {idAlergeno} no encontrado para el usuario con ID {idUsuario}.");
+    }
+}
+
+// Obtiene la lista de alérgenos de un usuario
+public List<AlergenoDTO> GetAlergenos(int idUsuario)
+{
+    var usuario = _context.Usuarios
+        .Include(u => u.Alergenos)
+        .FirstOrDefault(u => u.IdUsuario == idUsuario);
+
+    if (usuario == null)
+    {
+        throw new Exception($"Usuario con ID {idUsuario} no encontrado.");
+    }
+
+    return usuario.Alergenos
+        .Select(a => new AlergenoDTO 
+        { 
+            IdIngrediente = a.IdIngrediente,
+            IdAlergeno = a.IdAlergeno // Incluye IdAlergeno en el DTO
+        })
+        .ToList();
+}
+
             //Get 
         public List<UsuarioDTO> GetAll()
         {

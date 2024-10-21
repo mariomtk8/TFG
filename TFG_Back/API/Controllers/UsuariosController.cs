@@ -172,5 +172,52 @@
                     return StatusCode(500, new { message = ex.Message });
                 }
             }
+            // GET: /usuarios/{idUsuario}/alergenos
+        [HttpGet("{idUsuario}/alergenos")]
+        public ActionResult<List<AlergenoDTO>> GetAlergenos([FromRoute] int idUsuario)
+        {
+            try
+            {
+                var alergenos = _usuarioService.GetAlergenos(idUsuario);
+                return Ok(alergenos);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error al obtener los alérgenos del usuario: {ex.Message}");
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+
+        // POST: /usuarios/{idUsuario}/alergenos
+        [HttpPost("{idUsuario}/alergenos")]
+        public ActionResult AddAlergenos([FromRoute] int idUsuario, List<AddAlergenoDTO> alergenosDTO)
+        {
+            try
+            {
+                _usuarioService.AddAlergenos(idUsuario, alergenosDTO);
+                return Ok(new { message = "Alérgenos añadidos correctamente." });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error al añadir alérgenos al usuario: {ex.Message}");
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+
+        // Delete: /usuarios/{idUsuario}/alergenos
+        [HttpDelete("{idUsuario}/{idAlergeno}")]
+        public ActionResult DeleteAlergeno(int idUsuario, int idAlergeno)
+        {
+            try
+            {
+                _usuarioService.DeleteAlergeno(idUsuario, idAlergeno);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error al eliminar los alérgenos del usuario: {ex.Message}");
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
         }
     }

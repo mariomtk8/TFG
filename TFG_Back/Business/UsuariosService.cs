@@ -13,6 +13,24 @@ namespace RecetasRedondas.Business
             _usuarioRepository = usuarioRepository;
         }
 
+        // Asociación de alérgenos al usuario
+        public void AddAlergenos(int idUsuario, List<AddAlergenoDTO> alergenosDTO)
+        {
+            _usuarioRepository.AddAlergenos(idUsuario, alergenosDTO);
+        }
+
+        // Modificación de alérgenos del usuario
+        public void DeleteAlergeno(int idUsuario, int idAlergeno)
+        {
+            _usuarioRepository.DeleteAlergeno(idUsuario, idAlergeno);
+        }
+
+        // Obtiene los alérgenos de un usuario
+        public List<AlergenoDTO> GetAlergenos(int idUsuario)
+        {
+            return _usuarioRepository.GetAlergenos(idUsuario);
+        }
+
 
         //Get
         public List<UsuarioDTO> GetAll() => _usuarioRepository.GetAll();

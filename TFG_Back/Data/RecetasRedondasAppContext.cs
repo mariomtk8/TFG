@@ -39,14 +39,14 @@ namespace RecetasRedondas.Models
 
 
             modelBuilder.Entity<RecetaIngrediente>()
-                .HasOne<Receta>()
-                .WithMany()
-                .HasForeignKey(ri => ri.IdReceta);
+    .HasOne(ri => ri.Receta)
+    .WithMany(r => r.recetaIngredientes)  // Añadir propiedad de navegación en Receta
+    .HasForeignKey(ri => ri.IdReceta);
 
-            modelBuilder.Entity<RecetaIngrediente>()
-                .HasOne<Ingrediente>()
-                .WithMany()
-                .HasForeignKey(ri => ri.IdIngrediente);
+modelBuilder.Entity<RecetaIngrediente>()
+    .HasOne(ri => ri.Ingrediente)
+    .WithMany(i => i.recetaIngredientes)  // Añadir propiedad de navegación en Ingrediente
+    .HasForeignKey(ri => ri.IdIngrediente);
 
             // Configuración de relaciones
             modelBuilder.Entity<Receta>()
@@ -178,9 +178,9 @@ namespace RecetasRedondas.Models
             );
 
             modelBuilder.Entity<RecetaIngrediente>().HasData(
-                new RecetaIngrediente { IdRecetaIngrediente = 1, IdReceta = 1, IdIngrediente = 1, Cantidad = 100, EsOpcional = false, Notas = "" },
-                new RecetaIngrediente { IdRecetaIngrediente = 2, IdReceta = 2, IdIngrediente = 2, Cantidad = 200, EsOpcional = false, Notas = "" },
-                new RecetaIngrediente { IdRecetaIngrediente = 3, IdReceta = 3, IdIngrediente = 3, Cantidad = 50, EsOpcional = false, Notas = "" }
+                new RecetaIngrediente { IdRecetaIngrediente = 1, IdReceta = 1, IdIngrediente = 1, Cantidad = 100, EsOpcional = false, Notas = "", FechaAñadido = DateTime.Now.AddMonths(1) },
+                new RecetaIngrediente { IdRecetaIngrediente = 2, IdReceta = 2, IdIngrediente = 2, Cantidad = 200, EsOpcional = false, Notas = "", FechaAñadido = DateTime.Now.AddMonths(1) },
+                new RecetaIngrediente { IdRecetaIngrediente = 3, IdReceta = 3, IdIngrediente = 3, Cantidad = 50, EsOpcional = false, Notas = "", FechaAñadido = DateTime.Now.AddMonths(1)  }
             );
 
             modelBuilder.Entity<Usuario>().HasData(
