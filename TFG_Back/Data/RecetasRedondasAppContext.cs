@@ -20,7 +20,7 @@ namespace RecetasRedondas.Models
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Favorito> Favoritos { get; set; }
         public DbSet<RecetasPaso> recetasPasos { get; set; }
-        public DbSet<Alergeno> Alergenos { get; set; } // Añadido: DbSet de Alergenos
+        public DbSet<Alergeno> Alergenos { get; set; } 
         public DbSet<DiaMenu> DiasMenu { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,8 +34,23 @@ namespace RecetasRedondas.Models
             modelBuilder.Entity<Paso>().HasKey(p => p.IdPaso);
             modelBuilder.Entity<RecetaIngrediente>().HasKey(ri => ri.IdRecetaIngrediente);
             modelBuilder.Entity<Favorito>().HasKey(f => f.IdFavorito);
-            modelBuilder.Entity<Alergeno>().HasKey(a => a.IdAlergeno); // Añadido: Clave primaria de Alergeno
+            modelBuilder.Entity<Alergeno>().HasKey(a => a.IdAlergeno); 
             modelBuilder.Entity<DiaMenu>().HasKey(dm => dm.IdDiaMenu);
+
+            // Definir la relación muchos a muchos entre Usuario e Ingrediente
+        modelBuilder.Entity<Alergeno>()
+            .HasKey(a => new { a.IdUsuario, a.IdIngrediente });
+
+        modelBuilder.Entity<Alergeno>()
+            .HasOne(a => a.Usuarios)
+            .WithMany(u => u.Alergenos)
+            .HasForeignKey(au => au.IdUsuario);
+
+        modelBuilder.Entity<Alergeno>()
+            .HasOne(a => a.Ingredientes)
+            .WithMany(i => i.Alergenos)
+            .HasForeignKey(a => a.IdIngrediente);
+
 
 
             modelBuilder.Entity<RecetaIngrediente>()

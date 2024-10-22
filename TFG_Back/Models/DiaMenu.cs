@@ -17,8 +17,8 @@ namespace RecetasRedondas.Models
 
         public bool TipoComida { get; set; } //Comida= "True" Cena= "False"
 
-        public int IdMenuSemanal { get; set; } // Clave foránea para MenuSemanal
-        public MenuSemanal MenuSemanal { get; set; }
+        public int? IdMenuSemanal { get; set; } // Clave foránea para MenuSemanal
+        public MenuSemanal? MenuSemanal { get; set; }
 
     }
 

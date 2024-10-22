@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecetasRedondas.Models;
 
@@ -11,9 +12,11 @@ using RecetasRedondas.Models;
 namespace RecetasRedondas.Data.Migrations
 {
     [DbContext(typeof(RecetasRedondasAppContext))]
-    partial class RecetasRedondasAppContextModelSnapshot : ModelSnapshot
+    [Migration("20241022103822_atributosNull")]
+    partial class atributosNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

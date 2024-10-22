@@ -189,5 +189,33 @@ namespace RecetasRedondas.Data
                 _context.SaveChanges();
             }
         }
+
+    public List<RecetasMDTO> FiltrarRecetasPorAlergenos(int usuarioId)
+{
+    // Obtener la lista de alérgenos del usuario
+    var alergenosUsuario = _context.Alergenos
+        .Where(au => au.IdUsuario == usuarioId)
+        .Select(au => au.IdIngrediente)
+        .ToList();
+
+    // Obtener las recetas que no contengan ingredientes a los que el usuario es alérgico
+    var recetasSinAlergenos = _context.Recetas
+        .Where(receta => !receta.recetaIngredientes
+            .Any(ri => alergenosUsuario.Contains(ri.IdIngrediente))) // Filtrar las recetas que no contienen ingredientes alérgicos
+        .Include(r => r.Pasos) // Incluir los pasos de la receta
+        .ToList();
+
+    // Mapear las recetas a RecetaDTO
+    var newRecetas = recetasSinAlergenos.Select(receta => new RecetasMDTO
+    {
+        IdReceta = receta.IdReceta,
+        Nombre = receta.Nombre,
+    }).ToList();
+
+    return newRecetas;
+}
+
+
+
     }
 }

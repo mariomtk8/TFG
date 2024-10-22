@@ -136,5 +136,20 @@ namespace RecetasRedondas.Controllers
             _recetaService.DeletePaso( pasoId);
             return NoContent();
         }
+
+        [HttpGet("filtrarPorAlergenos/{usuarioId}")]
+    public IActionResult FiltrarRecetasPorAlergenos(int usuarioId)
+    {
+        var recetas = _recetaService.FiltrarRecetasPorAlergenos(usuarioId);
+
+        if (recetas == null || !recetas.Any())
+        {
+            return NotFound("No se encontraron recetas que cumplan con los requisitos.");
+        }else if(usuarioId == null){
+            return NotFound("No hay usuarios con ese id ");
+        }
+
+        return Ok(recetas);
+    }
     }
 }

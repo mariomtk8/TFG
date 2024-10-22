@@ -15,11 +15,8 @@ namespace RecetasRedondas.Business
 
         public List<RecetaDTO> GetAll() => _recetaRepository.GetAll();
         
-        public List<Receta> SearchRecetas(string searchTerm)
-        {
-            return _recetaRepository.GetBySearch(searchTerm);
-        }
-
+        public List<Receta> SearchRecetas(string searchTerm) =>  _recetaRepository.GetBySearch(searchTerm);
+        
         public RecetaDTO Get(int id) => _recetaRepository.Get(id);
 
         public List<Receta> GetByCategoria(int idCategoria) => _recetaRepository.GetByCategoria(idCategoria);
@@ -36,5 +33,8 @@ namespace RecetasRedondas.Business
         public void UpdatePaso(int recetaId, DatosPasoDTO paso) => _recetaRepository.UpdatePaso(recetaId, paso);
 
         public void DeletePaso( int pasoId) => _recetaRepository.DeletePaso(pasoId);
+        public List<RecetasMDTO> FiltrarRecetasPorAlergenos(int usuarioId) => _recetaRepository.FiltrarRecetasPorAlergenos(usuarioId);
+    
+
     }
 }

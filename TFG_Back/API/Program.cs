@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
+using RecetasRedondas.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -97,6 +98,8 @@ builder.Services.AddScoped<IIngredienteRepository, IngredienteRepository>();
 builder.Services.AddScoped<IRecetaIngredienteRepository, RecetaIngredienteRepository>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IFavoritoRepository, FavoritoRepository>();
+builder.Services.AddScoped<IDiaMenuRepository, DiaMenuRepository>();
+builder.Services.AddScoped<IMenuSemanalRepository, MenuSemanalRepository>();
 
 // Registrar servicios
 builder.Services.AddScoped<IRecetaService, RecetaService>();
@@ -104,10 +107,10 @@ builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 builder.Services.AddScoped<IIngredienteService, IngredienteService>();
 builder.Services.AddScoped<IRecetaIngredienteService, RecetaIngredienteService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-
 builder.Services.AddScoped<IFavoritoService, FavoritoService>();
-
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IDiaMenuService, DiaMenuService>();
+builder.Services.AddScoped<IMenuSemanalService, MenuSemanalService>();
 
 // Configuración de CORS
 builder.Services.AddCors(options =>
