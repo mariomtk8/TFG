@@ -12,11 +12,11 @@ namespace RecetasRedondas.Models
         public int IdReceta { get; set; }
         public int IdIngrediente { get; set; }
         public decimal Cantidad { get; set; }
-        public string Notas { get; set; } 
+        public string ?Notas { get; set; } 
         public DateTime FechaAñadido { get; set; } 
         public bool EsOpcional { get; set; }
 
-        public Receta Receta { get; set; }
-        public Ingrediente Ingrediente { get; set; }
+        public Receta ?Receta { get; set; }
+        public Ingrediente ?Ingrediente { get; set; }
     }
 }

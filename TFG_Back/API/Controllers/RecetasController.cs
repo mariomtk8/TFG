@@ -151,5 +151,22 @@ namespace RecetasRedondas.Controllers
 
         return Ok(recetas);
     }
+    [HttpGet("filtrarPorCategorias/{usuarioId}")]
+public IActionResult FiltrarRecetasPorCategorias(int usuarioId)
+{
+    var recetas = _recetaService.FiltrarRecetasPorCategorias(usuarioId);
+
+    if (recetas == null || !recetas.Any())
+    {
+        return NotFound("No se encontraron recetas que cumplan con los requisitos.");
+    }
+    else if (usuarioId <= 0) // Asegúrate de que el ID sea válido
+    {
+        return NotFound("No hay usuarios con ese id.");
+    }
+
+    return Ok(recetas);
+}
+
     }
 }

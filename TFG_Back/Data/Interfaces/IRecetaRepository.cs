@@ -17,6 +17,9 @@ namespace RecetasRedondas.Data
         void UpdatePaso(int recetaId, DatosPasoDTO paso);
         void DeletePaso( int pasoId);
         List<RecetasMDTO> FiltrarRecetasPorAlergenos(int usuarioId);
+        List<RecetasMDTO> FiltrarRecetasPorCategorias(int usuarioId);
+
+
 
 
     }

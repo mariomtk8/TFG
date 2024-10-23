@@ -1,12 +1,14 @@
 using RecetasRedondas.Models;
 using System.Collections.Generic;
 
-namespace RecetasRedondas.Data
+namespace RecetasRedondas.Services
 {
     public interface IMenuSemanalService
-{
-    void CrearMenuSemanal(MenuSemanal menuSemanal);
-    MenuSemanal ObtenerMenuSemanalPorUsuario(int usuarioId);
-    void ActualizarMenuSemanal(MenuSemanal menuSemanal);
-}
+    {
+        List<MenuSemanal> GenerarMenuSemana(int usuarioId);
+        void CrearMenuSemanal(List<MenuSemanal> menuSemanal);
+        List<MenuSemanal> GetMenuSemanalByUsuario(int usuarioId);
+        void RegenerarMenuSemanal(int usuarioId);
+        void DeleteMenuSemanal(int idMenuSemanal);
+    }
 }

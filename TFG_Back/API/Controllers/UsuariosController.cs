@@ -1,178 +1,179 @@
-    using Microsoft.AspNetCore.Mvc;
-    using RecetasRedondas.Models;
-    using RecetasRedondas.Data;
-    using RecetasRedondas.Business;
-    using System.Collections.Generic;
-    using Microsoft.AspNetCore.Authorization;
-    using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Mvc;
+using RecetasRedondas.Models;
+using RecetasRedondas.Data;
+using RecetasRedondas.Business;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
 
-    namespace RecetasRedondas.Controllers
-    {   
-        [Authorize]
-        [ApiController]
-        [Route("[controller]")]
-        public class UsuarioController : ControllerBase
+namespace RecetasRedondas.Controllers
+{
+    [Authorize]
+    [ApiController]
+    [Route("[controller]")]
+    public class UsuarioController : ControllerBase
+    {
+        private readonly IUsuarioService _usuarioService;
+        private readonly IAuthService _authService;
+
+        private readonly ILogger<UsuarioController> _logger;
+
+        public UsuarioController(IUsuarioService usuarioService, IAuthService authService, ILogger<UsuarioController> logger)
         {
-            private readonly IUsuarioService _usuarioService;
-            private readonly IAuthService _authService;
+            _usuarioService = usuarioService;
+            _authService = authService;
+            _logger = logger;
+        }
 
-            private readonly ILogger<UsuarioController> _logger;
-
-            public UsuarioController(IUsuarioService usuarioService, IAuthService authService, ILogger<UsuarioController> logger)
+        // Get
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public ActionResult<List<UsuarioDTO>> GetAll()
+        {
+            try
             {
-                _usuarioService = usuarioService;
-                _authService = authService;
-                _logger = logger;
+                _logger.LogInformation("Se ha solicitado obtener todos los usuarios.");
+                var usuarios = _usuarioService.GetAll();
+                return Ok(usuarios);
             }
-
-            // Get
-            [Authorize(Roles = "Admin")]
-            [HttpGet]
-            public ActionResult<List<UsuarioDTO>> GetAll()
+            catch (Exception ex)
             {
-                try
-                {
-                    _logger.LogInformation("Se ha solicitado obtener todos los usuarios.");
-                    var usuarios = _usuarioService.GetAll();
-                    return Ok(usuarios);
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError($"Error al intentar obtener todos los usuarios: {ex.Message}");
-                    return StatusCode(500, new { message = ex.Message });
-                }
+                _logger.LogError($"Error al intentar obtener todos los usuarios: {ex.Message}");
+                return StatusCode(500, new { message = ex.Message });
             }
+        }
 
-            [HttpGet("{idUsuario}", Name = "GetUsuarioId")]
+        [HttpGet("{idUsuario}", Name = "GetUsuarioId")]
 
-            public ActionResult<UsuarioDTO> GetUsuarioId([FromRoute] int idUsuario)
+        public ActionResult<UsuarioDTO> GetUsuarioId([FromRoute] int idUsuario)
+        {
+            try
             {
-                try
+                // Verificar si el usuario tiene acceso al recurso
+                var currentUser = HttpContext.User;
+                if (!_authService.HasAccessToResource(currentUser, idUsuario))
                 {
-                    // Verificar si el usuario tiene acceso al recurso
-                    var currentUser = HttpContext.User;
-                    if (!_authService.HasAccessToResource(currentUser, idUsuario))
-                    {
-                        _logger.LogWarning($"Acceso denegado para el usuario con ID: {idUsuario}");
-                        return Forbid();
-                    }
-
-                    var usuario = _usuarioService.GetUsuarioId(idUsuario);
-                    _logger.LogInformation($"Usuario con ID {idUsuario} obtenido exitosamente.");
-                    return Ok(usuario);
-
+                    _logger.LogWarning($"Acceso denegado para el usuario con ID: {idUsuario}");
+                    return Forbid();
                 }
-                catch (Exception ex)
-                {
-                    _logger.LogError($"Error al intentar obtener el usuario con ID {idUsuario}: {ex.Message}");
-                    return StatusCode(500, new { message = ex.Message });
-                }
+
+                var usuario = _usuarioService.GetUsuarioId(idUsuario);
+                _logger.LogInformation($"Usuario con ID {idUsuario} obtenido exitosamente.");
+                return Ok(usuario);
+
             }
-
-            //Post
-            [AllowAnonymous]
-            [HttpPost("login", Name = "LoginUsuario")]
-            public ActionResult<Usuario> LoginUsuario([FromBody] LoginUsuarioDTO loginUsuario)
+            catch (Exception ex)
             {
-
-                try
-                {
-                    _logger.LogInformation($"Se solicita iniciar sesion.");
-                    var usuario = _usuarioService.LoginUsuario(loginUsuario);
-                    var token = _authService.GenerateJwtToken(usuario);
-
-                    return Ok(new { token });
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError($"Error al intentar iniciar sesion: {ex.Message}");
-                    return StatusCode(500, new { message = ex.Message });
-                }
+                _logger.LogError($"Error al intentar obtener el usuario con ID {idUsuario}: {ex.Message}");
+                return StatusCode(500, new { message = ex.Message });
             }
+        }
 
-            [AllowAnonymous]
-            [HttpPost("register",Name = "RegisterUsuario")]
+        //Post
+        [AllowAnonymous]
+        [HttpPost("login", Name = "LoginUsuario")]
+        public ActionResult<Usuario> LoginUsuario([FromBody] LoginUsuarioDTO loginUsuario)
+        {
 
-            public ActionResult RegisterUsuario([FromBody] RegisterUsuarioDTO user)
+            try
             {
+                _logger.LogInformation($"Se solicita iniciar sesion.");
+                var usuario = _usuarioService.LoginUsuario(loginUsuario);
+                var token = _authService.GenerateJwtToken(usuario);
 
-                try
-                {
-                    _logger.LogInformation($"Se solicita registrar un usuario.");
-                    var usuario = _usuarioService.RegisterUsuario(user);
-                    var token = _authService.GenerateJwtToken(usuario);
-                    _logger.LogInformation($"Usuario registrado exitosamente: {user.Nombre}");
-                    
-                    return Ok(new { token });
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError($"Error al intentar registrar usuario: {ex.Message}");
-                    return StatusCode(500, new { message = ex.Message });
-                }
+                return Ok(new { token });
             }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error al intentar iniciar sesion: {ex.Message}");
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
 
-            //Update
+        [AllowAnonymous]
+        [HttpPost("register", Name = "RegisterUsuario")]
 
-            [HttpPut(Name = "UpdateUsuario")]
+        public ActionResult RegisterUsuario([FromBody] RegisterUsuarioDTO user)
+        {
 
-            public ActionResult UpdateUsuario([FromBody] UsuarioDTO usuario)
+            try
+            {
+                _logger.LogInformation($"Se solicita registrar un usuario.");
+                var usuario = _usuarioService.RegisterUsuario(user);
+                var token = _authService.GenerateJwtToken(usuario);
+                _logger.LogInformation($"Usuario registrado exitosamente: {user.Nombre}");
+
+                return Ok(new { token });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error al intentar registrar usuario: {ex.Message}");
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+
+        //Update
+
+        [HttpPut(Name = "UpdateUsuario")]
+
+        public ActionResult UpdateUsuario([FromBody] UsuarioDTO usuario)
+        {
+
+            try
             {
 
-                try
+                _logger.LogInformation($"Se solicita modificar al usuario con Id: {usuario.IdUsuario}.");
+
+                // Obtener el usuario autenticado
+                var currentUser = HttpContext.User;
+
+                // Verificar si el usuario tiene acceso al recurso
+                if (!_authService.HasAccessToResource(currentUser, usuario.IdUsuario))
                 {
-
-                    _logger.LogInformation($"Se solicita modificar al usuario con Id: {usuario.IdUsuario}.");
-
-                    // Obtener el usuario autenticado
-                    var currentUser = HttpContext.User;
-
-                    // Verificar si el usuario tiene acceso al recurso
-                    if (!_authService.HasAccessToResource(currentUser, usuario.IdUsuario))
-                    {
-                        _logger.LogWarning($"El usuario con ID: {currentUser.FindFirst(JwtRegisteredClaimNames.Sub)?.Value} no tiene acceso para modificar el usuario con ID: {usuario.IdUsuario}.");
-                        return Forbid();
-                    }
-
-                    _usuarioService.UpdateUsuario(usuario);
-                    return Ok(usuario);
+                    _logger.LogWarning($"El usuario con ID: {currentUser.FindFirst(JwtRegisteredClaimNames.Sub)?.Value} no tiene acceso para modificar el usuario con ID: {usuario.IdUsuario}.");
+                    return Forbid();
                 }
-                catch (Exception ex)
-                {
-                    _logger.LogError($"Error al intentar modificar al usuario: {ex.Message}");
-                    return StatusCode(500, new { message = ex.Message });
-                }
+
+                _usuarioService.UpdateUsuario(usuario);
+                return Ok(usuario);
             }
-
-            //Delete
-            [HttpDelete("{idUsuario}", Name = "DeleteUsuario")]
-
-            public ActionResult DeleteUsuario([FromRoute] int idUsuario)
+            catch (Exception ex)
             {
-
-                try
-                {
-                    _logger.LogInformation($"Se solicita eliminar al usuario con Id: {idUsuario}.");
-
-                    // Obtener el usuario autenticado
-                    var currentUser = HttpContext.User;
-
-                    if (!_authService.HasAccessToResource(currentUser, idUsuario))
-                    {
-                        _logger.LogWarning($"El usuario con ID: {currentUser.FindFirst(JwtRegisteredClaimNames.Sub)?.Value} no tiene acceso para eliminar el usuario con ID: {idUsuario}.");
-                        return Forbid();
-                    }
-
-                    _usuarioService.DeleteUsuario(idUsuario);
-                    return Ok();
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError($"Error al intentar eliminar usuario: {ex.Message}");
-                    return StatusCode(500, new { message = ex.Message });
-                }
+                _logger.LogError($"Error al intentar modificar al usuario: {ex.Message}");
+                return StatusCode(500, new { message = ex.Message });
             }
-            // GET: /usuarios/{idUsuario}/alergenos
+        }
+
+        //Delete
+        [HttpDelete("{idUsuario}", Name = "DeleteUsuario")]
+
+        public ActionResult DeleteUsuario([FromRoute] int idUsuario)
+        {
+
+            try
+            {
+                _logger.LogInformation($"Se solicita eliminar al usuario con Id: {idUsuario}.");
+
+                // Obtener el usuario autenticado
+                var currentUser = HttpContext.User;
+
+                if (!_authService.HasAccessToResource(currentUser, idUsuario))
+                {
+                    _logger.LogWarning($"El usuario con ID: {currentUser.FindFirst(JwtRegisteredClaimNames.Sub)?.Value} no tiene acceso para eliminar el usuario con ID: {idUsuario}.");
+                    return Forbid();
+                }
+
+                _usuarioService.DeleteUsuario(idUsuario);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error al intentar eliminar usuario: {ex.Message}");
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+        // GET: /usuarios/{idUsuario}/alergenos
+        [AllowAnonymous]
         [HttpGet("{idUsuario}/alergenos")]
         public ActionResult<List<AlergenoDTO>> GetAlergenos([FromRoute] int idUsuario)
         {
@@ -189,6 +190,7 @@
         }
 
         // POST: /usuarios/{idUsuario}/alergenos
+        [AllowAnonymous]
         [HttpPost("{idUsuario}/alergenos")]
         public ActionResult AddAlergenos([FromRoute] int idUsuario, List<AddAlergenoDTO> alergenosDTO)
         {
@@ -219,5 +221,36 @@
                 return StatusCode(500, new { message = ex.Message });
             }
         }
+
+        [AllowAnonymous]
+        [HttpPost("{idUsuario}/Categorias")]
+        public IActionResult AddCategorias(int idUsuario, [FromBody] List<AddCategoriaDTO> categoriasDTO)
+        {
+            _usuarioService.AddCategorias(idUsuario, categoriasDTO);
+            return Ok();
+        }
+
+        [AllowAnonymous]
+        [HttpGet("{idUsuario}/Categorias")]
+        public IActionResult GetCategorias(int idUsuario)
+        {
+            var categorias = _usuarioService.GetCategorias(idUsuario);
+            return Ok(categorias);
+        }
+
+        [AllowAnonymous]
+        [HttpDelete("categoria/{idUsuarioCategoria}")]
+        public IActionResult DeleteCategoria(int idUsuarioCategoria)
+        {
+            try
+            {
+                _usuarioService.DeleteCategoria(idUsuarioCategoria);
+                return Ok(new { message = "Categoría eliminada con éxito." });
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
         }
     }
+}

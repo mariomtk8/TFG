@@ -1,51 +1,56 @@
 using Microsoft.AspNetCore.Mvc;
-using RecetasRedondas.Data;
 using RecetasRedondas.Models;
 using RecetasRedondas.Services;
 using System.Collections.Generic;
 
 namespace RecetasRedondas.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-[Route("[controller]")]
-public class MenuSemanalController : ControllerBase
-{
-    private readonly IMenuSemanalService _menuSemanalService;
-
-    public MenuSemanalController(IMenuSemanalService menuSemanalService)
+    public class MenuSemanalController : ControllerBase
     {
-        _menuSemanalService = menuSemanalService;
-    }
+        private readonly IMenuSemanalService _menuSemanalService;
 
-    [HttpPost]
-    public IActionResult CrearMenuSemanal([FromBody] MenuSemanal menuSemanal)
-    {
-        _menuSemanalService.CrearMenuSemanal(menuSemanal);
-        return CreatedAtAction(nameof(ObtenerMenuSemanalPorUsuario), new { usuarioId = menuSemanal.IdUsuario }, menuSemanal);
-    }
-
-    [HttpGet("{usuarioId}")]
-    public IActionResult ObtenerMenuSemanalPorUsuario(int usuarioId)
-    {
-        var menuSemanal = _menuSemanalService.ObtenerMenuSemanalPorUsuario(usuarioId);
-        if (menuSemanal == null)
+        public MenuSemanalController(IMenuSemanalService menuSemanalService)
         {
-            return NotFound();
-        }
-        return Ok(menuSemanal);
-    }
-
-    [HttpPut("{id}")]
-    public IActionResult ActualizarMenuSemanal(int id, [FromBody] MenuSemanal menuSemanal)
-    {
-        if (menuSemanal.IdMenuSemanal != id)
-        {
-            return BadRequest("El ID del menú semanal no coincide.");
+            _menuSemanalService = menuSemanalService;
         }
 
-        _menuSemanalService.ActualizarMenuSemanal(menuSemanal);
-        return NoContent(); // Devuelve 204 No Content para la actualización exitosa.
-    }
-}
+        // POST: api/MenuSemanal
+        [HttpPost("{usuarioId}")]
+        public IActionResult CrearMenuSemanal(int usuarioId)
+        {
+            var menu = _menuSemanalService.GenerarMenuSemana(usuarioId);
+            _menuSemanalService.CrearMenuSemanal(menu);
+            return Ok(menu);
+        }
 
+        // GET: api/MenuSemanal/usuario/{usuarioId}
+        [HttpGet("usuario/{usuarioId}")]
+        public IActionResult GetMenuSemanalByUsuario(int usuarioId)
+        {
+            var menuSemanal = _menuSemanalService.GetMenuSemanalByUsuario(usuarioId);
+            if (menuSemanal == null || menuSemanal.Count == 0)
+            {
+                return NotFound("No se encontraron menús para el usuario.");
+            }
+            return Ok(menuSemanal);
+        }
+
+        // PUT: api/MenuSemanal/usuario/{usuarioId}
+        [HttpPut("usuario/{usuarioId}")]
+        public IActionResult RegenerarMenuSemanal(int usuarioId)
+        {
+            _menuSemanalService.RegenerarMenuSemanal(usuarioId);
+            return Ok("Menú semanal regenerado correctamente.");
+        }
+
+        // DELETE: api/MenuSemanal/{idMenuSemanal}
+        [HttpDelete("{idMenuSemanal}")]
+        public IActionResult DeleteMenuSemanal(int idMenuSemanal)
+        {
+            _menuSemanalService.DeleteMenuSemanal(idMenuSemanal);
+            return Ok("Menú semanal eliminado correctamente.");
+        }
+    }
 }

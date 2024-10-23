@@ -34,6 +34,7 @@ namespace RecetasRedondas.Business
 
         public void DeletePaso( int pasoId) => _recetaRepository.DeletePaso(pasoId);
         public List<RecetasMDTO> FiltrarRecetasPorAlergenos(int usuarioId) => _recetaRepository.FiltrarRecetasPorAlergenos(usuarioId);
+        public List<RecetasMDTO> FiltrarRecetasPorCategorias(int usuarioId) => _recetaRepository.FiltrarRecetasPorCategorias(usuarioId);
     
 
     }

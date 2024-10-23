@@ -1,32 +1,42 @@
-using RecetasRedondas.Data;
 using RecetasRedondas.Models;
 using System.Collections.Generic;
+using RecetasRedondas.Data;
 
-namespace RecetasRedondas.Business
+
+namespace RecetasRedondas.Services
 {
     public class MenuSemanalService : IMenuSemanalService
-{
-    private readonly IMenuSemanalRepository _menuSemanalRepository;
-
-    public MenuSemanalService(IMenuSemanalRepository menuSemanalRepository)
     {
-        _menuSemanalRepository = menuSemanalRepository;
-    }
+        private readonly IMenuSemanalRepository _menuSemanalRepository;
 
-    public void CrearMenuSemanal(MenuSemanal menuSemanal)
-    {
-        _menuSemanalRepository.CrearMenuSemanal(menuSemanal);
-    }
+        public MenuSemanalService(IMenuSemanalRepository menuSemanalRepository)
+        {
+            _menuSemanalRepository = menuSemanalRepository;
+        }
 
-    public MenuSemanal ObtenerMenuSemanalPorUsuario(int usuarioId)
-    {
-        return _menuSemanalRepository.ObtenerMenuSemanalPorUsuario(usuarioId);
-    }
+        public List<MenuSemanal> GenerarMenuSemana(int usuarioId)
+        {
+            return _menuSemanalRepository.GenerarMenuSemana(usuarioId);
+        }
 
-    public void ActualizarMenuSemanal(MenuSemanal menuSemanal)
-    {
-        _menuSemanalRepository.ActualizarMenuSemanal(menuSemanal);
+        public void CrearMenuSemanal(List<MenuSemanal> menuSemanal)
+        {
+            _menuSemanalRepository.CrearMenuSemanal(menuSemanal);
+        }
+
+        public List<MenuSemanal> GetMenuSemanalByUsuario(int usuarioId)
+        {
+            return _menuSemanalRepository.GetMenuSemanalByUsuario(usuarioId);
+        }
+
+        public void RegenerarMenuSemanal(int usuarioId)
+        {
+            _menuSemanalRepository.RegenerarMenuSemanal(usuarioId);
+        }
+
+        public void DeleteMenuSemanal(int idMenuSemanal)
+        {
+            _menuSemanalRepository.DeleteMenuSemanal(idMenuSemanal);
+        }
     }
 }
-    
-    }

@@ -42,53 +42,51 @@ namespace RecetasRedondas.Data
             SaveChanges();
         }
 
+        // Obtiene la lista de alérgenos de un usuario
+        public List<AlergenoDTO> GetAlergenos(int idUsuario)
+        {
+            var usuario = _context.Usuarios
+                .Include(u => u.Alergenos)
+                .FirstOrDefault(u => u.IdUsuario == idUsuario);
 
-// Elimina un alérgeno específico de un usuario
-public void DeleteAlergeno(int idUsuario, int idAlergeno)
-{
-    var usuario = _context.Usuarios
-        .Include(u => u.Alergenos)
-        .FirstOrDefault(u => u.IdUsuario == idUsuario);
+            if (usuario == null)
+            {
+                throw new Exception($"Usuario con ID {idUsuario} no encontrado.");
+            }
 
-    if (usuario == null)
-    {
-        throw new Exception($"Usuario con ID {idUsuario} no encontrado.");
-    }
+            return usuario.Alergenos
+                .Select(a => new AlergenoDTO
+                {
+                    IdIngrediente = a.IdIngrediente,
+                    IdAlergeno = a.IdAlergeno // Incluye IdAlergeno en el DTO
+                })
+                .ToList();
+        }
+        // Elimina un alérgeno específico de un usuario
+        public void DeleteAlergeno(int idUsuario, int idAlergeno)
+        {
+            var usuario = _context.Usuarios
+                .Include(u => u.Alergenos)
+                .FirstOrDefault(u => u.IdUsuario == idUsuario);
 
-    var alergeno = usuario.Alergenos.FirstOrDefault(a => a.IdAlergeno == idAlergeno);
-    if (alergeno != null)
-    {
-        usuario.Alergenos.Remove(alergeno);
-        SaveChanges();
-    }
-    else
-    {
-        throw new Exception($"Alérgeno con ID {idAlergeno} no encontrado para el usuario con ID {idUsuario}.");
-    }
-}
+            if (usuario == null)
+            {
+                throw new Exception($"Usuario con ID {idUsuario} no encontrado.");
+            }
 
-// Obtiene la lista de alérgenos de un usuario
-public List<AlergenoDTO> GetAlergenos(int idUsuario)
-{
-    var usuario = _context.Usuarios
-        .Include(u => u.Alergenos)
-        .FirstOrDefault(u => u.IdUsuario == idUsuario);
+            var alergeno = usuario.Alergenos.FirstOrDefault(a => a.IdAlergeno == idAlergeno);
+            if (alergeno != null)
+            {
+                usuario.Alergenos.Remove(alergeno);
+                SaveChanges();
+            }
+            else
+            {
+                throw new Exception($"Alérgeno con ID {idAlergeno} no encontrado para el usuario con ID {idUsuario}.");
+            }
+        }
 
-    if (usuario == null)
-    {
-        throw new Exception($"Usuario con ID {idUsuario} no encontrado.");
-    }
-
-    return usuario.Alergenos
-        .Select(a => new AlergenoDTO 
-        { 
-            IdIngrediente = a.IdIngrediente,
-            IdAlergeno = a.IdAlergeno // Incluye IdAlergeno en el DTO
-        })
-        .ToList();
-}
-
-            //Get 
+        //Get 
         public List<UsuarioDTO> GetAll()
         {
             var usuarios = _context.Usuarios.ToList();
@@ -103,7 +101,7 @@ public List<AlergenoDTO> GetAlergenos(int idUsuario)
             return usuarioDTOs;
         }
 
-            //Get id
+        //Get id
         public UsuarioDTO GetUsuarioId(int id)
         {
             var usuario = _context.Usuarios.FirstOrDefault(u => u.IdUsuario == id);
@@ -182,18 +180,18 @@ public List<AlergenoDTO> GetAlergenos(int idUsuario)
 
         public void UpdateUsuario(UsuarioDTO usuario)
         {
-        var existingUser = _context.Usuarios.Find(usuario.IdUsuario);
-        if (existingUser == null)
-        {
-            throw new KeyNotFoundException("No se encontró el Usuario a actualizar.");
-        }
+            var existingUser = _context.Usuarios.Find(usuario.IdUsuario);
+            if (existingUser == null)
+            {
+                throw new KeyNotFoundException("No se encontró el Usuario a actualizar.");
+            }
 
-        existingUser.Nombre = usuario.Nombre;
-        existingUser.Contrasena = usuario.Contrasena;
-        existingUser.Correo = usuario.Correo;
+            existingUser.Nombre = usuario.Nombre;
+            existingUser.Contrasena = usuario.Contrasena;
+            existingUser.Correo = usuario.Correo;
 
-        _context.Usuarios.Update(existingUser);
-        SaveChanges();
+            _context.Usuarios.Update(existingUser);
+            SaveChanges();
         }
 
         //Delete
@@ -215,5 +213,76 @@ public List<AlergenoDTO> GetAlergenos(int idUsuario)
         {
             _context.SaveChanges();
         }
+
+        public void AddCategorias(int idUsuario, List<AddCategoriaDTO> categoriasDTO)
+        {
+            var usuario = _context.Usuarios
+                .Include(u => u.UsuarioCategorias)
+                    .ThenInclude(uc => uc.Categoria)
+                .FirstOrDefault(u => u.IdUsuario == idUsuario);
+
+            if (usuario == null)
+            {
+                throw new Exception($"Usuario con ID {idUsuario} no encontrado.");
+            }
+
+            // Asocia las categorías al usuario
+            foreach (var categoriaDto in categoriasDTO)
+            {
+                // Crea un nuevo objeto UsuarioCategoria para asociar
+                var usuarioCategoria = new UsuarioCategoria
+                {
+                    IdUsuario = idUsuario,
+                    IdCategoria = categoriaDto.IdCategoria
+                    // No asignas IdUsuarioCategoria, ya que se genera automáticamente
+                };
+
+                // Añade la nueva asociación a la colección del usuario
+                usuario.UsuarioCategorias.Add(usuarioCategoria);
+            }
+
+            // Guarda los cambios en la base de datos
+            SaveChanges();
+        }
+
+
+        public List<CategoriaDTO> GetCategorias(int idUsuario)
+        {
+            var usuario = _context.Usuarios
+                .Include(u => u.UsuarioCategorias)
+                    .ThenInclude(uc => uc.Categoria)
+                .FirstOrDefault(u => u.IdUsuario == idUsuario);
+
+            if (usuario == null)
+            {
+                throw new Exception($"Usuario con ID {idUsuario} no encontrado.");
+            }
+
+            return usuario.UsuarioCategorias
+                .Select(uc => new CategoriaDTO
+                {
+                    IdUsuarioCategoria = uc.IdUsuarioCategoria, // Asegúrate de que este ID esté disponible
+                    IdCategoria = uc.Categoria.IdCategoria,
+                    NombreCategoria = uc.Categoria.NombreCategoria
+                })
+                .ToList();
+        }
+
+        public void DeleteCategoria(int idUsuarioCategoria)
+        {
+            var usuarioCategoria = _context.UsuarioCategorias
+                .FirstOrDefault(uc => uc.IdUsuarioCategoria == idUsuarioCategoria);
+
+            if (usuarioCategoria == null)
+            {
+                throw new Exception($"UsuarioCategoria con ID {idUsuarioCategoria} no encontrado.");
+            }
+
+            _context.UsuarioCategorias.Remove(usuarioCategoria);
+            SaveChanges();
+        }
+
+
+
     }
 }

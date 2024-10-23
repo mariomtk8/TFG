@@ -11,10 +11,10 @@ namespace RecetasRedondas.Models
         [Key]
         public int IdFavorito { get; set; }
         public int IdUsuario { get; set; }
-        public Usuario Usuario { get; set; } 
+        public Usuario ?Usuario { get; set; } 
         
         public int IdReceta { get; set; }
-        public Receta Receta { get; set; } 
+        public Receta ?Receta { get; set; } 
         
         public DateTime FechaFavorito { get; set; } 
     }

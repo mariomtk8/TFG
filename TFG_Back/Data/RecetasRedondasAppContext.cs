@@ -21,7 +21,7 @@ namespace RecetasRedondas.Models
         public DbSet<Favorito> Favoritos { get; set; }
         public DbSet<RecetasPaso> recetasPasos { get; set; }
         public DbSet<Alergeno> Alergenos { get; set; } 
-        public DbSet<DiaMenu> DiasMenu { get; set; }
+        public DbSet<UsuarioCategoria> UsuarioCategorias { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,8 +34,9 @@ namespace RecetasRedondas.Models
             modelBuilder.Entity<Paso>().HasKey(p => p.IdPaso);
             modelBuilder.Entity<RecetaIngrediente>().HasKey(ri => ri.IdRecetaIngrediente);
             modelBuilder.Entity<Favorito>().HasKey(f => f.IdFavorito);
-            modelBuilder.Entity<Alergeno>().HasKey(a => a.IdAlergeno); 
-            modelBuilder.Entity<DiaMenu>().HasKey(dm => dm.IdDiaMenu);
+            modelBuilder.Entity<Alergeno>().HasKey(a => a.IdAlergeno);
+            modelBuilder.Entity<UsuarioCategoria>().HasKey(a => a.IdUsuarioCategoria);
+            
 
             // Definir la relación muchos a muchos entre Usuario e Ingrediente
         modelBuilder.Entity<Alergeno>()
@@ -99,41 +100,49 @@ modelBuilder.Entity<RecetaIngrediente>()
                 .HasForeignKey(f => f.IdReceta);
 
 
-            // Relación entre MenuSemanal y Usuario (Uno a muchos)
+            // Relación entre MenuSemanal y Receta
             modelBuilder.Entity<MenuSemanal>()
-                .HasOne(ms => ms.Usuario)
-                .WithMany(u => u.MenusSemanales)
-                .HasForeignKey(ms => ms.IdUsuario);
+                .HasOne(m => m.Receta)               // Un menú semanal tiene una receta
+                .WithMany()                          // Una receta puede estar en muchos menús
+                .HasForeignKey(m => m.IdReceta)      // Clave foránea en MenuSemanal
+                .OnDelete(DeleteBehavior.Cascade);   // Comportamiento de eliminación en cascada
 
-            // Relación entre MenuSemanal y DiaMenu (Uno a muchos)
+            // Relación entre MenuSemanal y Usuario
             modelBuilder.Entity<MenuSemanal>()
-                .HasMany(dm => dm.DiasMenu)
-                .WithOne(ms => ms.MenuSemanal)
-                .HasForeignKey(dm => dm.IdMenuSemanal);
+                .HasOne(m => m.Usuario)              // Un menú semanal tiene un usuario
+                .WithMany()                          // Un usuario puede tener muchos menús
+                .HasForeignKey(m => m.IdUsuario)     // Clave foránea en MenuSemanal
+                .OnDelete(DeleteBehavior.Cascade);
 
-            // Relación entre DiaMenu y Receta (Uno a muchos)
-            modelBuilder.Entity<DiaMenu>()
-                .HasOne(dm => dm.Receta)
-                .WithMany()
-                .HasForeignKey(dm => dm.IdReceta);
+            // Configurar relación entre Usuario y UsuarioCategoria
+
+            modelBuilder.Entity<UsuarioCategoria>()
+                .HasOne(uc => uc.Usuario) // Cada UsuarioCategoria pertenece a un Usuario
+                .WithMany(u => u.UsuarioCategorias) // Un Usuario puede tener muchas UsuarioCategorias
+                .HasForeignKey(uc => uc.IdUsuario); // Foreign key en UsuarioCategoria
+
+            modelBuilder.Entity<UsuarioCategoria>()
+                .HasOne(uc => uc.Categoria) // Cada UsuarioCategoria pertenece a una Categoria
+                .WithMany(c => c.UsuarioCategorias) // Una Categoria puede tener muchas UsuarioCategorias
+                .HasForeignKey(uc => uc.IdCategoria); // Foreign key en UsuarioCategoria
 
             // Datos de ejemplo (se pueden ajustar según sea necesario)
             modelBuilder.Entity<Categoria>().HasData(
-     new Categoria { IdCategoria = 1, NombreCategoria = "Carnes", Descripcion = "Platos deliciosos de carne", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/carne.webp?updatedAt=1726218723472", PuntuacionPromedio = 4.5m },
-     new Categoria { IdCategoria = 2, NombreCategoria = "Arroces", Descripcion = "Platos variados con arroz", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/arroz.png?updatedAt=1726218452623", PuntuacionPromedio = 4.8m },
-    new Categoria { IdCategoria = 3, NombreCategoria = "Guisos", Descripcion = "Guisos tradicionales y caseros", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/guisos.png?updatedAt=1726218800757", PuntuacionPromedio = 4.7m },
-    new Categoria { IdCategoria = 4, NombreCategoria = "Mariscos", Descripcion = "Platos exquisitos de mariscos", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/marisco.webp?updatedAt=1726218800789", PuntuacionPromedio = 4.6m },
-    new Categoria { IdCategoria = 5, NombreCategoria = "Pescados", Descripcion = "Platos frescos de pescados", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/pescado.png?updatedAt=1726218801946", PuntuacionPromedio = 4.7m },
-    new Categoria { IdCategoria = 6, NombreCategoria = "Pastas", Descripcion = "Platos deliciosos de pasta", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/pasta.png?updatedAt=1726218800772", PuntuacionPromedio = 4.5m },
-    new Categoria { IdCategoria = 7, NombreCategoria = "Ensaladas", Descripcion = "Frescas y saludables ensaladas", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/carne.webp?updatedAt=1726218723472", PuntuacionPromedio = 4.6m },
-    new Categoria { IdCategoria = 8, NombreCategoria = "Sopas", Descripcion = "Reconfortantes sopas y cremas", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/sopa.png?updatedAt=1726218800718f", PuntuacionPromedio = 4.7m },
-    new Categoria { IdCategoria = 9, NombreCategoria = "Pizzas", Descripcion = "Variedad de pizzas caseras", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/pizza.png?updatedAt=1726218802077", PuntuacionPromedio = 4.8m },
-    new Categoria { IdCategoria = 10, NombreCategoria = "Sandwiches", Descripcion = "Creativos y deliciosos sandwiches", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/sandwitches.png?updatedAt=1726218800723", PuntuacionPromedio = 4.5m },
-    new Categoria { IdCategoria = 11, NombreCategoria = "Verduras", Descripcion = "Platos saludables de verduras", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/verduras.png?updatedAt=1726218800742", PuntuacionPromedio = 4.6m },
-    new Categoria { IdCategoria = 12, NombreCategoria = "Salsas", Descripcion = "Salsas para acompañar tus platos", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/salsas.png?updatedAt=1726218800564", PuntuacionPromedio = 4.7m },
-    new Categoria { IdCategoria = 13, NombreCategoria = "Postres", Descripcion = "Dulces y sabrosos postres", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/postres.png?updatedAt=1726218800753", PuntuacionPromedio = 4.8m },
-    new Categoria { IdCategoria = 14, NombreCategoria = "Bebidas", Descripcion = "Bebidas refrescantes y cócteles", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/bebidas.png?updatedAt=1726218678224", PuntuacionPromedio = 4.7m },
-    new Categoria { IdCategoria = 15, NombreCategoria = "Legumbres", Descripcion = "Platos tradicionales de legumbres", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/legumbres.png?updatedAt=1726218800787", PuntuacionPromedio = 4.6m }
+     new Categoria { IdCategoria = 1, NombreCategoria = "Carnes", Descripcion = "Platos deliciosos de carne", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/carne.webp?updatedAt=1726218723472", Puntuacion = 4.5m },
+     new Categoria { IdCategoria = 2, NombreCategoria = "Arroces", Descripcion = "Platos variados con arroz", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/arroz.png?updatedAt=1726218452623", Puntuacion = 4.8m },
+    new Categoria { IdCategoria = 3, NombreCategoria = "Guisos", Descripcion = "Guisos tradicionales y caseros", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/guisos.png?updatedAt=1726218800757", Puntuacion = 4.7m },
+    new Categoria { IdCategoria = 4, NombreCategoria = "Mariscos", Descripcion = "Platos exquisitos de mariscos", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/marisco.webp?updatedAt=1726218800789", Puntuacion = 4.6m },
+    new Categoria { IdCategoria = 5, NombreCategoria = "Pescados", Descripcion = "Platos frescos de pescados", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/pescado.png?updatedAt=1726218801946", Puntuacion = 4.7m },
+    new Categoria { IdCategoria = 6, NombreCategoria = "Pastas", Descripcion = "Platos deliciosos de pasta", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/pasta.png?updatedAt=1726218800772", Puntuacion = 4.5m },
+    new Categoria { IdCategoria = 7, NombreCategoria = "Ensaladas", Descripcion = "Frescas y saludables ensaladas", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/carne.webp?updatedAt=1726218723472", Puntuacion = 4.6m },
+    new Categoria { IdCategoria = 8, NombreCategoria = "Sopas", Descripcion = "Reconfortantes sopas y cremas", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/sopa.png?updatedAt=1726218800718f", Puntuacion = 4.7m },
+    new Categoria { IdCategoria = 9, NombreCategoria = "Pizzas", Descripcion = "Variedad de pizzas caseras", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/pizza.png?updatedAt=1726218802077", Puntuacion = 4.8m },
+    new Categoria { IdCategoria = 10, NombreCategoria = "Sandwiches", Descripcion = "Creativos y deliciosos sandwiches", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/sandwitches.png?updatedAt=1726218800723", Puntuacion = 4.5m },
+    new Categoria { IdCategoria = 11, NombreCategoria = "Verduras", Descripcion = "Platos saludables de verduras", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/verduras.png?updatedAt=1726218800742", Puntuacion = 4.6m },
+    new Categoria { IdCategoria = 12, NombreCategoria = "Salsas", Descripcion = "Salsas para acompañar tus platos", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/salsas.png?updatedAt=1726218800564", Puntuacion = 4.7m },
+    new Categoria { IdCategoria = 13, NombreCategoria = "Postres", Descripcion = "Dulces y sabrosos postres", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/postres.png?updatedAt=1726218800753", Puntuacion = 4.8m },
+    new Categoria { IdCategoria = 14, NombreCategoria = "Bebidas", Descripcion = "Bebidas refrescantes y cócteles", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/bebidas.png?updatedAt=1726218678224", Puntuacion = 4.7m },
+    new Categoria { IdCategoria = 15, NombreCategoria = "Legumbres", Descripcion = "Platos tradicionales de legumbres", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/legumbres.png?updatedAt=1726218800787", Puntuacion = 4.6m }
 );
 
             modelBuilder.Entity<Receta>().HasData(

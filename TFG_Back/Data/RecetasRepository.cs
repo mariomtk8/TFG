@@ -33,16 +33,16 @@ namespace RecetasRedondas.Data
                     Descripcion = paso.Descripcion,
                     ImagenUrl = paso.ImagenUrl
                 }).ToList(),
-                EsVegano = receta.EsVegano,
-                FechaCreacion = receta.FechaCreacion,
-                NivelDificultad = receta.NivelDificultad,
-                TiempoPreparacion = receta.TiempoPreparacion,
+                EsVegano = receta.EsVegano ?? false, // valor predeterminado false si es null
+                FechaCreacion = receta.FechaCreacion ?? DateTime.Now, // valor predeterminado de la fecha actual si es null
+                NivelDificultad = receta.NivelDificultad ?? 0m, // valor predeterminado de 0 si es null
+                TiempoPreparacion = receta.TiempoPreparacion ?? 0,
                 IdCategoria = receta.IdCategoria,
             }).ToList();
 
             return newRecetas;
         }
-            public List<Receta> GetBySearch(string searchTerm)
+        public List<Receta> GetBySearch(string searchTerm)
         {
             return _context.Recetas
                 .Where(r => r.Nombre.Contains(searchTerm))
@@ -73,10 +73,10 @@ namespace RecetasRedondas.Data
                     Descripcion = paso.Descripcion,
                     ImagenUrl = paso.ImagenUrl
                 }).ToList(),
-                EsVegano = recetas.EsVegano,
-                FechaCreacion = recetas.FechaCreacion,
-                NivelDificultad = recetas.NivelDificultad,
-                TiempoPreparacion = recetas.TiempoPreparacion,
+                EsVegano = recetas.EsVegano ?? false, // valor predeterminado false si es null
+                FechaCreacion = recetas.FechaCreacion ?? DateTime.Now, // valor predeterminado de la fecha actual si es null
+                NivelDificultad = recetas.NivelDificultad ?? 0m, // valor predeterminado de 0 si es null
+                TiempoPreparacion = recetas.TiempoPreparacion ?? 0,
                 IdCategoria = recetas.IdCategoria,
             };
 
@@ -107,7 +107,7 @@ namespace RecetasRedondas.Data
             existingEntity.TiempoPreparacion = receta.TiempoPreparacion;
             existingEntity.IdCategoria = receta.IdCategoria;
 
-            
+
 
             _context.SaveChanges();
         }
@@ -131,31 +131,32 @@ namespace RecetasRedondas.Data
 
         //métodos para gestionar pasos
 
-            public IEnumerable<DatosPasoDTO> GetPasosByRecetaId(int recetaId)
-                {
-                    var receta = _context.Recetas.Include(r => r.Pasos).FirstOrDefault(r => r.IdReceta == recetaId);
-                    
-                    if (receta != null)
-                    {
-                        return receta.Pasos.Select(p => new DatosPasoDTO
-                        {
-                            IdPaso = p.IdPaso,
-                            IdReceta = p.IdReceta,
-                            Numero = p.Numero,
-                            Descripcion = p.Descripcion,
-                            ImagenUrl = p.ImagenUrl
-                        }).ToList();
-                    }
+        public IEnumerable<DatosPasoDTO> GetPasosByRecetaId(int recetaId)
+        {
+            var receta = _context.Recetas.Include(r => r.Pasos).FirstOrDefault(r => r.IdReceta == recetaId);
 
-                    return new List<DatosPasoDTO>(); 
-                }
+            if (receta != null)
+            {
+                return receta.Pasos.Select(p => new DatosPasoDTO
+                {
+                    IdPaso = p.IdPaso,
+                    IdReceta = p.IdReceta,
+                    Numero = p.Numero,
+                    Descripcion = p.Descripcion,
+                    ImagenUrl = p.ImagenUrl
+                }).ToList();
+            }
+
+            return new List<DatosPasoDTO>();
+        }
 
         public void AddPaso(int recetaId, DatosPasoDTO paso)
-        {   
+        {
             var receta = _context.Recetas.Include(r => r.Pasos).FirstOrDefault(r => r.IdReceta == recetaId);
             if (receta != null)
             {
-                var DatosPaso = new Paso{
+                var DatosPaso = new Paso
+                {
                     IdReceta = paso.IdReceta,
                     Numero = paso.Numero,
                     Descripcion = paso.Descripcion,
@@ -180,9 +181,9 @@ namespace RecetasRedondas.Data
             }
         }
 
-        public void DeletePaso( int pasoId)
+        public void DeletePaso(int pasoId)
         {
-            var paso = _context.Pasos.FirstOrDefault(p => p.IdPaso == pasoId );
+            var paso = _context.Pasos.FirstOrDefault(p => p.IdPaso == pasoId);
             if (paso != null)
             {
                 _context.Pasos.Remove(paso);
@@ -190,32 +191,54 @@ namespace RecetasRedondas.Data
             }
         }
 
-    public List<RecetasMDTO> FiltrarRecetasPorAlergenos(int usuarioId)
-{
-    // Obtener la lista de alérgenos del usuario
-    var alergenosUsuario = _context.Alergenos
-        .Where(au => au.IdUsuario == usuarioId)
-        .Select(au => au.IdIngrediente)
-        .ToList();
+        public List<RecetasMDTO> FiltrarRecetasPorAlergenos(int usuarioId)
+        {
+            // Obtener la lista de alérgenos del usuario
+            var alergenosUsuario = _context.Alergenos
+                .Where(au => au.IdUsuario == usuarioId)
+                .Select(au => au.IdIngrediente)
+                .ToList();
 
-    // Obtener las recetas que no contengan ingredientes a los que el usuario es alérgico
-    var recetasSinAlergenos = _context.Recetas
-        .Where(receta => !receta.recetaIngredientes
-            .Any(ri => alergenosUsuario.Contains(ri.IdIngrediente))) // Filtrar las recetas que no contienen ingredientes alérgicos
-        .Include(r => r.Pasos) // Incluir los pasos de la receta
-        .ToList();
+            // Obtener las recetas que no contengan ingredientes a los que el usuario es alérgico
+            var recetasSinAlergenos = _context.Recetas
+                .Where(receta => !receta.recetaIngredientes
+                    .Any(ri => alergenosUsuario.Contains(ri.IdIngrediente))) // Filtrar las recetas que no contienen ingredientes alérgicos
+                .Include(r => r.Pasos) // Incluir los pasos de la receta
+                .ToList();
 
-    // Mapear las recetas a RecetaDTO
-    var newRecetas = recetasSinAlergenos.Select(receta => new RecetasMDTO
-    {
-        IdReceta = receta.IdReceta,
-        Nombre = receta.Nombre,
-    }).ToList();
+            // Mapear las recetas a RecetaDTO
+            var newRecetas = recetasSinAlergenos.Select(receta => new RecetasMDTO
+            {
+                IdReceta = receta.IdReceta,
+                Nombre = receta.Nombre,
+            }).ToList();
 
-    return newRecetas;
-}
+            return newRecetas;
+        }
+        public List<RecetasMDTO> FiltrarRecetasPorCategorias(int usuarioId)
+        {
+            // Obtener la lista de categorías seleccionadas por el usuario
+            var categoriasUsuario = _context.UsuarioCategorias
+                .Where(uc => uc.IdUsuario == usuarioId)
+                .Select(uc => uc.IdCategoria)
+                .ToList();
 
+            // Obtener las recetas que no están en las categorías seleccionadas por el usuario
+            var recetasSinCategorias = _context.Recetas
+                .Where(receta => !_context.UsuarioCategorias
+                    .Any(uc => uc.IdCategoria == receta.IdCategoria && uc.IdUsuario == usuarioId)) // Verifica que no estén en las categorías del usuario
+                .Include(r => r.Pasos) // Incluir los pasos de la receta
+                .ToList();
 
+            // Mapear las recetas a RecetasMDTO
+            var newRecetas = recetasSinCategorias.Select(receta => new RecetasMDTO
+            {
+                IdReceta = receta.IdReceta,
+                Nombre = receta.Nombre,
+            }).ToList();
+
+            return newRecetas;
+        }
 
     }
 }
