@@ -39,8 +39,6 @@ namespace RecetasRedondas.Models
             
 
             // Definir la relación muchos a muchos entre Usuario e Ingrediente
-        modelBuilder.Entity<Alergeno>()
-            .HasKey(a => new { a.IdUsuario, a.IdIngrediente });
 
         modelBuilder.Entity<Alergeno>()
             .HasOne(a => a.Usuarios)

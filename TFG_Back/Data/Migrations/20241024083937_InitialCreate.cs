@@ -142,13 +142,14 @@ namespace RecetasRedondas.Data.Migrations
                 name: "Alergenos",
                 columns: table => new
                 {
-                    IdUsuario = table.Column<int>(type: "int", nullable: false),
-                    IdIngrediente = table.Column<int>(type: "int", nullable: false),
                     IdAlergeno = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdUsuario = table.Column<int>(type: "int", nullable: false),
+                    IdIngrediente = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Alergenos", x => new { x.IdUsuario, x.IdIngrediente });
+                    table.PrimaryKey("PK_Alergenos", x => x.IdAlergeno);
                     table.ForeignKey(
                         name: "FK_Alergenos_Ingredientes_IdIngrediente",
                         column: x => x.IdIngrediente,
@@ -281,21 +282,21 @@ namespace RecetasRedondas.Data.Migrations
                 columns: new[] { "IdCategoria", "Descripcion", "Especial", "FechaCreacion", "Icono", "NombreCategoria", "Puntuacion" },
                 values: new object[,]
                 {
-                    { 1, "Platos deliciosos de carne", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(575), "https://ik.imagekit.io/Mariocanizares/carne.webp?updatedAt=1726218723472", "Carnes", 4.5m },
-                    { 2, "Platos variados con arroz", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(640), "https://ik.imagekit.io/Mariocanizares/arroz.png?updatedAt=1726218452623", "Arroces", 4.8m },
-                    { 3, "Guisos tradicionales y caseros", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(645), "https://ik.imagekit.io/Mariocanizares/guisos.png?updatedAt=1726218800757", "Guisos", 4.7m },
-                    { 4, "Platos exquisitos de mariscos", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(648), "https://ik.imagekit.io/Mariocanizares/marisco.webp?updatedAt=1726218800789", "Mariscos", 4.6m },
-                    { 5, "Platos frescos de pescados", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(651), "https://ik.imagekit.io/Mariocanizares/pescado.png?updatedAt=1726218801946", "Pescados", 4.7m },
-                    { 6, "Platos deliciosos de pasta", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(654), "https://ik.imagekit.io/Mariocanizares/pasta.png?updatedAt=1726218800772", "Pastas", 4.5m },
-                    { 7, "Frescas y saludables ensaladas", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(658), "https://ik.imagekit.io/Mariocanizares/carne.webp?updatedAt=1726218723472", "Ensaladas", 4.6m },
-                    { 8, "Reconfortantes sopas y cremas", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(664), "https://ik.imagekit.io/Mariocanizares/sopa.png?updatedAt=1726218800718f", "Sopas", 4.7m },
-                    { 9, "Variedad de pizzas caseras", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(667), "https://ik.imagekit.io/Mariocanizares/pizza.png?updatedAt=1726218802077", "Pizzas", 4.8m },
-                    { 10, "Creativos y deliciosos sandwiches", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(670), "https://ik.imagekit.io/Mariocanizares/sandwitches.png?updatedAt=1726218800723", "Sandwiches", 4.5m },
-                    { 11, "Platos saludables de verduras", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(673), "https://ik.imagekit.io/Mariocanizares/verduras.png?updatedAt=1726218800742", "Verduras", 4.6m },
-                    { 12, "Salsas para acompañar tus platos", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(676), "https://ik.imagekit.io/Mariocanizares/salsas.png?updatedAt=1726218800564", "Salsas", 4.7m },
-                    { 13, "Dulces y sabrosos postres", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(680), "https://ik.imagekit.io/Mariocanizares/postres.png?updatedAt=1726218800753", "Postres", 4.8m },
-                    { 14, "Bebidas refrescantes y cócteles", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(683), "https://ik.imagekit.io/Mariocanizares/bebidas.png?updatedAt=1726218678224", "Bebidas", 4.7m },
-                    { 15, "Platos tradicionales de legumbres", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(687), "https://ik.imagekit.io/Mariocanizares/legumbres.png?updatedAt=1726218800787", "Legumbres", 4.6m }
+                    { 1, "Platos deliciosos de carne", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(6359), "https://ik.imagekit.io/Mariocanizares/carne.webp?updatedAt=1726218723472", "Carnes", 4.5m },
+                    { 2, "Platos variados con arroz", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(6430), "https://ik.imagekit.io/Mariocanizares/arroz.png?updatedAt=1726218452623", "Arroces", 4.8m },
+                    { 3, "Guisos tradicionales y caseros", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(6435), "https://ik.imagekit.io/Mariocanizares/guisos.png?updatedAt=1726218800757", "Guisos", 4.7m },
+                    { 4, "Platos exquisitos de mariscos", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(6439), "https://ik.imagekit.io/Mariocanizares/marisco.webp?updatedAt=1726218800789", "Mariscos", 4.6m },
+                    { 5, "Platos frescos de pescados", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(6466), "https://ik.imagekit.io/Mariocanizares/pescado.png?updatedAt=1726218801946", "Pescados", 4.7m },
+                    { 6, "Platos deliciosos de pasta", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(6470), "https://ik.imagekit.io/Mariocanizares/pasta.png?updatedAt=1726218800772", "Pastas", 4.5m },
+                    { 7, "Frescas y saludables ensaladas", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(6473), "https://ik.imagekit.io/Mariocanizares/carne.webp?updatedAt=1726218723472", "Ensaladas", 4.6m },
+                    { 8, "Reconfortantes sopas y cremas", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(6478), "https://ik.imagekit.io/Mariocanizares/sopa.png?updatedAt=1726218800718f", "Sopas", 4.7m },
+                    { 9, "Variedad de pizzas caseras", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(6482), "https://ik.imagekit.io/Mariocanizares/pizza.png?updatedAt=1726218802077", "Pizzas", 4.8m },
+                    { 10, "Creativos y deliciosos sandwiches", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(6487), "https://ik.imagekit.io/Mariocanizares/sandwitches.png?updatedAt=1726218800723", "Sandwiches", 4.5m },
+                    { 11, "Platos saludables de verduras", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(6490), "https://ik.imagekit.io/Mariocanizares/verduras.png?updatedAt=1726218800742", "Verduras", 4.6m },
+                    { 12, "Salsas para acompañar tus platos", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(6494), "https://ik.imagekit.io/Mariocanizares/salsas.png?updatedAt=1726218800564", "Salsas", 4.7m },
+                    { 13, "Dulces y sabrosos postres", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(6497), "https://ik.imagekit.io/Mariocanizares/postres.png?updatedAt=1726218800753", "Postres", 4.8m },
+                    { 14, "Bebidas refrescantes y cócteles", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(6500), "https://ik.imagekit.io/Mariocanizares/bebidas.png?updatedAt=1726218678224", "Bebidas", 4.7m },
+                    { 15, "Platos tradicionales de legumbres", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(6504), "https://ik.imagekit.io/Mariocanizares/legumbres.png?updatedAt=1726218800787", "Legumbres", 4.6m }
                 });
 
             migrationBuilder.InsertData(
@@ -303,9 +304,9 @@ namespace RecetasRedondas.Data.Migrations
                 columns: new[] { "IdIngrediente", "Calorias", "ContieneAlergenos", "FechaExpiracion", "NombreIngrediente", "TipoAlergeno", "UnidadMedida" },
                 values: new object[,]
                 {
-                    { 1, 15m, false, new DateTime(2024, 11, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1437), "Lechuga", "", "g" },
-                    { 2, 130m, false, new DateTime(2025, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1455), "Arroz", "", "g" },
-                    { 3, 2m, false, new DateTime(2025, 4, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1460), "Café", "", "ml" }
+                    { 1, 15m, false, new DateTime(2024, 11, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7261), "Lechuga", "", "g" },
+                    { 2, 130m, false, new DateTime(2025, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7274), "Arroz", "", "g" },
+                    { 3, 2m, false, new DateTime(2025, 4, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7278), "Café", "", "ml" }
                 });
 
             migrationBuilder.InsertData(
@@ -313,42 +314,42 @@ namespace RecetasRedondas.Data.Migrations
                 columns: new[] { "IdReceta", "Descripcion", "EsVegano", "FechaCreacion", "IdCategoria", "Imagen", "NivelDificultad", "Nombre", "TiempoPreparacion" },
                 values: new object[,]
                 {
-                    { 1, "Ensalada fresca con aderezo César", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1185), 1, "https://ik.imagekit.io/Mariocanizares/Recetas/ensalada.jpg?updatedAt=1727169325456", 1m, "Ensalada César", 20 },
-                    { 2, "Arroz tradicional español con mariscos", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1202), 2, "https://ik.imagekit.io/Mariocanizares/Recetas/arroz-marisco.jpg?updatedAt=1727169389258", 2m, "Paella", 60 },
-                    { 3, "Postre italiano con café y mascarpone", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1207), 3, "https://ik.imagekit.io/Mariocanizares/Recetas/tiramisu.jpg?updatedAt=1727169422091", 3m, "Tiramisú", 30 },
-                    { 4, "Pasta con salsa cremosa de huevo y panceta", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1211), 4, "https://ik.imagekit.io/Mariocanizares/Recetas/carbonara.jpg?updatedAt=1727169452310", 2m, "Pasta Carbonara", 25 },
-                    { 5, "Rollos de arroz y pescado crudo", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1216), 5, "https://ik.imagekit.io/Mariocanizares/Recetas/sushi.jpg?updatedAt=1727169470676", 3m, "Sushi", 50 },
-                    { 6, "Pizza clásica con tomate, mozzarella y albahaca", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1223), 6, "https://ik.imagekit.io/Mariocanizares/Recetas/pizza.jpg?updatedAt=1727169491728", 2m, "Pizza Margherita", 40 },
-                    { 7, "Aguacate triturado con cebolla, tomate y limón", true, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1227), 1, "https://ik.imagekit.io/Mariocanizares/Recetas/guacamole.jpg?updatedAt=1727169511551", 1m, "Guacamole", 10 },
-                    { 8, "Capas de pasta, carne y salsa de tomate", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1232), 4, "https://ik.imagekit.io/Mariocanizares/Recetas/lasagna.jpg?updatedAt=1727169528673", 3m, "Lasaña", 90 },
-                    { 9, "Tacos rellenos de pollo, cebolla y cilantro", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1237), 2, "https://ik.imagekit.io/Mariocanizares/Recetas/tacos.jpg?updatedAt=1727169541523", 2m, "Tacos de Pollo", 30 },
-                    { 10, "Deliciosos brownies de chocolate", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1242), 3, "https://ik.imagekit.io/Mariocanizares/Recetas/brownies.jpg?updatedAt=1727169556237", 2m, "Brownies", 45 },
-                    { 11, "Sopa nutritiva de lentejas", true, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1246), 1, "https://ik.imagekit.io/Mariocanizares/Recetas/lentejas.jpg?updatedAt=1727169570913", 1m, "Sopa de Lentejas", 35 },
-                    { 12, "Guiso picante de carne y frijoles", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1250), 2, "https://ik.imagekit.io/Mariocanizares/Recetas/chili.jpg?updatedAt=1727169584071", 3m, "Chili con Carne", 50 },
-                    { 13, "Dip de berenjena asada", true, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1254), 1, "https://ik.imagekit.io/Mariocanizares/Recetas/baba-ganoush.jpg?updatedAt=1727169596850", 2m, "Baba Ganoush", 20 },
-                    { 14, "Deliciosos crepes dulces o salados", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1259), 3, "https://ik.imagekit.io/Mariocanizares/Recetas/crepes.jpg?updatedAt=1727169607858", 2m, "Crepes", 30 },
-                    { 15, "Pollo cocido en salsa de curry", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1262), 2, "https://ik.imagekit.io/Mariocanizares/Recetas/pollo-curry.jpg?updatedAt=1727169619493", 3m, "Pollo al Curry", 40 },
-                    { 16, "Galletas crujientes de chocolate", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1269), 3, "https://ik.imagekit.io/Mariocanizares/Recetas/galletas-chocolate.jpg?updatedAt=1727169630571", 1m, "Galletas de Chocolate", 25 },
-                    { 17, "Tarta salada con verduras y queso", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1272), 4, "https://ik.imagekit.io/Mariocanizares/Recetas/quiche.jpg?updatedAt=1727169642129", 3m, "Quiche de Verduras", 50 },
-                    { 18, "Muffins esponjosos con arándanos", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1276), 3, "https://ik.imagekit.io/Mariocanizares/Recetas/muffins.jpg?updatedAt=1727169653441", 2m, "Muffins de Arándano", 35 },
-                    { 19, "Batido saludable de espinacas y plátano", true, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1280), 1, "https://ik.imagekit.io/Mariocanizares/Recetas/batido-verde.jpg?updatedAt=1727169666491", 1m, "Batido Verde", 15 },
-                    { 20, "Salmón asado con hierbas", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1285), 2, "https://ik.imagekit.io/Mariocanizares/Recetas/salmon.jpg?updatedAt=1727169677362", 2m, "Salmón al Horno", 30 },
-                    { 21, "Pancakes esponjosos con jarabe de arce", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1288), 3, "https://ik.imagekit.io/Mariocanizares/Recetas/pancakes.jpg?updatedAt=1727169687612", 1m, "Pancakes", 20 },
-                    { 22, "Sopa fría de tomate", true, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1293), 1, "https://ik.imagekit.io/Mariocanizares/Recetas/gazpacho.jpg?updatedAt=1727169697098", 2m, "Gazpacho", 15 },
-                    { 23, "Bolas fritas rellenas de bechamel", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1298), 4, "https://ik.imagekit.io/Mariocanizares/Recetas/croquetas.jpg?updatedAt=1727169707360", 3m, "Croquetas", 45 },
-                    { 24, "Pudín saludable con semillas de chía", true, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1302), 3, "https://ik.imagekit.io/Mariocanizares/Recetas/pudin-chia.jpg?updatedAt=1727169717454", 1m, "Pudín de Chía", 15 },
-                    { 25, "Pescado marinado en jugo de limón", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1306), 2, "https://ik.imagekit.io/Mariocanizares/Recetas/ceviche.jpg?updatedAt=1727169726708", 3m, "Ceviche", 30 },
-                    { 26, "Huevos con salsa de tomate y frijoles", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1310), 4, "https://ik.imagekit.io/Mariocanizares/Recetas/huevos-rancheros.jpg?updatedAt=1727169737304", 2m, "Huevos Rancheros", 25 },
-                    { 27, "Pimientos rellenos de carne y arroz", false, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1314), 4, "https://ik.imagekit.io/Mariocanizares/Recetas/pimientos-rellenos.jpg?updatedAt=1727169746992", 3m, "Pimientos Rellenos", 50 },
-                    { 28, "Zanahorias asadas con miel y especias", true, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1318), 1, "https://ik.imagekit.io/Mariocanizares/Recetas/zanahorias.jpg?updatedAt=1727169756553", 1m, "Zanahorias Asadas", 30 },
-                    { 29, "Pasta con salsa pesto fresca", true, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1322), 4, "https://ik.imagekit.io/Mariocanizares/Recetas/pasta-pesto.jpg?updatedAt=1727169765990", 2m, "Pasta al Pesto", 20 },
-                    { 30, "Batido refrescante de fresa", true, new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1326), 1, "https://ik.imagekit.io/Mariocanizares/Recetas/batido-fresa.jpg?updatedAt=1727169775184", 1m, "Batido de Fresa", 10 }
+                    { 1, "Ensalada fresca con aderezo César", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(6992), 1, "https://ik.imagekit.io/Mariocanizares/Recetas/ensalada.jpg?updatedAt=1727169325456", 1m, "Ensalada César", 20 },
+                    { 2, "Arroz tradicional español con mariscos", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7013), 2, "https://ik.imagekit.io/Mariocanizares/Recetas/arroz-marisco.jpg?updatedAt=1727169389258", 2m, "Paella", 60 },
+                    { 3, "Postre italiano con café y mascarpone", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7017), 3, "https://ik.imagekit.io/Mariocanizares/Recetas/tiramisu.jpg?updatedAt=1727169422091", 3m, "Tiramisú", 30 },
+                    { 4, "Pasta con salsa cremosa de huevo y panceta", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7022), 4, "https://ik.imagekit.io/Mariocanizares/Recetas/carbonara.jpg?updatedAt=1727169452310", 2m, "Pasta Carbonara", 25 },
+                    { 5, "Rollos de arroz y pescado crudo", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7030), 5, "https://ik.imagekit.io/Mariocanizares/Recetas/sushi.jpg?updatedAt=1727169470676", 3m, "Sushi", 50 },
+                    { 6, "Pizza clásica con tomate, mozzarella y albahaca", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7033), 6, "https://ik.imagekit.io/Mariocanizares/Recetas/pizza.jpg?updatedAt=1727169491728", 2m, "Pizza Margherita", 40 },
+                    { 7, "Aguacate triturado con cebolla, tomate y limón", true, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7044), 1, "https://ik.imagekit.io/Mariocanizares/Recetas/guacamole.jpg?updatedAt=1727169511551", 1m, "Guacamole", 10 },
+                    { 8, "Capas de pasta, carne y salsa de tomate", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7049), 4, "https://ik.imagekit.io/Mariocanizares/Recetas/lasagna.jpg?updatedAt=1727169528673", 3m, "Lasaña", 90 },
+                    { 9, "Tacos rellenos de pollo, cebolla y cilantro", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7053), 2, "https://ik.imagekit.io/Mariocanizares/Recetas/tacos.jpg?updatedAt=1727169541523", 2m, "Tacos de Pollo", 30 },
+                    { 10, "Deliciosos brownies de chocolate", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7057), 3, "https://ik.imagekit.io/Mariocanizares/Recetas/brownies.jpg?updatedAt=1727169556237", 2m, "Brownies", 45 },
+                    { 11, "Sopa nutritiva de lentejas", true, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7061), 1, "https://ik.imagekit.io/Mariocanizares/Recetas/lentejas.jpg?updatedAt=1727169570913", 1m, "Sopa de Lentejas", 35 },
+                    { 12, "Guiso picante de carne y frijoles", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7066), 2, "https://ik.imagekit.io/Mariocanizares/Recetas/chili.jpg?updatedAt=1727169584071", 3m, "Chili con Carne", 50 },
+                    { 13, "Dip de berenjena asada", true, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7071), 1, "https://ik.imagekit.io/Mariocanizares/Recetas/baba-ganoush.jpg?updatedAt=1727169596850", 2m, "Baba Ganoush", 20 },
+                    { 14, "Deliciosos crepes dulces o salados", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7075), 3, "https://ik.imagekit.io/Mariocanizares/Recetas/crepes.jpg?updatedAt=1727169607858", 2m, "Crepes", 30 },
+                    { 15, "Pollo cocido en salsa de curry", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7079), 2, "https://ik.imagekit.io/Mariocanizares/Recetas/pollo-curry.jpg?updatedAt=1727169619493", 3m, "Pollo al Curry", 40 },
+                    { 16, "Galletas crujientes de chocolate", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7083), 3, "https://ik.imagekit.io/Mariocanizares/Recetas/galletas-chocolate.jpg?updatedAt=1727169630571", 1m, "Galletas de Chocolate", 25 },
+                    { 17, "Tarta salada con verduras y queso", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7088), 4, "https://ik.imagekit.io/Mariocanizares/Recetas/quiche.jpg?updatedAt=1727169642129", 3m, "Quiche de Verduras", 50 },
+                    { 18, "Muffins esponjosos con arándanos", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7091), 3, "https://ik.imagekit.io/Mariocanizares/Recetas/muffins.jpg?updatedAt=1727169653441", 2m, "Muffins de Arándano", 35 },
+                    { 19, "Batido saludable de espinacas y plátano", true, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7096), 1, "https://ik.imagekit.io/Mariocanizares/Recetas/batido-verde.jpg?updatedAt=1727169666491", 1m, "Batido Verde", 15 },
+                    { 20, "Salmón asado con hierbas", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7101), 2, "https://ik.imagekit.io/Mariocanizares/Recetas/salmon.jpg?updatedAt=1727169677362", 2m, "Salmón al Horno", 30 },
+                    { 21, "Pancakes esponjosos con jarabe de arce", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7105), 3, "https://ik.imagekit.io/Mariocanizares/Recetas/pancakes.jpg?updatedAt=1727169687612", 1m, "Pancakes", 20 },
+                    { 22, "Sopa fría de tomate", true, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7109), 1, "https://ik.imagekit.io/Mariocanizares/Recetas/gazpacho.jpg?updatedAt=1727169697098", 2m, "Gazpacho", 15 },
+                    { 23, "Bolas fritas rellenas de bechamel", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7113), 4, "https://ik.imagekit.io/Mariocanizares/Recetas/croquetas.jpg?updatedAt=1727169707360", 3m, "Croquetas", 45 },
+                    { 24, "Pudín saludable con semillas de chía", true, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7117), 3, "https://ik.imagekit.io/Mariocanizares/Recetas/pudin-chia.jpg?updatedAt=1727169717454", 1m, "Pudín de Chía", 15 },
+                    { 25, "Pescado marinado en jugo de limón", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7121), 2, "https://ik.imagekit.io/Mariocanizares/Recetas/ceviche.jpg?updatedAt=1727169726708", 3m, "Ceviche", 30 },
+                    { 26, "Huevos con salsa de tomate y frijoles", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7125), 4, "https://ik.imagekit.io/Mariocanizares/Recetas/huevos-rancheros.jpg?updatedAt=1727169737304", 2m, "Huevos Rancheros", 25 },
+                    { 27, "Pimientos rellenos de carne y arroz", false, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7130), 4, "https://ik.imagekit.io/Mariocanizares/Recetas/pimientos-rellenos.jpg?updatedAt=1727169746992", 3m, "Pimientos Rellenos", 50 },
+                    { 28, "Zanahorias asadas con miel y especias", true, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7134), 1, "https://ik.imagekit.io/Mariocanizares/Recetas/zanahorias.jpg?updatedAt=1727169756553", 1m, "Zanahorias Asadas", 30 },
+                    { 29, "Pasta con salsa pesto fresca", true, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7138), 4, "https://ik.imagekit.io/Mariocanizares/Recetas/pasta-pesto.jpg?updatedAt=1727169765990", 2m, "Pasta al Pesto", 20 },
+                    { 30, "Batido refrescante de fresa", true, new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7142), 1, "https://ik.imagekit.io/Mariocanizares/Recetas/batido-fresa.jpg?updatedAt=1727169775184", 1m, "Batido de Fresa", 10 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Usuarios",
                 columns: new[] { "IdUsuario", "Contrasena", "Correo", "FechaRegistro", "Nombre", "Rol" },
-                values: new object[] { 1, "MarioX8", "mario@gmail.com", new DateTime(2024, 10, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1589), "Admin", true });
+                values: new object[] { 1, "MarioX8", "mario@gmail.com", new DateTime(2024, 10, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7371), "Admin", true });
 
             migrationBuilder.InsertData(
                 table: "Pasos",
@@ -371,15 +372,20 @@ namespace RecetasRedondas.Data.Migrations
                 columns: new[] { "IdRecetaIngrediente", "Cantidad", "EsOpcional", "FechaAñadido", "IdIngrediente", "IdReceta", "Notas" },
                 values: new object[,]
                 {
-                    { 1, 100m, false, new DateTime(2024, 11, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1539), 1, 1, "" },
-                    { 2, 200m, false, new DateTime(2024, 11, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1547), 2, 2, "" },
-                    { 3, 50m, false, new DateTime(2024, 11, 23, 13, 18, 23, 846, DateTimeKind.Local).AddTicks(1551), 3, 3, "" }
+                    { 1, 100m, false, new DateTime(2024, 11, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7317), 1, 1, "" },
+                    { 2, 200m, false, new DateTime(2024, 11, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7325), 2, 2, "" },
+                    { 3, 50m, false, new DateTime(2024, 11, 24, 10, 39, 36, 657, DateTimeKind.Local).AddTicks(7329), 3, 3, "" }
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Alergenos_IdIngrediente",
                 table: "Alergenos",
                 column: "IdIngrediente");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Alergenos_IdUsuario",
+                table: "Alergenos",
+                column: "IdUsuario");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Favoritos_IdReceta",

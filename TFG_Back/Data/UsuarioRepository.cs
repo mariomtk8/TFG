@@ -19,6 +19,7 @@ namespace RecetasRedondas.Data
         {
             var usuario = _context.Usuarios
                 .Include(u => u.Alergenos)
+                
                 .FirstOrDefault(u => u.IdUsuario == idUsuario);
 
             if (usuario == null)
@@ -47,6 +48,7 @@ namespace RecetasRedondas.Data
         {
             var usuario = _context.Usuarios
                 .Include(u => u.Alergenos)
+                .ThenInclude(u => u.Ingredientes)
                 .FirstOrDefault(u => u.IdUsuario == idUsuario);
 
             if (usuario == null)
@@ -57,8 +59,9 @@ namespace RecetasRedondas.Data
             return usuario.Alergenos
                 .Select(a => new AlergenoDTO
                 {
-                    IdIngrediente = a.IdIngrediente,
-                    IdAlergeno = a.IdAlergeno // Incluye IdAlergeno en el DTO
+                    IdIngrediente = a.Ingredientes.IdIngrediente,
+                    IdAlergeno = a.IdAlergeno,
+                    NombreIngrediente = a.Ingredientes.NombreIngrediente
                 })
                 .ToList();
         }
