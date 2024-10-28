@@ -76,6 +76,7 @@ namespace RecetasRedondas.Data
         {
             return _context.MenusSemanales
                 .Where(m => m.IdUsuario == usuarioId)
+                .Include(m => m.Receta) // Carga la receta asociada
                 .ToList();
         }
 
