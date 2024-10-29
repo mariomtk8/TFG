@@ -14,6 +14,7 @@ namespace RecetasRedondas.Models
     public decimal NivelDificultad { get; set; }
     public decimal ?PromedioVotos { get; set; }
     public int TiempoPreparacion { get; set; }
+    public string? TemaCocina { get; set; }
     public int IdCategoria { get; set; }
     }
 }

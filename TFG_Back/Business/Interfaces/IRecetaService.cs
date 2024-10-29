@@ -20,6 +20,7 @@ namespace RecetasRedondas.Business
         List<RecetasMDTO> FiltrarRecetasPorCategorias(int usuarioId);
         List<Receta> FiltrarPorNivelDificultad( bool ascendente);
         List<Receta> FiltrarPorTiempoPreparacion( bool ascendente);
+        List<Receta> FiltrarPorTemaCocina(string temaCocina);
 
     }
 }

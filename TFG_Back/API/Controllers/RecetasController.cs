@@ -183,6 +183,12 @@ namespace RecetasRedondas.Controllers
             var recetas = _recetaService.FiltrarPorTiempoPreparacion( ascendente);
             return Ok(recetas);
         }
+        [HttpGet("filtrarPorTemaCocina")]
+        public ActionResult<List<Receta>> FiltrarPorTemaCocina([FromQuery] string temaCocina)
+        {
+            var recetas = _recetaService.FiltrarPorTemaCocina(temaCocina);
+            return Ok(recetas);
+        }
 
     }
 }

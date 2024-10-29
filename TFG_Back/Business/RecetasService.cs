@@ -35,15 +35,9 @@ namespace RecetasRedondas.Business
         public void DeletePaso( int pasoId) => _recetaRepository.DeletePaso(pasoId);
         public List<RecetasMDTO> FiltrarRecetasPorAlergenos(int usuarioId) => _recetaRepository.FiltrarRecetasPorAlergenos(usuarioId);
         public List<RecetasMDTO> FiltrarRecetasPorCategorias(int usuarioId) => _recetaRepository.FiltrarRecetasPorCategorias(usuarioId);
-        public List<Receta> FiltrarPorNivelDificultad( bool ascendente)
-        {
-            return _recetaRepository.FiltrarPorNivelDificultad( ascendente);
-        }
-
-        public List<Receta> FiltrarPorTiempoPreparacion( bool ascendente)
-        {
-            return _recetaRepository.FiltrarPorTiempoPreparacion( ascendente);
-        }
+        public List<Receta> FiltrarPorNivelDificultad( bool ascendente) => _recetaRepository.FiltrarPorNivelDificultad( ascendente);
+        public List<Receta> FiltrarPorTiempoPreparacion( bool ascendente) => _recetaRepository.FiltrarPorTiempoPreparacion( ascendente);
+        public List<Receta> FiltrarPorTemaCocina(string temaCocina) => _recetaRepository.FiltrarPorTemaCocina(temaCocina);
       
     
 

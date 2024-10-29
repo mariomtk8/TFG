@@ -38,6 +38,7 @@ namespace RecetasRedondas.Data
                 NivelDificultad = receta.NivelDificultad ?? 0m, // valor predeterminado de 0 si es null
                 PromedioVotos = receta.PromedioVotos,
                 TiempoPreparacion = receta.TiempoPreparacion ?? 0,
+                TemaCocina = receta.TemaCocina,
                 IdCategoria = receta.IdCategoria,
             }).ToList();
 
@@ -79,6 +80,7 @@ namespace RecetasRedondas.Data
                 NivelDificultad = recetas.NivelDificultad ?? 0m, // valor predeterminado de 0 si es null
                 PromedioVotos = recetas.PromedioVotos,
                 TiempoPreparacion = recetas.TiempoPreparacion ?? 0,
+                TemaCocina = recetas.TemaCocina,
                 IdCategoria = recetas.IdCategoria,
             };
 
@@ -258,6 +260,12 @@ namespace RecetasRedondas.Data
             return ascendente ? 
                 query.OrderBy(r => r.TiempoPreparacion).ToList() : 
                 query.OrderByDescending(r => r.TiempoPreparacion).ToList();
+        }
+        public List<Receta> FiltrarPorTemaCocina(string temaCocina)
+        {
+            return _context.Recetas
+                .Where(r => r.TemaCocina != null && r.TemaCocina.Contains(temaCocina))
+                .ToList();
         }
 
     }
