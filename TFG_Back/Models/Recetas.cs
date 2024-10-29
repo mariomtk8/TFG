@@ -19,6 +19,9 @@ namespace RecetasRedondas.Models
     public int ?TiempoPreparacion { get; set; }
     public int IdCategoria { get; set; }
     public List<RecetaIngrediente> ?recetaIngredientes  { get; set; } = new List<RecetaIngrediente>();
+    public decimal ?PromedioVotos { get; set; }
+    public List<Votacion> ?Votaciones { get; set; }
+    public List<Comentario> ?Comentarios { get; set; }
 
     }
 }

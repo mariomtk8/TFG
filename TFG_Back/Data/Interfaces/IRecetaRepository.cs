@@ -18,6 +18,8 @@ namespace RecetasRedondas.Data
         void DeletePaso( int pasoId);
         List<RecetasMDTO> FiltrarRecetasPorAlergenos(int usuarioId);
         List<RecetasMDTO> FiltrarRecetasPorCategorias(int usuarioId);
+        List<Receta> FiltrarPorNivelDificultad( bool ascendente);
+        List<Receta> FiltrarPorTiempoPreparacion( bool ascendente);
 
 
 

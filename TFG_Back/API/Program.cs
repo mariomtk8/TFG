@@ -99,6 +99,9 @@ builder.Services.AddScoped<IRecetaIngredienteRepository, RecetaIngredienteReposi
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IFavoritoRepository, FavoritoRepository>();
 builder.Services.AddScoped<IMenuSemanalRepository, MenuSemanalRepository>();
+builder.Services.AddScoped<IVotacionRepository, VotacionRepository>();
+builder.Services.AddScoped<IComentarioRepository, ComentarioRepository>();
+
 
 // Registrar servicios
 builder.Services.AddScoped<IRecetaService, RecetaService>();
@@ -109,6 +112,8 @@ builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IFavoritoService, FavoritoService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IMenuSemanalService, MenuSemanalService>();
+builder.Services.AddScoped<IVotacionService, VotacionService>();
+builder.Services.AddScoped<IComentarioService, ComentarioService>();
 
 // Configuración de CORS
 builder.Services.AddCors(options =>

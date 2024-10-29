@@ -97,14 +97,14 @@ namespace RecetasRedondas.Controllers
             return NoContent();
         }
 
-        [HttpGet("Receta/{recetaId}/Pasos")]
-            public IActionResult GetPasosByRecetaId(int recetaId)
-            {
-                var pasos = _recetaService.GetPasosByRecetaId(recetaId);
-                return Ok(pasos);
-            }
+        [HttpGet("{recetaId}/Pasos")]
+        public IActionResult GetPasosByRecetaId(int recetaId)
+        {
+            var pasos = _recetaService.GetPasosByRecetaId(recetaId);
+            return Ok(pasos);
+        }
 
-            // Obtener un paso específico por ID
+        // Obtener un paso específico por ID
 
         [HttpPost("{recetaId}/paso")]
         public IActionResult AddPaso(int recetaId, [FromBody] DatosPasoDTO paso)
@@ -133,40 +133,56 @@ namespace RecetasRedondas.Controllers
         [HttpDelete("/Paso/{pasoId}")]
         public IActionResult DeletePaso(int pasoId)
         {
-            _recetaService.DeletePaso( pasoId);
+            _recetaService.DeletePaso(pasoId);
             return NoContent();
         }
 
         [HttpGet("filtrarPorAlergenos/{usuarioId}")]
-    public IActionResult FiltrarRecetasPorAlergenos(int usuarioId)
-    {
-        var recetas = _recetaService.FiltrarRecetasPorAlergenos(usuarioId);
-
-        if (recetas == null || !recetas.Any())
+        public IActionResult FiltrarRecetasPorAlergenos(int usuarioId)
         {
-            return NotFound("No se encontraron recetas que cumplan con los requisitos.");
-        }else if(usuarioId == null){
-            return NotFound("No hay usuarios con ese id ");
+            var recetas = _recetaService.FiltrarRecetasPorAlergenos(usuarioId);
+
+            if (recetas == null || !recetas.Any())
+            {
+                return NotFound("No se encontraron recetas que cumplan con los requisitos.");
+            }
+            else if (usuarioId == null)
+            {
+                return NotFound("No hay usuarios con ese id ");
+            }
+
+            return Ok(recetas);
+        }
+        [HttpGet("filtrarPorCategorias/{usuarioId}")]
+        public IActionResult FiltrarRecetasPorCategorias(int usuarioId)
+        {
+            var recetas = _recetaService.FiltrarRecetasPorCategorias(usuarioId);
+
+            if (recetas == null || !recetas.Any())
+            {
+                return NotFound("No se encontraron recetas que cumplan con los requisitos.");
+            }
+            else if (usuarioId <= 0) // Asegúrate de que el ID sea válido
+            {
+                return NotFound("No hay usuarios con ese id.");
+            }
+
+            return Ok(recetas);
         }
 
-        return Ok(recetas);
-    }
-    [HttpGet("filtrarPorCategorias/{usuarioId}")]
-public IActionResult FiltrarRecetasPorCategorias(int usuarioId)
-{
-    var recetas = _recetaService.FiltrarRecetasPorCategorias(usuarioId);
+        [HttpGet("filtrarPorNivelDificultad")]
+        public ActionResult<List<Receta>> FiltrarPorNivelDificultad( [FromQuery] bool ascendente = true)
+        {
+            var recetas = _recetaService.FiltrarPorNivelDificultad( ascendente);
+            return Ok(recetas);
+        }
 
-    if (recetas == null || !recetas.Any())
-    {
-        return NotFound("No se encontraron recetas que cumplan con los requisitos.");
-    }
-    else if (usuarioId <= 0) // Asegúrate de que el ID sea válido
-    {
-        return NotFound("No hay usuarios con ese id.");
-    }
-
-    return Ok(recetas);
-}
+        [HttpGet("filtrarPorTiempoPreparacion")]
+        public ActionResult<List<Receta>> FiltrarPorTiempoPreparacion( [FromQuery] bool ascendente = true)
+        {
+            var recetas = _recetaService.FiltrarPorTiempoPreparacion( ascendente);
+            return Ok(recetas);
+        }
 
     }
 }

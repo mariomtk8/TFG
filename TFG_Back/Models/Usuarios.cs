@@ -19,5 +19,7 @@ namespace RecetasRedondas.Models
         public List<MenuSemanal> ?MenusSemanales { get; set; }
         public List<Alergeno> ?Alergenos { get; set; } = new List<Alergeno>();
         public List<UsuarioCategoria> ?UsuarioCategorias { get; set; } = new List<UsuarioCategoria>();
+        public List<Votacion> Votaciones { get; set; }
+        public List<Comentario> Comentarios { get; set; }
     }
 }

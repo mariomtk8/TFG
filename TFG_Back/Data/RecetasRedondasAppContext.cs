@@ -13,15 +13,16 @@ namespace RecetasRedondas.Models
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Ingrediente> Ingredientes { get; set; }
         public DbSet<MenuSemanal> MenusSemanales { get; set; }
-
         public DbSet<Receta> Recetas { get; set; }
         public DbSet<Paso> Pasos { get; set; }
         public DbSet<RecetaIngrediente> RecetaIngredientes { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Favorito> Favoritos { get; set; }
         public DbSet<RecetasPaso> recetasPasos { get; set; }
-        public DbSet<Alergeno> Alergenos { get; set; } 
+        public DbSet<Alergeno> Alergenos { get; set; }
         public DbSet<UsuarioCategoria> UsuarioCategorias { get; set; }
+        public DbSet<Votacion> Votaciones { get; set; }
+        public DbSet<Comentario> Comentarios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,38 +36,40 @@ namespace RecetasRedondas.Models
             modelBuilder.Entity<RecetaIngrediente>().HasKey(ri => ri.IdRecetaIngrediente);
             modelBuilder.Entity<Favorito>().HasKey(f => f.IdFavorito);
             modelBuilder.Entity<Alergeno>().HasKey(a => a.IdAlergeno);
-            modelBuilder.Entity<UsuarioCategoria>().HasKey(a => a.IdUsuarioCategoria);
-            
+            modelBuilder.Entity<UsuarioCategoria>().HasKey(uc => uc.IdUsuarioCategoria);
+            modelBuilder.Entity<Votacion>().HasKey(v => v.Id);
+            modelBuilder.Entity<Comentario>().HasKey(c => c.Id);
+
 
             // Definir la relación muchos a muchos entre Usuario e Ingrediente
 
-        modelBuilder.Entity<Alergeno>()
-            .HasOne(a => a.Usuarios)
-            .WithMany(u => u.Alergenos)
-            .HasForeignKey(au => au.IdUsuario);
+            modelBuilder.Entity<Alergeno>()
+                .HasOne(a => a.Usuarios)
+                .WithMany(u => u.Alergenos)
+                .HasForeignKey(au => au.IdUsuario);
 
-        modelBuilder.Entity<Alergeno>()
-            .HasOne(a => a.Ingredientes)
-            .WithMany(i => i.Alergenos)
-            .HasForeignKey(a => a.IdIngrediente);
+            modelBuilder.Entity<Alergeno>()
+                .HasOne(a => a.Ingredientes)
+                .WithMany(i => i.Alergenos)
+                .HasForeignKey(a => a.IdIngrediente);
 
 
 
             modelBuilder.Entity<RecetaIngrediente>()
-    .HasOne(ri => ri.Receta)
-    .WithMany(r => r.recetaIngredientes)  // Añadir propiedad de navegación en Receta
-    .HasForeignKey(ri => ri.IdReceta);
+                .HasOne(ri => ri.Receta)
+                .WithMany(r => r.recetaIngredientes) 
+                .HasForeignKey(ri => ri.IdReceta);
 
-modelBuilder.Entity<RecetaIngrediente>()
-    .HasOne(ri => ri.Ingrediente)
-    .WithMany(i => i.recetaIngredientes)  // Añadir propiedad de navegación en Ingrediente
-    .HasForeignKey(ri => ri.IdIngrediente);
+            modelBuilder.Entity<RecetaIngrediente>()
+                .HasOne(ri => ri.Ingrediente)
+                .WithMany(i => i.recetaIngredientes)  
+                .HasForeignKey(ri => ri.IdIngrediente);
 
             // Configuración de relaciones
             modelBuilder.Entity<Receta>()
                 .HasMany(r => r.Pasos)
                 .WithOne(p => p.Receta)
-                .HasForeignKey(p => p.IdReceta); // Se mantiene el comportamiento por defecto para la eliminación en cascada.
+                .HasForeignKey(p => p.IdReceta); 
 
             // Configuración para RecetasPaso
             modelBuilder.Entity<RecetasPaso>()
@@ -75,16 +78,16 @@ modelBuilder.Entity<RecetaIngrediente>()
             // Relación entre RecetasPaso y Receta
             modelBuilder.Entity<RecetasPaso>()
                 .HasOne(rp => rp.Receta)
-                .WithMany() // No necesitas especificar la colección aquí si no hay propiedad de navegación
+                .WithMany() 
                 .HasForeignKey(rp => rp.IdReceta)
-                .OnDelete(DeleteBehavior.Restrict);  // Cambiado a "Restrict" para evitar el ciclo
+                .OnDelete(DeleteBehavior.Restrict);  
 
             // Relación entre RecetasPaso y Paso
             modelBuilder.Entity<RecetasPaso>()
                 .HasOne(rp => rp.Paso)
-                .WithMany() // No necesitas especificar la colección aquí si no hay propiedad de navegación
+                .WithMany() 
                 .HasForeignKey(rp => rp.IdPaso)
-                .OnDelete(DeleteBehavior.Restrict); // Cambiado a "Restrict" para evitar el ciclo
+                .OnDelete(DeleteBehavior.Restrict); 
 
             // Relación Favorito
             modelBuilder.Entity<Favorito>()
@@ -100,31 +103,53 @@ modelBuilder.Entity<RecetaIngrediente>()
 
             // Relación entre MenuSemanal y Receta
             modelBuilder.Entity<MenuSemanal>()
-                .HasOne(m => m.Receta)               // Un menú semanal tiene una receta
-                .WithMany()                          // Una receta puede estar en muchos menús
-                .HasForeignKey(m => m.IdReceta)      // Clave foránea en MenuSemanal
-                .OnDelete(DeleteBehavior.Cascade);   // Comportamiento de eliminación en cascada
+                .HasOne(m => m.Receta)             
+                .WithMany()                         
+                .HasForeignKey(m => m.IdReceta)      
+                .OnDelete(DeleteBehavior.Cascade);   
 
             // Relación entre MenuSemanal y Usuario
             modelBuilder.Entity<MenuSemanal>()
-                .HasOne(m => m.Usuario)              // Un menú semanal tiene un usuario
-                .WithMany()                          // Un usuario puede tener muchos menús
-                .HasForeignKey(m => m.IdUsuario)     // Clave foránea en MenuSemanal
+                .HasOne(m => m.Usuario)              
+                .WithMany()                          
+                .HasForeignKey(m => m.IdUsuario)     
                 .OnDelete(DeleteBehavior.Cascade);
 
             // Configurar relación entre Usuario y UsuarioCategoria
 
             modelBuilder.Entity<UsuarioCategoria>()
-                .HasOne(uc => uc.Usuario) // Cada UsuarioCategoria pertenece a un Usuario
-                .WithMany(u => u.UsuarioCategorias) // Un Usuario puede tener muchas UsuarioCategorias
-                .HasForeignKey(uc => uc.IdUsuario); // Foreign key en UsuarioCategoria
+                .HasOne(uc => uc.Usuario)
+                .WithMany(u => u.UsuarioCategorias) 
+                .HasForeignKey(uc => uc.IdUsuario); 
 
             modelBuilder.Entity<UsuarioCategoria>()
-                .HasOne(uc => uc.Categoria) // Cada UsuarioCategoria pertenece a una Categoria
-                .WithMany(c => c.UsuarioCategorias) // Una Categoria puede tener muchas UsuarioCategorias
-                .HasForeignKey(uc => uc.IdCategoria); // Foreign key en UsuarioCategoria
+                .HasOne(uc => uc.Categoria) 
+                .WithMany(c => c.UsuarioCategorias) 
+                .HasForeignKey(uc => uc.IdCategoria); 
 
+            //Votacion
+            modelBuilder.Entity<Votacion>()
+                .HasOne(v => v.Usuario)
+                .WithMany(u => u.Votaciones)
+                .HasForeignKey(v => v.UsuarioId);
+
+            modelBuilder.Entity<Votacion>()
+                .HasOne(v => v.Receta)
+                .WithMany(r => r.Votaciones)
+                .HasForeignKey(v => v.RecetaId);
+
+            //Comentarios
+            modelBuilder.Entity<Comentario>()
+                .HasOne(c => c.Usuario)
+                .WithMany(u => u.Comentarios)
+                .HasForeignKey(c => c.UsuarioId);
+
+            modelBuilder.Entity<Comentario>()
+                .HasOne(c => c.Receta)
+                .WithMany(r => r.Comentarios)
+                .HasForeignKey(c => c.RecetaId);
             // Datos de ejemplo (se pueden ajustar según sea necesario)
+            
             modelBuilder.Entity<Categoria>().HasData(
      new Categoria { IdCategoria = 1, NombreCategoria = "Carnes", Descripcion = "Platos deliciosos de carne", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/carne.webp?updatedAt=1726218723472", Puntuacion = 4.5m },
      new Categoria { IdCategoria = 2, NombreCategoria = "Arroces", Descripcion = "Platos variados con arroz", Especial = false, FechaCreacion = DateTime.Now, Icono = "https://ik.imagekit.io/Mariocanizares/arroz.png?updatedAt=1726218452623", Puntuacion = 4.8m },
@@ -202,7 +227,7 @@ modelBuilder.Entity<RecetaIngrediente>()
             modelBuilder.Entity<RecetaIngrediente>().HasData(
                 new RecetaIngrediente { IdRecetaIngrediente = 1, IdReceta = 1, IdIngrediente = 1, Cantidad = 100, EsOpcional = false, Notas = "", FechaAñadido = DateTime.Now.AddMonths(1) },
                 new RecetaIngrediente { IdRecetaIngrediente = 2, IdReceta = 2, IdIngrediente = 2, Cantidad = 200, EsOpcional = false, Notas = "", FechaAñadido = DateTime.Now.AddMonths(1) },
-                new RecetaIngrediente { IdRecetaIngrediente = 3, IdReceta = 3, IdIngrediente = 3, Cantidad = 50, EsOpcional = false, Notas = "", FechaAñadido = DateTime.Now.AddMonths(1)  }
+                new RecetaIngrediente { IdRecetaIngrediente = 3, IdReceta = 3, IdIngrediente = 3, Cantidad = 50, EsOpcional = false, Notas = "", FechaAñadido = DateTime.Now.AddMonths(1) }
             );
 
             modelBuilder.Entity<Usuario>().HasData(

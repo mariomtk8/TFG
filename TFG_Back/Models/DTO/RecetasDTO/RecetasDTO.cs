@@ -12,6 +12,7 @@ namespace RecetasRedondas.Models
     public bool EsVegano { get; set; }
     public DateTime FechaCreacion { get; set; }
     public decimal NivelDificultad { get; set; }
+    public decimal ?PromedioVotos { get; set; }
     public int TiempoPreparacion { get; set; }
     public int IdCategoria { get; set; }
     }

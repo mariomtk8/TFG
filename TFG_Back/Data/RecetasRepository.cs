@@ -36,6 +36,7 @@ namespace RecetasRedondas.Data
                 EsVegano = receta.EsVegano ?? false, // valor predeterminado false si es null
                 FechaCreacion = receta.FechaCreacion ?? DateTime.Now, // valor predeterminado de la fecha actual si es null
                 NivelDificultad = receta.NivelDificultad ?? 0m, // valor predeterminado de 0 si es null
+                PromedioVotos = receta.PromedioVotos,
                 TiempoPreparacion = receta.TiempoPreparacion ?? 0,
                 IdCategoria = receta.IdCategoria,
             }).ToList();
@@ -76,6 +77,7 @@ namespace RecetasRedondas.Data
                 EsVegano = recetas.EsVegano ?? false, // valor predeterminado false si es null
                 FechaCreacion = recetas.FechaCreacion ?? DateTime.Now, // valor predeterminado de la fecha actual si es null
                 NivelDificultad = recetas.NivelDificultad ?? 0m, // valor predeterminado de 0 si es null
+                PromedioVotos = recetas.PromedioVotos,
                 TiempoPreparacion = recetas.TiempoPreparacion ?? 0,
                 IdCategoria = recetas.IdCategoria,
             };
@@ -238,6 +240,24 @@ namespace RecetasRedondas.Data
             }).ToList();
 
             return newRecetas;
+        }
+
+        public List<Receta> FiltrarPorNivelDificultad(bool ascendente)
+        {
+            var query = _context.Recetas.AsQueryable();
+
+            return ascendente ? 
+                query.OrderBy(r => r.NivelDificultad).ToList() : 
+                query.OrderByDescending(r => r.NivelDificultad).ToList();
+        }
+
+        public List<Receta> FiltrarPorTiempoPreparacion(bool ascendente)
+        {
+            var query = _context.Recetas.AsQueryable();
+
+            return ascendente ? 
+                query.OrderBy(r => r.TiempoPreparacion).ToList() : 
+                query.OrderByDescending(r => r.TiempoPreparacion).ToList();
         }
 
     }
