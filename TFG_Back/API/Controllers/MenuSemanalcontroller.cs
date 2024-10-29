@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace RecetasRedondas.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class MenuSemanalController : ControllerBase
     {
@@ -16,7 +16,7 @@ namespace RecetasRedondas.Controllers
             _menuSemanalService = menuSemanalService;
         }
 
-        // POST: api/MenuSemanal
+        // POST: MenuSemanal
         [HttpPost("{usuarioId}")]
         public IActionResult CrearMenuSemanal(int usuarioId)
         {
@@ -37,7 +37,7 @@ namespace RecetasRedondas.Controllers
             return Ok(menuSemanal);
         }
 
-        // PUT: api/MenuSemanal/usuario/{usuarioId}
+        // PUT: /MenuSemanal/usuario/{usuarioId}
         [HttpPut("usuario/{usuarioId}")]
         public IActionResult RegenerarMenuSemanal(int usuarioId)
         {
@@ -45,7 +45,7 @@ namespace RecetasRedondas.Controllers
             return Ok("Menú semanal regenerado correctamente.");
         }
 
-        // DELETE: api/MenuSemanal/{idMenuSemanal}
+        // DELETE: MenuSemanal/{idMenuSemanal}
         [HttpDelete("{idMenuSemanal}")]
         public IActionResult DeleteMenuSemanal(int idMenuSemanal)
         {
