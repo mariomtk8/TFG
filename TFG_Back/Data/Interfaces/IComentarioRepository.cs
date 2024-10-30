@@ -6,7 +6,9 @@ namespace RecetasRedondas.Data
     public interface IComentarioRepository
 {
     void AgregarComentario(Comentario comentario);
-    List<Comentario> ObtenerComentariosPorReceta(int recetaId);
+    List<ComentarioDto> ObtenerComentariosPorReceta(int recetaId);
+    void EliminarComentarioPorId(int comentarioId);
+    void EliminarComentarioPorUsuario(int comentarioId, int usuarioId);
 }
 
 }

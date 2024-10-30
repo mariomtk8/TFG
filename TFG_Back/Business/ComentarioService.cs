@@ -25,10 +25,19 @@ namespace RecetasRedondas.Business
         _comentarioRepository.AgregarComentario(comentario);
     }
 
-    public List<Comentario> ObtenerComentarios(int recetaId)
+    public List<ComentarioDto> ObtenerComentariosPorReceta(int recetaId)
     {
         return _comentarioRepository.ObtenerComentariosPorReceta(recetaId);
     }
+    public void EliminarComentarioPorId(int comentarioId)
+        {
+            _comentarioRepository.EliminarComentarioPorId(comentarioId);
+        }
+
+        public void EliminarComentarioPorUsuario(int comentarioId, int usuarioId)
+        {
+            _comentarioRepository.EliminarComentarioPorUsuario(comentarioId, usuarioId);
+        }
 }
 
 }

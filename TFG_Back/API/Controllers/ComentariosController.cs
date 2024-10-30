@@ -18,7 +18,7 @@ public class ComentariosController : ControllerBase
     {
         _comentarioService = comentarioService;
     }
-
+    [AllowAnonymous]
     [HttpPost]
     public IActionResult AgregarComentario(int usuarioId, int recetaId, string contenido)
     {
@@ -26,12 +26,30 @@ public class ComentariosController : ControllerBase
         return Ok(new { Message = "Comentario agregado exitosamente" });
     }
 
+    [AllowAnonymous]
     [HttpGet("{recetaId}")]
-    public IActionResult ObtenerComentarios(int recetaId)
+    public ActionResult<List<ComentarioDto>> GetComentariosPorReceta(int recetaId)
     {
-        var comentarios = _comentarioService.ObtenerComentarios(recetaId);
+        var comentarios = _comentarioService.ObtenerComentariosPorReceta(recetaId);
         return Ok(comentarios);
     }
+
+    [Authorize(Roles = "Admin")]
+    [HttpDelete("{comentarioId}")]
+        public IActionResult EliminarComentarioPorId(int comentarioId)
+        {
+            _comentarioService.EliminarComentarioPorId(comentarioId);
+            return Ok("Comentario eliminado por el administrador.");
+        }
+
+        [AllowAnonymous]
+        [HttpDelete("{comentarioId}/usuario/{usuarioId}")]
+        public IActionResult EliminarComentarioPorUsuario(int comentarioId, int usuarioId)
+        {
+            
+            _comentarioService.EliminarComentarioPorUsuario(comentarioId, usuarioId);
+            return Ok("Comentario eliminado por el usuario.");
+        }
 }
 
 }
