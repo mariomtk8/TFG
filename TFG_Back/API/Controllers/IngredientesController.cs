@@ -64,5 +64,12 @@ namespace RecetasRedondas.Controllers
             _ingredienteService.Delete(id);
             return NoContent();
         }
+        [AllowAnonymous]
+        [HttpGet("search")]
+        public ActionResult<List<Ingrediente>> Search(string query) // Método de búsqueda
+        {
+            var ingredientes = _ingredienteService.Search(query);
+            return ingredientes;
+        }
     }
 }

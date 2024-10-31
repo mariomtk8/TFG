@@ -10,5 +10,6 @@ namespace RecetasRedondas.Business
         void Add(Ingrediente ingrediente);
         void Update(Ingrediente ingrediente);
         void Delete(int id);
+        List<Ingrediente> Search(string query);
     }
 }

@@ -200,6 +200,65 @@ namespace RecetasRedondas.Models
   new Receta { IdReceta = 29, Nombre = "Pasta al Pesto", IdCategoria = 4, Descripcion = "Pasta con salsa pesto fresca", Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/pasta-pesto.jpg?updatedAt=1727169765990", FechaCreacion = DateTime.Now, NivelDificultad = 2, EsVegano = true, TiempoPreparacion = 20 },
   new Receta { IdReceta = 30, Nombre = "Batido de Fresa", IdCategoria = 1, Descripcion = "Batido refrescante de fresa", Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/batido-fresa.jpg?updatedAt=1727169775184", FechaCreacion = DateTime.Now, NivelDificultad = 1, EsVegano = true, TiempoPreparacion = 10 }
 );
+            modelBuilder.Entity<Ingrediente>().HasData(
+    new Ingrediente { IdIngrediente = 1, NombreIngrediente = "Lechuga", Calorias = 15, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddMonths(1) },
+    new Ingrediente { IdIngrediente = 2, NombreIngrediente = "Tomate", Calorias = 18, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddMonths(1) },
+    new Ingrediente { IdIngrediente = 3, NombreIngrediente = "Queso", Calorias = 300, ContieneAlergenos = true, TipoAlergeno = "Lactosa", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddDays(10) },
+    new Ingrediente { IdIngrediente = 4, NombreIngrediente = "Pan", Calorias = 265, ContieneAlergenos = true, TipoAlergeno = "Gluten", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddDays(5) },
+    new Ingrediente { IdIngrediente = 5, NombreIngrediente = "Pollo", Calorias = 239, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddDays(3) },
+    new Ingrediente { IdIngrediente = 6, NombreIngrediente = "Huevo", Calorias = 155, ContieneAlergenos = true, TipoAlergeno = "Huevo", UnidadMedida = "unidad", FechaExpiracion = DateTime.Now.AddDays(7) },
+    new Ingrediente { IdIngrediente = 7, NombreIngrediente = "Pimiento", Calorias = 20, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddMonths(1) },
+    new Ingrediente { IdIngrediente = 8, NombreIngrediente = "Aceite de oliva", Calorias = 884, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "ml", FechaExpiracion = DateTime.Now.AddMonths(6) },
+    new Ingrediente { IdIngrediente = 9, NombreIngrediente = "Azúcar", Calorias = 387, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddYears(1) },
+    new Ingrediente { IdIngrediente = 10, NombreIngrediente = "Sal", Calorias = 0, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddYears(2) },
+    new Ingrediente { IdIngrediente = 11, NombreIngrediente = "Harina", Calorias = 364, ContieneAlergenos = true, TipoAlergeno = "Gluten", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddMonths(3) },
+    new Ingrediente { IdIngrediente = 12, NombreIngrediente = "Leche", Calorias = 42, ContieneAlergenos = true, TipoAlergeno = "Lactosa", UnidadMedida = "ml", FechaExpiracion = DateTime.Now.AddDays(5) },
+    new Ingrediente { IdIngrediente = 13, NombreIngrediente = "Mantequilla", Calorias = 717, ContieneAlergenos = true, TipoAlergeno = "Lactosa", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddDays(15) },
+    new Ingrediente { IdIngrediente = 14, NombreIngrediente = "Cebolla", Calorias = 40, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddMonths(1) },
+    new Ingrediente { IdIngrediente = 15, NombreIngrediente = "Ajo", Calorias = 149, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddMonths(2) },
+    new Ingrediente { IdIngrediente = 16, NombreIngrediente = "Perejil", Calorias = 36, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddMonths(1) },
+    new Ingrediente { IdIngrediente = 17, NombreIngrediente = "Pimienta negra", Calorias = 251, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddYears(2) },
+    new Ingrediente { IdIngrediente = 18, NombreIngrediente = "Orégano", Calorias = 306, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddYears(2) },
+    new Ingrediente { IdIngrediente = 19, NombreIngrediente = "Vino tinto", Calorias = 85, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "ml", FechaExpiracion = DateTime.Now.AddMonths(12) },
+    new Ingrediente { IdIngrediente = 20, NombreIngrediente = "Miel", Calorias = 304, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddYears(3) },
+    new Ingrediente { IdIngrediente = 21, NombreIngrediente = "Almendras", Calorias = 575, ContieneAlergenos = true, TipoAlergeno = "Frutos secos", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddMonths(6) },
+    new Ingrediente { IdIngrediente = 22, NombreIngrediente = "Chocolate", Calorias = 546, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddMonths(4) },
+    new Ingrediente { IdIngrediente = 23, NombreIngrediente = "Manzana", Calorias = 52, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddMonths(1) },
+    new Ingrediente { IdIngrediente = 24, NombreIngrediente = "Nuez moscada", Calorias = 525, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddYears(1) },
+    new Ingrediente { IdIngrediente = 25, NombreIngrediente = "Espinacas", Calorias = 23, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddDays(7) }
+            );
+
+
+
+            modelBuilder.Entity<RecetaIngrediente>().HasData(
+    new RecetaIngrediente { IdRecetaIngrediente = 1, IdReceta = 1, IdIngrediente = 1, }, // Lechuga para Ensalada César
+    new RecetaIngrediente { IdRecetaIngrediente = 2, IdReceta = 1, IdIngrediente = 2, }, // Queso parmesano
+    new RecetaIngrediente { IdRecetaIngrediente = 3, IdReceta = 1, IdIngrediente = 3, }, // Aderezo César
+    new RecetaIngrediente { IdRecetaIngrediente = 4, IdReceta = 2, IdIngrediente = 4,  }, // Arroz para Paella
+    new RecetaIngrediente { IdRecetaIngrediente = 5, IdReceta = 2, IdIngrediente = 5, }, // Mariscos
+    new RecetaIngrediente { IdRecetaIngrediente = 6, IdReceta = 2, IdIngrediente = 6,  }, // Azafrán
+    new RecetaIngrediente { IdRecetaIngrediente = 7, IdReceta = 3, IdIngrediente = 7, }, // Mascarpone para Tiramisú
+    new RecetaIngrediente { IdRecetaIngrediente = 8, IdReceta = 3, IdIngrediente = 8, }, // Café
+    new RecetaIngrediente { IdRecetaIngrediente = 9, IdReceta = 3, IdIngrediente = 9,  }, // Cacao en polvo
+    new RecetaIngrediente { IdRecetaIngrediente = 10, IdReceta = 4, IdIngrediente = 10,  }, // Pasta
+    new RecetaIngrediente { IdRecetaIngrediente = 11, IdReceta = 4, IdIngrediente = 11, }, // Panceta
+    new RecetaIngrediente { IdRecetaIngrediente = 12, IdReceta = 5, IdIngrediente = 12,  }, // Arroz para Sushi
+    new RecetaIngrediente { IdRecetaIngrediente = 13, IdReceta = 5, IdIngrediente = 13}, // Pescado crudo
+    new RecetaIngrediente { IdRecetaIngrediente = 14, IdReceta = 6, IdIngrediente = 14,  }, // Masa de pizza para Pizza Margherita
+    new RecetaIngrediente { IdRecetaIngrediente = 15, IdReceta = 6, IdIngrediente = 15, }, // Mozzarella
+    new RecetaIngrediente { IdRecetaIngrediente = 16, IdReceta = 6, IdIngrediente = 16,}, // Albahaca
+    new RecetaIngrediente { IdRecetaIngrediente = 17, IdReceta = 7, IdIngrediente = 17 }, // Aguacate para Guacamole
+    new RecetaIngrediente { IdRecetaIngrediente = 18, IdReceta = 7, IdIngrediente = 18,  }, // Tomate
+    new RecetaIngrediente { IdRecetaIngrediente = 19, IdReceta = 7, IdIngrediente = 19,  }, // Jugo de limón
+    new RecetaIngrediente { IdRecetaIngrediente = 20, IdReceta = 8, IdIngrediente = 20,  }, // Carne molida para Lasaña
+    new RecetaIngrediente { IdRecetaIngrediente = 21, IdReceta = 8, IdIngrediente = 21, }, // Queso ricotta
+    new RecetaIngrediente { IdRecetaIngrediente = 22, IdReceta = 9, IdIngrediente = 22,  }, // Pollo para Tacos de Pollo
+    new RecetaIngrediente { IdRecetaIngrediente = 23, IdReceta = 9, IdIngrediente = 23,  }, // Cilantro
+    new RecetaIngrediente { IdRecetaIngrediente = 24, IdReceta = 10, IdIngrediente = 24,  }, // Chocolate para Brownies
+    new RecetaIngrediente { IdRecetaIngrediente = 25, IdReceta = 10, IdIngrediente = 25,  } // Harina
+    // Añade más ingredientes y recetas según sea necesario.
+);
+
 
 
             // Datos de ejemplo para pasos
@@ -215,19 +274,6 @@ namespace RecetasRedondas.Models
                 new Paso { IdPaso = 7, IdReceta = 3, Numero = 1, Descripcion = "Preparar el café y dejar enfriar.", ImagenUrl = "https://ik.imagekit.io/Mariocanizares/Recetas/tiramisu.jpg?updatedAt=1727169422091" },
                 new Paso { IdPaso = 8, IdReceta = 3, Numero = 2, Descripcion = "Mezclar el mascarpone con azúcar.", ImagenUrl = "https://example.com/imagen8.jpg" },
                 new Paso { IdPaso = 9, IdReceta = 3, Numero = 3, Descripcion = "Montar los ingredientes en capas.", ImagenUrl = "https://example.com/imagen9.jpg" }
-            );
-
-
-            modelBuilder.Entity<Ingrediente>().HasData(
-                new Ingrediente { IdIngrediente = 1, NombreIngrediente = "Lechuga", Calorias = 15, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddMonths(1) },
-                new Ingrediente { IdIngrediente = 2, NombreIngrediente = "Arroz", Calorias = 130, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "g", FechaExpiracion = DateTime.Now.AddYears(1) },
-                new Ingrediente { IdIngrediente = 3, NombreIngrediente = "Café", Calorias = 2, ContieneAlergenos = false, TipoAlergeno = "", UnidadMedida = "ml", FechaExpiracion = DateTime.Now.AddMonths(6) }
-            );
-
-            modelBuilder.Entity<RecetaIngrediente>().HasData(
-                new RecetaIngrediente { IdRecetaIngrediente = 1, IdReceta = 1, IdIngrediente = 1, Cantidad = 100, EsOpcional = false, Notas = "", FechaAñadido = DateTime.Now.AddMonths(1) },
-                new RecetaIngrediente { IdRecetaIngrediente = 2, IdReceta = 2, IdIngrediente = 2, Cantidad = 200, EsOpcional = false, Notas = "", FechaAñadido = DateTime.Now.AddMonths(1) },
-                new RecetaIngrediente { IdRecetaIngrediente = 3, IdReceta = 3, IdIngrediente = 3, Cantidad = 50, EsOpcional = false, Notas = "", FechaAñadido = DateTime.Now.AddMonths(1) }
             );
 
             modelBuilder.Entity<Usuario>().HasData(

@@ -12,7 +12,7 @@ using RecetasRedondas.Models;
 namespace RecetasRedondas.Data.Migrations
 {
     [DbContext(typeof(RecetasRedondasAppContext))]
-    [Migration("20241029105949_InitialCreate")]
+    [Migration("20241031111720_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -84,7 +84,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdCategoria = 1,
                             Descripcion = "Platos deliciosos de carne",
                             Especial = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(3419),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(6267),
                             Icono = "https://ik.imagekit.io/Mariocanizares/carne.webp?updatedAt=1726218723472",
                             NombreCategoria = "Carnes",
                             Puntuacion = 4.5m
@@ -94,7 +94,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdCategoria = 2,
                             Descripcion = "Platos variados con arroz",
                             Especial = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(3488),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(6367),
                             Icono = "https://ik.imagekit.io/Mariocanizares/arroz.png?updatedAt=1726218452623",
                             NombreCategoria = "Arroces",
                             Puntuacion = 4.8m
@@ -104,7 +104,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdCategoria = 3,
                             Descripcion = "Guisos tradicionales y caseros",
                             Especial = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(3492),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(6378),
                             Icono = "https://ik.imagekit.io/Mariocanizares/guisos.png?updatedAt=1726218800757",
                             NombreCategoria = "Guisos",
                             Puntuacion = 4.7m
@@ -114,7 +114,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdCategoria = 4,
                             Descripcion = "Platos exquisitos de mariscos",
                             Especial = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(3496),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(6384),
                             Icono = "https://ik.imagekit.io/Mariocanizares/marisco.webp?updatedAt=1726218800789",
                             NombreCategoria = "Mariscos",
                             Puntuacion = 4.6m
@@ -124,7 +124,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdCategoria = 5,
                             Descripcion = "Platos frescos de pescados",
                             Especial = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(3499),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(6390),
                             Icono = "https://ik.imagekit.io/Mariocanizares/pescado.png?updatedAt=1726218801946",
                             NombreCategoria = "Pescados",
                             Puntuacion = 4.7m
@@ -134,7 +134,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdCategoria = 6,
                             Descripcion = "Platos deliciosos de pasta",
                             Especial = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(3502),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(6396),
                             Icono = "https://ik.imagekit.io/Mariocanizares/pasta.png?updatedAt=1726218800772",
                             NombreCategoria = "Pastas",
                             Puntuacion = 4.5m
@@ -144,7 +144,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdCategoria = 7,
                             Descripcion = "Frescas y saludables ensaladas",
                             Especial = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(3505),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(6419),
                             Icono = "https://ik.imagekit.io/Mariocanizares/carne.webp?updatedAt=1726218723472",
                             NombreCategoria = "Ensaladas",
                             Puntuacion = 4.6m
@@ -154,7 +154,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdCategoria = 8,
                             Descripcion = "Reconfortantes sopas y cremas",
                             Especial = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(3512),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(6426),
                             Icono = "https://ik.imagekit.io/Mariocanizares/sopa.png?updatedAt=1726218800718f",
                             NombreCategoria = "Sopas",
                             Puntuacion = 4.7m
@@ -164,7 +164,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdCategoria = 9,
                             Descripcion = "Variedad de pizzas caseras",
                             Especial = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(3516),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(6438),
                             Icono = "https://ik.imagekit.io/Mariocanizares/pizza.png?updatedAt=1726218802077",
                             NombreCategoria = "Pizzas",
                             Puntuacion = 4.8m
@@ -174,7 +174,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdCategoria = 10,
                             Descripcion = "Creativos y deliciosos sandwiches",
                             Especial = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(3519),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(6444),
                             Icono = "https://ik.imagekit.io/Mariocanizares/sandwitches.png?updatedAt=1726218800723",
                             NombreCategoria = "Sandwiches",
                             Puntuacion = 4.5m
@@ -184,7 +184,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdCategoria = 11,
                             Descripcion = "Platos saludables de verduras",
                             Especial = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(3523),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(6462),
                             Icono = "https://ik.imagekit.io/Mariocanizares/verduras.png?updatedAt=1726218800742",
                             NombreCategoria = "Verduras",
                             Puntuacion = 4.6m
@@ -194,7 +194,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdCategoria = 12,
                             Descripcion = "Salsas para acompañar tus platos",
                             Especial = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(3526),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(6468),
                             Icono = "https://ik.imagekit.io/Mariocanizares/salsas.png?updatedAt=1726218800564",
                             NombreCategoria = "Salsas",
                             Puntuacion = 4.7m
@@ -204,7 +204,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdCategoria = 13,
                             Descripcion = "Dulces y sabrosos postres",
                             Especial = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(3529),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(6474),
                             Icono = "https://ik.imagekit.io/Mariocanizares/postres.png?updatedAt=1726218800753",
                             NombreCategoria = "Postres",
                             Puntuacion = 4.8m
@@ -214,7 +214,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdCategoria = 14,
                             Descripcion = "Bebidas refrescantes y cócteles",
                             Especial = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(3532),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(6480),
                             Icono = "https://ik.imagekit.io/Mariocanizares/bebidas.png?updatedAt=1726218678224",
                             NombreCategoria = "Bebidas",
                             Puntuacion = 4.7m
@@ -224,7 +224,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdCategoria = 15,
                             Descripcion = "Platos tradicionales de legumbres",
                             Especial = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(3535),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(6487),
                             Icono = "https://ik.imagekit.io/Mariocanizares/legumbres.png?updatedAt=1726218800787",
                             NombreCategoria = "Legumbres",
                             Puntuacion = 4.6m
@@ -240,7 +240,6 @@ namespace RecetasRedondas.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Contenido")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Fecha")
@@ -323,7 +322,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdIngrediente = 1,
                             Calorias = 15m,
                             ContieneAlergenos = false,
-                            FechaExpiracion = new DateTime(2024, 11, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4360),
+                            FechaExpiracion = new DateTime(2024, 11, 30, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7879),
                             NombreIngrediente = "Lechuga",
                             TipoAlergeno = "",
                             UnidadMedida = "g"
@@ -331,22 +330,242 @@ namespace RecetasRedondas.Data.Migrations
                         new
                         {
                             IdIngrediente = 2,
-                            Calorias = 130m,
+                            Calorias = 18m,
                             ContieneAlergenos = false,
-                            FechaExpiracion = new DateTime(2025, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4377),
-                            NombreIngrediente = "Arroz",
+                            FechaExpiracion = new DateTime(2024, 11, 30, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7907),
+                            NombreIngrediente = "Tomate",
                             TipoAlergeno = "",
                             UnidadMedida = "g"
                         },
                         new
                         {
                             IdIngrediente = 3,
-                            Calorias = 2m,
+                            Calorias = 300m,
+                            ContieneAlergenos = true,
+                            FechaExpiracion = new DateTime(2024, 11, 10, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7914),
+                            NombreIngrediente = "Queso",
+                            TipoAlergeno = "Lactosa",
+                            UnidadMedida = "g"
+                        },
+                        new
+                        {
+                            IdIngrediente = 4,
+                            Calorias = 265m,
+                            ContieneAlergenos = true,
+                            FechaExpiracion = new DateTime(2024, 11, 5, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7930),
+                            NombreIngrediente = "Pan",
+                            TipoAlergeno = "Gluten",
+                            UnidadMedida = "g"
+                        },
+                        new
+                        {
+                            IdIngrediente = 5,
+                            Calorias = 239m,
                             ContieneAlergenos = false,
-                            FechaExpiracion = new DateTime(2025, 4, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4382),
-                            NombreIngrediente = "Café",
+                            FechaExpiracion = new DateTime(2024, 11, 3, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7936),
+                            NombreIngrediente = "Pollo",
+                            TipoAlergeno = "",
+                            UnidadMedida = "g"
+                        },
+                        new
+                        {
+                            IdIngrediente = 6,
+                            Calorias = 155m,
+                            ContieneAlergenos = true,
+                            FechaExpiracion = new DateTime(2024, 11, 7, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8042),
+                            NombreIngrediente = "Huevo",
+                            TipoAlergeno = "Huevo",
+                            UnidadMedida = "unidad"
+                        },
+                        new
+                        {
+                            IdIngrediente = 7,
+                            Calorias = 20m,
+                            ContieneAlergenos = false,
+                            FechaExpiracion = new DateTime(2024, 11, 30, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8056),
+                            NombreIngrediente = "Pimiento",
+                            TipoAlergeno = "",
+                            UnidadMedida = "g"
+                        },
+                        new
+                        {
+                            IdIngrediente = 8,
+                            Calorias = 884m,
+                            ContieneAlergenos = false,
+                            FechaExpiracion = new DateTime(2025, 4, 30, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8064),
+                            NombreIngrediente = "Aceite de oliva",
                             TipoAlergeno = "",
                             UnidadMedida = "ml"
+                        },
+                        new
+                        {
+                            IdIngrediente = 9,
+                            Calorias = 387m,
+                            ContieneAlergenos = false,
+                            FechaExpiracion = new DateTime(2025, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8073),
+                            NombreIngrediente = "Azúcar",
+                            TipoAlergeno = "",
+                            UnidadMedida = "g"
+                        },
+                        new
+                        {
+                            IdIngrediente = 10,
+                            Calorias = 0m,
+                            ContieneAlergenos = false,
+                            FechaExpiracion = new DateTime(2026, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8085),
+                            NombreIngrediente = "Sal",
+                            TipoAlergeno = "",
+                            UnidadMedida = "g"
+                        },
+                        new
+                        {
+                            IdIngrediente = 11,
+                            Calorias = 364m,
+                            ContieneAlergenos = true,
+                            FechaExpiracion = new DateTime(2025, 1, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8092),
+                            NombreIngrediente = "Harina",
+                            TipoAlergeno = "Gluten",
+                            UnidadMedida = "g"
+                        },
+                        new
+                        {
+                            IdIngrediente = 12,
+                            Calorias = 42m,
+                            ContieneAlergenos = true,
+                            FechaExpiracion = new DateTime(2024, 11, 5, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8100),
+                            NombreIngrediente = "Leche",
+                            TipoAlergeno = "Lactosa",
+                            UnidadMedida = "ml"
+                        },
+                        new
+                        {
+                            IdIngrediente = 13,
+                            Calorias = 717m,
+                            ContieneAlergenos = true,
+                            FechaExpiracion = new DateTime(2024, 11, 15, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8107),
+                            NombreIngrediente = "Mantequilla",
+                            TipoAlergeno = "Lactosa",
+                            UnidadMedida = "g"
+                        },
+                        new
+                        {
+                            IdIngrediente = 14,
+                            Calorias = 40m,
+                            ContieneAlergenos = false,
+                            FechaExpiracion = new DateTime(2024, 11, 30, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8118),
+                            NombreIngrediente = "Cebolla",
+                            TipoAlergeno = "",
+                            UnidadMedida = "g"
+                        },
+                        new
+                        {
+                            IdIngrediente = 15,
+                            Calorias = 149m,
+                            ContieneAlergenos = false,
+                            FechaExpiracion = new DateTime(2024, 12, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8125),
+                            NombreIngrediente = "Ajo",
+                            TipoAlergeno = "",
+                            UnidadMedida = "g"
+                        },
+                        new
+                        {
+                            IdIngrediente = 16,
+                            Calorias = 36m,
+                            ContieneAlergenos = false,
+                            FechaExpiracion = new DateTime(2024, 11, 30, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8134),
+                            NombreIngrediente = "Perejil",
+                            TipoAlergeno = "",
+                            UnidadMedida = "g"
+                        },
+                        new
+                        {
+                            IdIngrediente = 17,
+                            Calorias = 251m,
+                            ContieneAlergenos = false,
+                            FechaExpiracion = new DateTime(2026, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8142),
+                            NombreIngrediente = "Pimienta negra",
+                            TipoAlergeno = "",
+                            UnidadMedida = "g"
+                        },
+                        new
+                        {
+                            IdIngrediente = 18,
+                            Calorias = 306m,
+                            ContieneAlergenos = false,
+                            FechaExpiracion = new DateTime(2026, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8149),
+                            NombreIngrediente = "Orégano",
+                            TipoAlergeno = "",
+                            UnidadMedida = "g"
+                        },
+                        new
+                        {
+                            IdIngrediente = 19,
+                            Calorias = 85m,
+                            ContieneAlergenos = false,
+                            FechaExpiracion = new DateTime(2025, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8155),
+                            NombreIngrediente = "Vino tinto",
+                            TipoAlergeno = "",
+                            UnidadMedida = "ml"
+                        },
+                        new
+                        {
+                            IdIngrediente = 20,
+                            Calorias = 304m,
+                            ContieneAlergenos = false,
+                            FechaExpiracion = new DateTime(2027, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8163),
+                            NombreIngrediente = "Miel",
+                            TipoAlergeno = "",
+                            UnidadMedida = "g"
+                        },
+                        new
+                        {
+                            IdIngrediente = 21,
+                            Calorias = 575m,
+                            ContieneAlergenos = true,
+                            FechaExpiracion = new DateTime(2025, 4, 30, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8172),
+                            NombreIngrediente = "Almendras",
+                            TipoAlergeno = "Frutos secos",
+                            UnidadMedida = "g"
+                        },
+                        new
+                        {
+                            IdIngrediente = 22,
+                            Calorias = 546m,
+                            ContieneAlergenos = false,
+                            FechaExpiracion = new DateTime(2025, 2, 28, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8181),
+                            NombreIngrediente = "Chocolate",
+                            TipoAlergeno = "",
+                            UnidadMedida = "g"
+                        },
+                        new
+                        {
+                            IdIngrediente = 23,
+                            Calorias = 52m,
+                            ContieneAlergenos = false,
+                            FechaExpiracion = new DateTime(2024, 11, 30, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8190),
+                            NombreIngrediente = "Manzana",
+                            TipoAlergeno = "",
+                            UnidadMedida = "g"
+                        },
+                        new
+                        {
+                            IdIngrediente = 24,
+                            Calorias = 525m,
+                            ContieneAlergenos = false,
+                            FechaExpiracion = new DateTime(2025, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8198),
+                            NombreIngrediente = "Nuez moscada",
+                            TipoAlergeno = "",
+                            UnidadMedida = "g"
+                        },
+                        new
+                        {
+                            IdIngrediente = 25,
+                            Calorias = 23m,
+                            ContieneAlergenos = false,
+                            FechaExpiracion = new DateTime(2024, 11, 7, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8207),
+                            NombreIngrediente = "Espinacas",
+                            TipoAlergeno = "",
+                            UnidadMedida = "g"
                         });
                 });
 
@@ -536,7 +755,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 1,
                             Descripcion = "Ensalada fresca con aderezo César",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(3919),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7153),
                             IdCategoria = 1,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/ensalada.jpg?updatedAt=1727169325456",
                             NivelDificultad = 1m,
@@ -548,7 +767,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 2,
                             Descripcion = "Arroz tradicional español con mariscos",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(3934),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7192),
                             IdCategoria = 2,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/arroz-marisco.jpg?updatedAt=1727169389258",
                             NivelDificultad = 2m,
@@ -560,7 +779,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 3,
                             Descripcion = "Postre italiano con café y mascarpone",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4052),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7315),
                             IdCategoria = 3,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/tiramisu.jpg?updatedAt=1727169422091",
                             NivelDificultad = 3m,
@@ -572,7 +791,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 4,
                             Descripcion = "Pasta con salsa cremosa de huevo y panceta",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4062),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7328),
                             IdCategoria = 4,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/carbonara.jpg?updatedAt=1727169452310",
                             NivelDificultad = 2m,
@@ -584,7 +803,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 5,
                             Descripcion = "Rollos de arroz y pescado crudo",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4066),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7338),
                             IdCategoria = 5,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/sushi.jpg?updatedAt=1727169470676",
                             NivelDificultad = 3m,
@@ -596,7 +815,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 6,
                             Descripcion = "Pizza clásica con tomate, mozzarella y albahaca",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4071),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7345),
                             IdCategoria = 6,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/pizza.jpg?updatedAt=1727169491728",
                             NivelDificultad = 2m,
@@ -608,7 +827,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 7,
                             Descripcion = "Aguacate triturado con cebolla, tomate y limón",
                             EsVegano = true,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4075),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7353),
                             IdCategoria = 1,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/guacamole.jpg?updatedAt=1727169511551",
                             NivelDificultad = 1m,
@@ -620,7 +839,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 8,
                             Descripcion = "Capas de pasta, carne y salsa de tomate",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4079),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7363),
                             IdCategoria = 4,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/lasagna.jpg?updatedAt=1727169528673",
                             NivelDificultad = 3m,
@@ -632,7 +851,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 9,
                             Descripcion = "Tacos rellenos de pollo, cebolla y cilantro",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4085),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7371),
                             IdCategoria = 2,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/tacos.jpg?updatedAt=1727169541523",
                             NivelDificultad = 2m,
@@ -644,7 +863,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 10,
                             Descripcion = "Deliciosos brownies de chocolate",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4089),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7380),
                             IdCategoria = 3,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/brownies.jpg?updatedAt=1727169556237",
                             NivelDificultad = 2m,
@@ -656,7 +875,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 11,
                             Descripcion = "Sopa nutritiva de lentejas",
                             EsVegano = true,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4096),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7387),
                             IdCategoria = 1,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/lentejas.jpg?updatedAt=1727169570913",
                             NivelDificultad = 1m,
@@ -668,7 +887,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 12,
                             Descripcion = "Guiso picante de carne y frijoles",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4104),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7396),
                             IdCategoria = 2,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/chili.jpg?updatedAt=1727169584071",
                             NivelDificultad = 3m,
@@ -680,7 +899,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 13,
                             Descripcion = "Dip de berenjena asada",
                             EsVegano = true,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4108),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7405),
                             IdCategoria = 1,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/baba-ganoush.jpg?updatedAt=1727169596850",
                             NivelDificultad = 2m,
@@ -692,7 +911,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 14,
                             Descripcion = "Deliciosos crepes dulces o salados",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4112),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7413),
                             IdCategoria = 3,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/crepes.jpg?updatedAt=1727169607858",
                             NivelDificultad = 2m,
@@ -704,7 +923,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 15,
                             Descripcion = "Pollo cocido en salsa de curry",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4116),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7438),
                             IdCategoria = 2,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/pollo-curry.jpg?updatedAt=1727169619493",
                             NivelDificultad = 3m,
@@ -716,7 +935,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 16,
                             Descripcion = "Galletas crujientes de chocolate",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4120),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7519),
                             IdCategoria = 3,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/galletas-chocolate.jpg?updatedAt=1727169630571",
                             NivelDificultad = 1m,
@@ -728,7 +947,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 17,
                             Descripcion = "Tarta salada con verduras y queso",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4123),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7538),
                             IdCategoria = 4,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/quiche.jpg?updatedAt=1727169642129",
                             NivelDificultad = 3m,
@@ -740,7 +959,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 18,
                             Descripcion = "Muffins esponjosos con arándanos",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4127),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7546),
                             IdCategoria = 3,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/muffins.jpg?updatedAt=1727169653441",
                             NivelDificultad = 2m,
@@ -752,7 +971,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 19,
                             Descripcion = "Batido saludable de espinacas y plátano",
                             EsVegano = true,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4133),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7553),
                             IdCategoria = 1,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/batido-verde.jpg?updatedAt=1727169666491",
                             NivelDificultad = 1m,
@@ -764,7 +983,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 20,
                             Descripcion = "Salmón asado con hierbas",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4137),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7561),
                             IdCategoria = 2,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/salmon.jpg?updatedAt=1727169677362",
                             NivelDificultad = 2m,
@@ -776,7 +995,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 21,
                             Descripcion = "Pancakes esponjosos con jarabe de arce",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4141),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7568),
                             IdCategoria = 3,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/pancakes.jpg?updatedAt=1727169687612",
                             NivelDificultad = 1m,
@@ -788,7 +1007,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 22,
                             Descripcion = "Sopa fría de tomate",
                             EsVegano = true,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4145),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7577),
                             IdCategoria = 1,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/gazpacho.jpg?updatedAt=1727169697098",
                             NivelDificultad = 2m,
@@ -801,7 +1020,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 23,
                             Descripcion = "Bolas fritas rellenas de bechamel",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4150),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7589),
                             IdCategoria = 4,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/croquetas.jpg?updatedAt=1727169707360",
                             NivelDificultad = 3m,
@@ -813,7 +1032,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 24,
                             Descripcion = "Pudín saludable con semillas de chía",
                             EsVegano = true,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4153),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7621),
                             IdCategoria = 3,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/pudin-chia.jpg?updatedAt=1727169717454",
                             NivelDificultad = 1m,
@@ -825,7 +1044,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 25,
                             Descripcion = "Pescado marinado en jugo de limón",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4157),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7633),
                             IdCategoria = 2,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/ceviche.jpg?updatedAt=1727169726708",
                             NivelDificultad = 3m,
@@ -837,7 +1056,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 26,
                             Descripcion = "Huevos con salsa de tomate y frijoles",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4162),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7641),
                             IdCategoria = 4,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/huevos-rancheros.jpg?updatedAt=1727169737304",
                             NivelDificultad = 2m,
@@ -849,7 +1068,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 27,
                             Descripcion = "Pimientos rellenos de carne y arroz",
                             EsVegano = false,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4166),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7649),
                             IdCategoria = 4,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/pimientos-rellenos.jpg?updatedAt=1727169746992",
                             NivelDificultad = 3m,
@@ -861,7 +1080,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 28,
                             Descripcion = "Zanahorias asadas con miel y especias",
                             EsVegano = true,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4170),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7658),
                             IdCategoria = 1,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/zanahorias.jpg?updatedAt=1727169756553",
                             NivelDificultad = 1m,
@@ -873,7 +1092,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 29,
                             Descripcion = "Pasta con salsa pesto fresca",
                             EsVegano = true,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4174),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7668),
                             IdCategoria = 4,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/pasta-pesto.jpg?updatedAt=1727169765990",
                             NivelDificultad = 2m,
@@ -885,7 +1104,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdReceta = 30,
                             Descripcion = "Batido refrescante de fresa",
                             EsVegano = true,
-                            FechaCreacion = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4178),
+                            FechaCreacion = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(7676),
                             IdCategoria = 1,
                             Imagen = "https://ik.imagekit.io/Mariocanizares/Recetas/batido-fresa.jpg?updatedAt=1727169775184",
                             NivelDificultad = 1m,
@@ -902,7 +1121,7 @@ namespace RecetasRedondas.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdRecetaIngrediente"));
 
-                    b.Property<decimal>("Cantidad")
+                    b.Property<decimal?>("Cantidad")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<bool>("EsOpcional")
@@ -932,32 +1151,202 @@ namespace RecetasRedondas.Data.Migrations
                         new
                         {
                             IdRecetaIngrediente = 1,
-                            Cantidad = 100m,
                             EsOpcional = false,
-                            FechaAñadido = new DateTime(2024, 11, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4430),
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IdIngrediente = 1,
-                            IdReceta = 1,
-                            Notas = ""
+                            IdReceta = 1
                         },
                         new
                         {
                             IdRecetaIngrediente = 2,
-                            Cantidad = 200m,
                             EsOpcional = false,
-                            FechaAñadido = new DateTime(2024, 11, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4437),
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IdIngrediente = 2,
-                            IdReceta = 2,
-                            Notas = ""
+                            IdReceta = 1
                         },
                         new
                         {
                             IdRecetaIngrediente = 3,
-                            Cantidad = 50m,
                             EsOpcional = false,
-                            FechaAñadido = new DateTime(2024, 11, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4440),
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IdIngrediente = 3,
-                            IdReceta = 3,
-                            Notas = ""
+                            IdReceta = 1
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 4,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 4,
+                            IdReceta = 2
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 5,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 5,
+                            IdReceta = 2
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 6,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 6,
+                            IdReceta = 2
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 7,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 7,
+                            IdReceta = 3
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 8,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 8,
+                            IdReceta = 3
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 9,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 9,
+                            IdReceta = 3
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 10,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 10,
+                            IdReceta = 4
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 11,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 11,
+                            IdReceta = 4
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 12,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 12,
+                            IdReceta = 5
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 13,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 13,
+                            IdReceta = 5
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 14,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 14,
+                            IdReceta = 6
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 15,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 15,
+                            IdReceta = 6
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 16,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 16,
+                            IdReceta = 6
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 17,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 17,
+                            IdReceta = 7
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 18,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 18,
+                            IdReceta = 7
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 19,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 19,
+                            IdReceta = 7
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 20,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 20,
+                            IdReceta = 8
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 21,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 21,
+                            IdReceta = 8
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 22,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 22,
+                            IdReceta = 9
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 23,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 23,
+                            IdReceta = 9
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 24,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 24,
+                            IdReceta = 10
+                        },
+                        new
+                        {
+                            IdRecetaIngrediente = 25,
+                            EsOpcional = false,
+                            FechaAñadido = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdIngrediente = 25,
+                            IdReceta = 10
                         });
                 });
 
@@ -1015,7 +1404,7 @@ namespace RecetasRedondas.Data.Migrations
                             IdUsuario = 1,
                             Contrasena = "MarioX8",
                             Correo = "mario@gmail.com",
-                            FechaRegistro = new DateTime(2024, 10, 29, 11, 59, 48, 495, DateTimeKind.Local).AddTicks(4470),
+                            FechaRegistro = new DateTime(2024, 10, 31, 12, 17, 17, 744, DateTimeKind.Local).AddTicks(8547),
                             Nombre = "Admin",
                             Rol = true
                         });

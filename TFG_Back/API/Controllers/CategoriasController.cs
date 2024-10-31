@@ -65,5 +65,12 @@ namespace RecetasRedondas.Controllers
             _categoriaService.Delete(id);
             return NoContent();
         }
+        [AllowAnonymous]
+        [HttpGet("search")]
+        public ActionResult<List<Categoria>> Search(string query) // Método de búsqueda
+        {
+            var categorias = _categoriaService.Search(query);
+            return categorias;
+        }
     }
 }

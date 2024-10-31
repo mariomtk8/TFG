@@ -22,5 +22,8 @@ namespace RecetasRedondas.Business
         public void Add(Ingrediente ingrediente) => _ingredienteRepository.Add(ingrediente);
 
         public void Delete(int id) => _ingredienteRepository.Delete(id);
+        public List<Ingrediente> Search(string query) => _ingredienteRepository.Search(query); // Método de búsqueda
+
+        
     }
 }

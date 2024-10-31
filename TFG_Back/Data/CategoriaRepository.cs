@@ -45,5 +45,12 @@ namespace RecetasRedondas.Data
                 _context.SaveChanges();
             }
         }
+
+        public List<Categoria> Search(string query) // Método de búsqueda
+        {
+            return _context.Categorias
+                .Where(c => c.NombreCategoria.Contains(query))
+                .ToList();
+        }
     }
 }

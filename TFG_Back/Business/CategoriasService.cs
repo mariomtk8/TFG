@@ -22,5 +22,6 @@ namespace RecetasRedondas.Business
         public void Add(Categoria categoria) => _categoriaRepository.Add(categoria);
 
         public void Delete(int id) => _categoriaRepository.Delete(id);
+        public List<Categoria> Search(string query) => _categoriaRepository.Search(query);
     }
 }

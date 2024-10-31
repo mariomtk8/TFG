@@ -10,5 +10,6 @@ namespace RecetasRedondas.Data
         void Add(Categoria categoria);
         void Update(Categoria categoria);
         void Delete(int id);
+        List<Categoria> Search(string query);
     }
 }
