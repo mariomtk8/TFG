@@ -195,54 +195,37 @@ namespace RecetasRedondas.Data
             }
         }
 
-        public List<RecetasMDTO> FiltrarRecetasPorAlergenos(int usuarioId)
-        {
-            // Obtener la lista de alérgenos del usuario
-            var alergenosUsuario = _context.Alergenos
-                .Where(au => au.IdUsuario == usuarioId)
-                .Select(au => au.IdIngrediente)
-                .ToList();
+        public List<RecetasMDTO> FiltrarRecetas(int usuarioId)
+{
+    
+    var alergenosUsuario = _context.Alergenos
+        .Where(au => au.IdUsuario == usuarioId)
+        .Select(au => au.IdIngrediente)
+        .ToList();
 
-            // Obtener las recetas que no contengan ingredientes a los que el usuario es alérgico
-            var recetasSinAlergenos = _context.Recetas
-                .Where(receta => !receta.recetaIngredientes
-                    .Any(ri => alergenosUsuario.Contains(ri.IdIngrediente))) // Filtrar las recetas que no contienen ingredientes alérgicos
-                .Include(r => r.Pasos) // Incluir los pasos de la receta
-                .ToList();
+    var categoriasUsuario = _context.UsuarioCategorias
+        .Where(uc => uc.IdUsuario == usuarioId)
+        .Select(uc => uc.IdCategoria)
+        .ToList();
+        
+    var recetasFiltradas = _context.Recetas
+        .Where(receta => !receta.recetaIngredientes
+            .Any(ri => alergenosUsuario.Contains(ri.IdIngrediente)) && 
+            !categoriasUsuario.Contains(receta.IdCategoria)) 
+        .Include(r => r.Pasos) 
+        .ToList();
 
-            // Mapear las recetas a RecetaDTO
-            var newRecetas = recetasSinAlergenos.Select(receta => new RecetasMDTO
-            {
-                IdReceta = receta.IdReceta,
-                Nombre = receta.Nombre,
-            }).ToList();
+    // Mapear las recetas a RecetasMDTO
+    var newRecetas = recetasFiltradas.Select(receta => new RecetasMDTO
+    {
+        IdReceta = receta.IdReceta,
+        Nombre = receta.Nombre,
+    }).ToList();
 
-            return newRecetas;
-        }
-        public List<RecetasMDTO> FiltrarRecetasPorCategorias(int usuarioId)
-        {
-            // Obtener la lista de categorías seleccionadas por el usuario
-            var categoriasUsuario = _context.UsuarioCategorias
-                .Where(uc => uc.IdUsuario == usuarioId)
-                .Select(uc => uc.IdCategoria)
-                .ToList();
+    return newRecetas;
+}
 
-            // Obtener las recetas que no están en las categorías seleccionadas por el usuario
-            var recetasSinCategorias = _context.Recetas
-                .Where(receta => !_context.UsuarioCategorias
-                    .Any(uc => uc.IdCategoria == receta.IdCategoria && uc.IdUsuario == usuarioId)) // Verifica que no estén en las categorías del usuario
-                .Include(r => r.Pasos) // Incluir los pasos de la receta
-                .ToList();
 
-            // Mapear las recetas a RecetasMDTO
-            var newRecetas = recetasSinCategorias.Select(receta => new RecetasMDTO
-            {
-                IdReceta = receta.IdReceta,
-                Nombre = receta.Nombre,
-            }).ToList();
-
-            return newRecetas;
-        }
 
         public List<Receta> FiltrarPorNivelDificultad(bool ascendente)
         {

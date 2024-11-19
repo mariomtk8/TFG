@@ -137,38 +137,19 @@ namespace RecetasRedondas.Controllers
             return NoContent();
         }
 
-        [HttpGet("filtrarPorAlergenos/{usuarioId}")]
-        public IActionResult FiltrarRecetasPorAlergenos(int usuarioId)
+        [HttpGet("FiltrarRecetas/{usuarioId}")]
+    public async Task<ActionResult<List<RecetasMDTO>>> FiltrarRecetas(int usuarioId)
+    {
+        try
         {
-            var recetas = _recetaService.FiltrarRecetasPorAlergenos(usuarioId);
-
-            if (recetas == null || !recetas.Any())
-            {
-                return NotFound("No se encontraron recetas que cumplan con los requisitos.");
-            }
-            else if (usuarioId == null)
-            {
-                return NotFound("No hay usuarios con ese id ");
-            }
-
+            var recetas = _recetaService.FiltrarRecetas(usuarioId);
             return Ok(recetas);
         }
-        [HttpGet("filtrarPorCategorias/{usuarioId}")]
-        public IActionResult FiltrarRecetasPorCategorias(int usuarioId)
+        catch (Exception ex)
         {
-            var recetas = _recetaService.FiltrarRecetasPorCategorias(usuarioId);
-
-            if (recetas == null || !recetas.Any())
-            {
-                return NotFound("No se encontraron recetas que cumplan con los requisitos.");
-            }
-            else if (usuarioId <= 0) // Asegúrate de que el ID sea válido
-            {
-                return NotFound("No hay usuarios con ese id.");
-            }
-
-            return Ok(recetas);
+            return BadRequest($"Error al filtrar las recetas: {ex.Message}");
         }
+    }
 
         [HttpGet("filtrarPorNivelDificultad")]
         public ActionResult<List<Receta>> FiltrarPorNivelDificultad( [FromQuery] bool ascendente = true)

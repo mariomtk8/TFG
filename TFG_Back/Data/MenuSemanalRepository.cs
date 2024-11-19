@@ -16,10 +16,9 @@ namespace RecetasRedondas.Data
             _recetaRepository = recetaRepository;
         }
 
-        // Generar menú semanal con 14 recetas (7 días, 2 recetas por día: comida y cena)
         public List<MenuSemanal> GenerarMenuSemana(int usuarioId)
         {
-            var recetasFiltradas = _recetaRepository.FiltrarRecetasPorAlergenos(usuarioId);
+            var recetasFiltradas = _recetaRepository.FiltrarRecetas(usuarioId);
             var random = new Random();
             var menuSemana = new List<MenuSemanal>();
 
@@ -27,9 +26,9 @@ namespace RecetasRedondas.Data
             {
                 var recetasUsadas = new HashSet<int>();
 
-                for (int dia = 0; dia < 7; dia++) // Generar 7 días de menús
+                for (int dia = 0; dia < 7; dia++) 
                 {
-                    // Generar receta para la comida (TipoComida = true)
+                    
                     var recetaComida = recetasFiltradas[random.Next(recetasFiltradas.Count)];
                     while (recetasUsadas.Contains(recetaComida.IdReceta))
                     {
@@ -38,13 +37,12 @@ namespace RecetasRedondas.Data
                     recetasUsadas.Add(recetaComida.IdReceta);
                     menuSemana.Add(new MenuSemanal
                     {
-                        FechaInicio = DateTime.Now.AddDays(dia), // Fecha correspondiente al día del menú
+                        FechaInicio = DateTime.Now.AddDays(dia), 
                         IdReceta = recetaComida.IdReceta,
                         IdUsuario = usuarioId,
-                        TipoComida = true, // Comida
+                        TipoComida = true, 
                     });
 
-                    // Generar receta para la cena (TipoComida = false)
                     var recetaCena = recetasFiltradas[random.Next(recetasFiltradas.Count)];
                     while (recetasUsadas.Contains(recetaCena.IdReceta) || recetaCena.IdReceta == recetaComida.IdReceta)
                     {
@@ -53,10 +51,10 @@ namespace RecetasRedondas.Data
                     recetasUsadas.Add(recetaCena.IdReceta);
                     menuSemana.Add(new MenuSemanal
                     {
-                        FechaInicio = DateTime.Now.AddDays(dia), // Fecha correspondiente al día del menú
+                        FechaInicio = DateTime.Now.AddDays(dia), 
                         IdReceta = recetaCena.IdReceta,
                         IdUsuario = usuarioId,
-                        TipoComida = false, // Cena
+                        TipoComida = false,
                     });
                 }
             }

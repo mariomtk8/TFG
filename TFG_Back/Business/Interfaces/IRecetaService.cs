@@ -16,8 +16,7 @@ namespace RecetasRedondas.Business
         void AddPaso(int recetaId, DatosPasoDTO paso);
         void UpdatePaso(int recetaId, DatosPasoDTO paso);
         void DeletePaso( int pasoId);
-        List<RecetasMDTO> FiltrarRecetasPorAlergenos(int usuarioId);
-        List<RecetasMDTO> FiltrarRecetasPorCategorias(int usuarioId);
+        List<RecetasMDTO> FiltrarRecetas(int usuarioId);
         List<Receta> FiltrarPorNivelDificultad( bool ascendente);
         List<Receta> FiltrarPorTiempoPreparacion( bool ascendente);
         List<Receta> FiltrarPorTemaCocina(string temaCocina);
