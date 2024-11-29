@@ -19,17 +19,21 @@ namespace RecetasRedondas.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public ActionResult<List<RecetaDTO>> GetAll()
+        public async Task<IActionResult> GetRecetas(int page = 1, int pageSize = 10)
         {
-            try
+            var (recetas, totalRecetas, totalPaginas) = await _recetaService.GetRecetasPaginadasAsync(page, pageSize);
+
+            var response = new
             {
-                return Ok(_recetaService.GetAll());
-            }
-            catch (Exception er)
-            {
-                return StatusCode(500, new { message = er });
-            }
+                TotalRecetas = totalRecetas,
+                PaginaActual = page,
+                TotalPaginas = totalPaginas,
+                Recetas = recetas
+            };
+
+            return Ok(response);
         }
+        
         [AllowAnonymous]
         [HttpGet("search")]
         public ActionResult<List<Receta>> SearchRecetas(string searchTerm)

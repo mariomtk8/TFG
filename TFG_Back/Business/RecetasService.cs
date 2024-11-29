@@ -13,7 +13,13 @@ namespace RecetasRedondas.Business
             _recetaRepository = recetaRepository;
         }
 
-        public List<RecetaDTO> GetAll() => _recetaRepository.GetAll();
+        public async Task<(List<Receta> Recetas, int TotalRecetas, int TotalPaginas)> GetRecetasPaginadasAsync(int page, int pageSize)
+        {
+            var (recetas, totalRecetas) = await _recetaRepository.GetRecetasPaginadasAsync(page, pageSize);
+            int totalPaginas = (int)Math.Ceiling(totalRecetas / (double)pageSize);
+
+            return (recetas, totalRecetas, totalPaginas);
+        }
         
         public List<Receta> SearchRecetas(string searchTerm) =>  _recetaRepository.GetBySearch(searchTerm);
         

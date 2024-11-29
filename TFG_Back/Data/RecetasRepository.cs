@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Update.Internal;
 using RecetasRedondas.Models;
 using System;
 using System.Collections.Generic;
@@ -15,34 +16,18 @@ namespace RecetasRedondas.Data
             _context = context;
         }
 
-        public List<RecetaDTO> GetAll()
+        public async Task<(List<Receta> Recetas, int TotalRecetas)> GetRecetasPaginadasAsync(int page, int pageSize)
         {
-            var recetas = _context.Recetas.Include(p => p.Pasos).ToList();
+            int skip = (page - 1) * pageSize;
 
-            var newRecetas = recetas.Select(receta => new RecetaDTO
-            {
-                IdReceta = receta.IdReceta,
-                Nombre = receta.Nombre,
-                Descripcion = receta.Descripcion,
-                Imagen = receta.Imagen,
-                Pasos = receta.Pasos.Select(paso => new DatosPasoDTO
-                {
-                    IdPaso = paso.IdPaso,
-                    IdReceta = paso.IdReceta,
-                    Numero = paso.Numero,
-                    Descripcion = paso.Descripcion,
-                    ImagenUrl = paso.ImagenUrl
-                }).ToList(),
-                EsVegano = receta.EsVegano ?? false, // valor predeterminado false si es null
-                FechaCreacion = receta.FechaCreacion ?? DateTime.Now, // valor predeterminado de la fecha actual si es null
-                NivelDificultad = receta.NivelDificultad ?? 0m, // valor predeterminado de 0 si es null
-                PromedioVotos = receta.PromedioVotos,
-                TiempoPreparacion = receta.TiempoPreparacion ?? 0,
-                TemaCocina = receta.TemaCocina,
-                IdCategoria = receta.IdCategoria,
-            }).ToList();
+            var totalRecetas = await _context.Recetas.CountAsync();
+            var recetas = await _context.Recetas
+                .OrderBy(r => r.IdReceta) // Ordenar de forma predecible
+                .Skip(skip)               // Saltar las recetas de las páginas anteriores
+                .Take(pageSize)           // Tomar solo las recetas necesarias para la página actual
+                .ToListAsync();
 
-            return newRecetas;
+            return (recetas, totalRecetas);
         }
         public List<Receta> GetBySearch(string searchTerm)
         {
@@ -211,7 +196,7 @@ namespace RecetasRedondas.Data
     var recetasFiltradas = _context.Recetas
         .Where(receta => !receta.recetaIngredientes
             .Any(ri => alergenosUsuario.Contains(ri.IdIngrediente)) && 
-            !categoriasUsuario.Contains(receta.IdCategoria)) 
+            categoriasUsuario.Contains(receta.IdCategoria)) 
         .Include(r => r.Pasos) 
         .ToList();
 

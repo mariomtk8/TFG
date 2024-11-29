@@ -5,7 +5,8 @@ namespace RecetasRedondas.Data
 {
     public interface IRecetaRepository
     {
-        List<RecetaDTO> GetAll();
+        Task<(List<Receta> Recetas, int TotalRecetas)> GetRecetasPaginadasAsync(int page, int pageSize);
+
         List<Receta> GetBySearch(string searchTerm);
         RecetaDTO Get(int id);
         List<Receta> GetByCategoria(int idCategoria);

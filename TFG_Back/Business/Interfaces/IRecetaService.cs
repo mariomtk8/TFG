@@ -5,7 +5,7 @@ namespace RecetasRedondas.Business
 {
     public interface IRecetaService
     {
-        List<RecetaDTO> GetAll();
+        Task<(List<Receta> Recetas, int TotalRecetas, int TotalPaginas)> GetRecetasPaginadasAsync(int page, int pageSize);
         List<Receta> SearchRecetas(string searchTerm);
         RecetaDTO Get(int id);
         List<Receta> GetByCategoria(int idCategoria);
