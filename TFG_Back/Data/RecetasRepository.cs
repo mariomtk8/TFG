@@ -196,7 +196,7 @@ namespace RecetasRedondas.Data
     var recetasFiltradas = _context.Recetas
         .Where(receta => !receta.recetaIngredientes
             .Any(ri => alergenosUsuario.Contains(ri.IdIngrediente)) && 
-            categoriasUsuario.Contains(receta.IdCategoria)) 
+            !categoriasUsuario.Contains(receta.IdCategoria)) 
         .Include(r => r.Pasos) 
         .ToList();
 
